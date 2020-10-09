@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors'
+gem 'jwt', '~> 2.2', '>= 2.2.2'
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
