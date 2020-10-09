@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:create]
       resources :sessions, only: [:create]
-      resources :projects, only: [:create, :update]
+      resources :projects, only: [:create, :update] do
+        resources :tags, only: [:create]
+      end
     end
   end
 end
