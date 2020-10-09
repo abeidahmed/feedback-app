@@ -1,7 +1,5 @@
 json.user do
-  json.id @user.id
-  json.email @user.email
-  json.created_at @user.created_at
+  json.partial! 'user', user: @user
 end
 
 json.token @token

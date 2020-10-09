@@ -11,4 +11,10 @@ class User < ApplicationRecord
   validates_format_of :email, with: VALID_EMAIL_REGEX
 
   validates_length_of :password, minimum: 5, allow_blank: true
+
+  def self.find_by_credentials(email, password)
+    user = self.find_by(email: email.downcase)
+    return nil unless user
+    user.authenticate(password) ? user : nil
+  end
 end
