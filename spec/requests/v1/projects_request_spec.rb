@@ -15,6 +15,13 @@ RSpec.describe "V1::Projects", type: :request do
         expect(Project.count).to eq(1)
       end
 
+      it 'is expected to create three tags with title: Issue, Idea, Other' do
+        expect(Tag.count).to eq(3)
+        expect(Tag.first.name).to eq('Issue')
+        expect(Tag.second.name).to eq('Idea')
+        expect(Tag.third.name).to eq('Other')
+      end
+
       include_examples 'created'
     end
 
