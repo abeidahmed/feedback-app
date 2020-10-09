@@ -9,6 +9,17 @@ class V1::ProjectsController < ApplicationController
     end
   end
 
+  def update
+    @project = Project.find(params[:id])
+    return error('unauthorized') unless current_user?(@project.user)
+
+    if @project.update(project_params)
+      render :new
+    else
+      render json: { message: @project.errors.full_messages }, status: :bad_request
+    end
+  end
+
   private
   def project_params
     params.require(:project).permit(:name)
