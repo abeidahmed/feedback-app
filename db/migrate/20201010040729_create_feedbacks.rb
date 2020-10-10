@@ -1,7 +1,7 @@
 class CreateFeedbacks < ActiveRecord::Migration[6.0]
   def change
     create_table :feedbacks, id: :uuid do |t|
-      t.text :content
+      t.text :content,          null: false
       t.string :tag_name,       null: false
       t.string :sender_email
       t.string :page_url
