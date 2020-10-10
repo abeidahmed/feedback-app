@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "V1::Tags", type: :request do
   describe '#create' do
     let(:team) { create(:team_with_users) }
-    let(:project) { create(:project, team: team) } # project creates additional 3 tags (system generated)
+    let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
 
     let(:valid_tag) { { tag: { name: 'idea' } }.to_json }
     let(:invalid_tag) { { tag: { name: '' } }.to_json }
@@ -14,7 +14,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to create a tag' do
-        expect(Tag.count).to eq(4)
+        expect(Tag.count).to eq(5)
       end
 
       include_examples 'created'
@@ -27,7 +27,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to not create a tag' do
-        expect(Tag.count).to eq(3)
+        expect(Tag.count).to eq(4)
       end
 
       include_examples 'unauthorized'
@@ -40,7 +40,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to not create a tag' do
-        expect(Tag.count).to eq(3)
+        expect(Tag.count).to eq(4)
       end
 
       include_examples 'error'
@@ -51,7 +51,7 @@ RSpec.describe "V1::Tags", type: :request do
 
   describe '#update' do
     let(:team) { create(:team_with_users) }
-    let(:project) { create(:project, team: team) } # project creates additional 3 tags (system generated)
+    let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
     let(:tag) { create(:tag, name: 'issues', project: project) }
 
     let(:valid_tag) { { tag: { name: 'great idea' } }.to_json }
@@ -84,7 +84,7 @@ RSpec.describe "V1::Tags", type: :request do
 
   describe '#destroy' do
     let(:team) { create(:team_with_users) }
-    let(:project) { create(:project, team: team) }
+    let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
     let(:tag) { create(:tag, project: project) }
 
     context 'when the delete request is made by a team member' do
@@ -93,7 +93,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to delete the tag' do
-        expect(project.tags.count).to eq(3)
+        expect(project.tags.count).to eq(4)
       end
     end
 
@@ -104,7 +104,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to not delete the tag' do
-        expect(project.tags.count).to eq(4)
+        expect(project.tags.count).to eq(5)
       end
 
       include_examples 'unauthorized'

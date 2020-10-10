@@ -25,11 +25,12 @@ RSpec.describe "V1::Projects", type: :request do
         post v1_projects_url, params: valid_project, headers: auth_header(user)
       end
 
-      it 'is expected to create three tags with title: Issue, Idea, Other' do
-        expect(Tag.count).to eq(3)
+      it 'is expected to create four tags with title: Issue, Idea, Other, and Archive' do
+        expect(Tag.count).to eq(4)
         expect(Tag.first.name).to eq('Issue')
         expect(Tag.second.name).to eq('Idea')
         expect(Tag.third.name).to eq('Other')
+        expect(Tag.last.name).to eq('Archive')
       end
     end
 
