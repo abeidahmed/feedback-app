@@ -1,5 +1,5 @@
 class V1::FeedbacksController < ApplicationController
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:create]
 
   def create
     project = Project.find(params[:project_id])
@@ -13,6 +13,14 @@ class V1::FeedbacksController < ApplicationController
     else
       render json: { message: @feedback.errors.full_messages }, status: :bad_request
     end
+  end
+
+  def archive
+    project = Project.find(params[:project_id])
+    archive_tag = project.tags.find_by(name: 'Archive')
+    feedback = project.feedbacks.find(params[:id])
+
+    feedback.update(tag: archive_tag, tag_name: archive_tag.name)
   end
 
   private

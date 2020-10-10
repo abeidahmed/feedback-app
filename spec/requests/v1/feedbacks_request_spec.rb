@@ -31,4 +31,22 @@ RSpec.describe "V1::Feedbacks", type: :request do
       include_examples 'created'
     end
   end
+
+  describe '#archive' do
+    let(:team) { create(:team_with_users) }
+    let(:project) { create(:project_with_tags, user: team.users.first, team: team) }
+    let(:feedback) { project.tags.first.feedbacks.create! content: 'hello', tag_name: 'Issue', project: project }
+
+    context 'when the patch request is valid' do
+      before do
+        patch archive_v1_project_feedback_url(project, feedback), headers: auth_header(team.users.first)
+      end
+
+      it 'is expected to archive the feedback' do
+        feedback.reload
+        expect(feedback.tag.name).to eq('Archive')
+        expect(feedback.tag_name).to eq('Archive')
+      end
+    end
+  end
 end

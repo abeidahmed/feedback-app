@@ -70,7 +70,7 @@ RSpec.describe "V1::Projects", type: :request do
   end
 
   describe '#update' do
-    let(:team) { create(:team_with_users)}
+    let(:team) { create(:team_with_users) }
     let(:project) { create(:project, name: 'Hello world', user_id: team.users.first.id, team: team) }
 
     let(:valid_project) { { project: { name: 'Main website' } }.to_json }
