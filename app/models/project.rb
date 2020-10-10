@@ -9,6 +9,15 @@ class Project < ApplicationRecord
   validates_presence_of :name
   validates_length_of :name, maximum: 50
 
+  def initialize_team(current_user)
+    ActiveRecord::Base.transaction do
+      team = Team.create!
+      self.team_id = team.id
+      team.add(current_user)
+      raise ActiveRecord::Rollback unless self.valid?
+    end
+  end
+
   def initialize_tags
     self.tags.create! name: 'Issue'
     self.tags.create! name: 'Idea'
