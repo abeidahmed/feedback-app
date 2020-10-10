@@ -49,6 +49,39 @@ RSpec.describe "V1::Tags", type: :request do
     end
   end
 
+  describe '#update' do
+    let(:team) { create(:team_with_users) }
+    let(:project) { create(:project, team: team) } # project creates additional 3 tags (system generated)
+    let(:tag) { create(:tag, name: 'issues', project: project) }
+
+    let(:valid_tag) { { tag: { name: 'great idea' } }.to_json }
+
+    context 'when the patch request is made by a team member' do
+      before do
+        patch v1_project_tag_url(project, tag), params: valid_tag, headers: auth_header(team.users.first)
+      end
+
+      it 'is expected to update the tag' do
+        tag.reload
+        expect(tag.name).to eq('great idea')
+      end
+    end
+
+    context 'when the patch request is made by a random user' do
+      before do
+        user = create(:user)
+        patch v1_project_tag_url(project, tag), params: valid_tag, headers: auth_header(user)
+      end
+
+      it 'is expected to not update the tag' do
+        tag.reload
+        expect(tag.name).to eq('issues')
+      end
+
+      include_examples 'unauthorized'
+    end
+  end
+
   describe '#destroy' do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) }

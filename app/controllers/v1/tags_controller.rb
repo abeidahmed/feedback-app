@@ -1,6 +1,6 @@
 class V1::TagsController < ApplicationController
   def create
-    project = Project.find(params[:project_id])
+    project = find_project
     return error('unauthorized') unless project.team_members.include?(current_user)
     @tag = project.tags.build(tag_params)
 
@@ -11,8 +11,20 @@ class V1::TagsController < ApplicationController
     end
   end
 
+  def update
+    project = find_project
+    return error('unauthorized') unless project.team_members.include?(current_user)
+    @tag = project.tags.find(params[:id])
+
+    if @tag.update(tag_params)
+      render :new
+    else
+      render json: { message: @tag.errors.full_messages }, status: :bad_request
+    end
+  end
+
   def destroy
-    project = Project.find(params[:project_id])
+    project = find_project
     return error('unauthorized') unless project.team_members.include?(current_user)
     tag = project.tags.find(params[:id])
     tag.destroy
@@ -21,5 +33,9 @@ class V1::TagsController < ApplicationController
   private
   def tag_params
     params.require(:tag).permit(:name)
+  end
+
+  def find_project
+    Project.find(params[:project_id])
   end
 end
