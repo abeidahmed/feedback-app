@@ -4,4 +4,8 @@ class Tag < ApplicationRecord
 
   validates_presence_of :name
   validates_length_of :name, maximum: 50
+
+  def is_archive_tag?
+    self.name.downcase == 'archive'
+  end
 end

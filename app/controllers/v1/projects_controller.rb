@@ -14,7 +14,7 @@ class V1::ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    return error('unauthorized') unless @project.team_members.include?(current_user)
+    return error('unauthorized') unless team_has_access?(@project.team_members)
 
     if @project.update(project_params)
       render :new
@@ -25,7 +25,7 @@ class V1::ProjectsController < ApplicationController
 
   def destroy
     project = Project.find(params[:id])
-    return error('unauthorized') unless project.team_members.include?(current_user)
+    return error('unauthorized') unless team_has_access?(project.team_members)
     project.destroy
   end
 
