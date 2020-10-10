@@ -2,6 +2,7 @@ class V1::TagsController < ApplicationController
   def create
     project = find_project(params[:project_id])
     return error('unauthorized') unless team_has_access?(project.team_members)
+
     @tag = project.tags.build(tag_params)
     return error('bad_request') if @tag.is_archive_tag?
 
@@ -15,6 +16,7 @@ class V1::TagsController < ApplicationController
   def update
     project = find_project(params[:project_id])
     return error('unauthorized') unless team_has_access?(project.team_members)
+
     @tag = project.tags.find(params[:id])
     return error('bad_request') if @tag.is_archive_tag?
 
@@ -28,6 +30,7 @@ class V1::TagsController < ApplicationController
   def destroy
     project = find_project(params[:project_id])
     return error('unauthorized') unless team_has_access?(project.team_members)
+
     tag = project.tags.find(params[:id])
     return error('bad_request') if tag.is_archive_tag?
 

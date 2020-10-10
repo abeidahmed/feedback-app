@@ -1,6 +1,7 @@
 class V1::ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
+
     team = Team.create!
     @project.team_id = team.id
     team.add(current_user)
@@ -26,6 +27,7 @@ class V1::ProjectsController < ApplicationController
   def destroy
     project = Project.find(params[:id])
     return error('unauthorized') unless team_has_access?(project.team_members)
+
     project.destroy
   end
 
