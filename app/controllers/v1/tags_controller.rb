@@ -1,6 +1,7 @@
 class V1::TagsController < ApplicationController
   def create
     project = Project.find(params[:project_id])
+    return error('unauthorized') unless project.team_members.include?(current_user)
     @tag = project.tags.build(tag_params)
 
     if @tag.save
