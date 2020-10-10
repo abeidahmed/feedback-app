@@ -23,6 +23,12 @@ class V1::ProjectsController < ApplicationController
     end
   end
 
+  def destroy
+    project = Project.find(params[:id])
+    return error('unauthorized') unless project.team_members.include?(current_user)
+    project.destroy
+  end
+
   private
   def project_params
     params.require(:project).permit(:name)

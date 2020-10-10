@@ -110,4 +110,32 @@ RSpec.describe "V1::Projects", type: :request do
       include_examples 'bad_request'
     end
   end
+
+  describe '#destroy' do
+    let(:team) { create(:team_with_users)}
+    let(:project) { create(:project, user_id: team.users.first.id, team: team) }
+
+    context 'when the delete request is made by a team member' do
+      before do
+        delete v1_project_url(project), headers: auth_header(team.users.second)
+      end
+
+      it 'is expected to delete the project' do
+        expect(team.projects.count).to be_zero
+      end
+    end
+
+    context 'when the delete request is made by a random user' do
+      before do
+        user = create(:user)
+        delete v1_project_url(project), headers: auth_header(user)
+      end
+
+      it 'is expected to not delete the project' do
+        expect(team.projects.count).to eq(1)
+      end
+
+      include_examples 'unauthorized'
+    end
+  end
 end
