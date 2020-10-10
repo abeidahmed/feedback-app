@@ -1,3 +1,4 @@
+/* Inter */
 @font-face {
   font-family: 'Inter';
   src: local('Inter-Regular'), url('../fonts/Inter-Regular.woff') format('woff');
@@ -10,6 +11,24 @@
   font-family: 'Inter';
   src: local('Inter-Medium'), url('../fonts/Inter-Medium.woff') format('woff');
   font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+/* PT Serif */
+@font-face {
+  font-family: 'PT Serif';
+  src: local('pt-serif-regular'),
+    url('../fonts/pt-serif-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  src: local('pt-serif-bold'), url('../fonts/pt-serif-bold.woff') format('woff');
+  font-weight: 700;
   font-style: normal;
   font-display: block;
 }
