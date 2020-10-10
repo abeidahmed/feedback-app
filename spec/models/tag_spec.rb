@@ -9,5 +9,7 @@ RSpec.describe Tag, type: :model do
 
   describe 'associations' do
     it { should belong_to(:project) }
+
+    it { should have_many(:feedbacks) }
   end
 end

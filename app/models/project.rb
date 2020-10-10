@@ -2,7 +2,8 @@ class Project < ApplicationRecord
   after_create :initialize_tags
 
   belongs_to :user
-  has_many :tags
+  has_many :tags, dependent: :destroy
+  has_many :feedbacks, dependent: :destroy
 
   validates_presence_of :name
   validates_length_of :name, maximum: 50
