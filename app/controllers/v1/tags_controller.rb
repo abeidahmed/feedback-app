@@ -16,6 +16,7 @@ class V1::TagsController < ApplicationController
     project = find_project
     return error('unauthorized') unless project.team_members.include?(current_user)
     @tag = project.tags.find(params[:id])
+    return error('bad_request') if @tag.name.downcase == 'archive'
 
     if @tag.update(tag_params)
       render :new

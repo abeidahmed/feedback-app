@@ -64,8 +64,22 @@ RSpec.describe "V1::Tags", type: :request do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
     let(:tag) { create(:tag, name: 'issues', project: project) }
+    let(:archive_tag) { create(:tag, name: 'archive', project: project) }
 
     let(:valid_tag) { { tag: { name: 'great idea' } }.to_json }
+
+    context 'when the patch request is made on the archive tag' do
+      before do
+        patch v1_project_tag_url(project, archive_tag), params: valid_tag, headers: auth_header(team.users.first)
+      end
+
+      it 'is expected to not update the tag' do
+        archive_tag.reload
+        expect(archive_tag.name).to eq('archive')
+      end
+
+      include_examples 'bad_request'
+    end
 
     context 'when the patch request is made by a team member' do
       before do
