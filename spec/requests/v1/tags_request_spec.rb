@@ -97,6 +97,19 @@ RSpec.describe "V1::Tags", type: :request do
       end
     end
 
+    context 'when the delete request is made on the archive tag' do
+      before do
+        archive_tag = create(:tag, project: project, name: 'Archive')
+        delete v1_project_tag_url(project, archive_tag), headers: auth_header(team.users.first)
+      end
+
+      it 'is expected to not delete the tag' do
+        expect(project.tags.count).to eq(5)
+      end
+
+      include_examples 'bad_request'
+    end
+
     context 'when the delete request is made by a random user' do
       before do
         user = create(:user)
