@@ -3,8 +3,7 @@ class V1::FeedbacksController < ApplicationController
 
   def create
     project = Project.find(params[:project_id])
-    tag_name = params[:tag]
-    tag = project.tags.find_by!(name: [tag_name.capitalize, tag_name.upcase, tag_name.downcase])
+    tag = project.tags.find_by!(name: params[:tag])
     @feedback = tag.feedbacks.build(feedback_params)
     @feedback.project_id = project.id
 

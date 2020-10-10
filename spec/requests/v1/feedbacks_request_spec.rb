@@ -17,7 +17,7 @@ RSpec.describe "V1::Feedbacks", type: :request do
 
     context 'when the post request is valid' do
       before do
-        post v1_project_feedbacks_url(project, tag: 'issue'), params: valid_feedback, headers: default_header
+        post v1_project_feedbacks_url(project, tag: 'Issue'), params: valid_feedback, headers: default_header
       end
 
       it 'is expected to create the feedback' do
