@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :feedback do
-    content { "MyText" }
-    tag_name { "MyString" }
-    sender_email { "MyString" }
-    page_url { "MyString" }
-    device { "MyString" }
-    project { nil }
-    tag { nil }
+    project
+    tag
+    content { 'Feedback content' }
+    tag_name { "issue" }
+    sender_email { 'hello@example.com' }
+    page_url { '/about' }
+    device { 'Chrome 65' }
   end
 end
