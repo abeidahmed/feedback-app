@@ -5,7 +5,7 @@ RSpec.describe "V1::Tags", type: :request do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
 
-    let(:valid_tag) { { tag: { name: 'best idea' } }.to_json }
+    let(:valid_tag) { { tag: { name: 'best idea', color: '#BEE3F8' } }.to_json }
     let(:invalid_tag) { { tag: { name: '' } }.to_json }
 
     context 'when the post request is made by a team member' do

@@ -38,7 +38,7 @@ class V1::TagsController < ApplicationController
 
   private
   def tag_params
-    params.require(:tag).permit(:name)
+    params.require(:tag).permit(:name, :color)
   end
 
   def find_project(id)
