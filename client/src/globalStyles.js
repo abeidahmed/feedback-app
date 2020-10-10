@@ -17,6 +17,13 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
 
+  body {
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    color: ${({ theme }) => theme.color.gray900}
+  }
+
   button {
     background-color: transparent;
     background-image: none;
@@ -44,6 +51,7 @@ export const GlobalStyles = createGlobalStyle`
       'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif',
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     line-height: 1.5;
+    height: 100%;
   }
 
   *,
