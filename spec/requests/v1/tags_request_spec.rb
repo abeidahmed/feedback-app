@@ -5,19 +5,8 @@ RSpec.describe "V1::Tags", type: :request do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
 
-    let(:valid_tag) { { tag: { name: 'idea' } }.to_json }
-    let(:archive_tag) { { tag: { name: 'archive' } }.to_json }
+    let(:valid_tag) { { tag: { name: 'best idea' } }.to_json }
     let(:invalid_tag) { { tag: { name: '' } }.to_json }
-
-    context 'when the post request is made to create a duplicate Archive tag' do
-      before do
-        post v1_project_tags_url(project), params: archive_tag, headers: auth_header(team.users.first)
-      end
-
-      it 'is expected to not create a tag' do
-        expect(Tag.count).to eq(4)
-      end
-    end
 
     context 'when the post request is made by a team member' do
       before do
@@ -63,8 +52,8 @@ RSpec.describe "V1::Tags", type: :request do
   describe '#update' do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
-    let(:tag) { create(:tag, name: 'issues', project: project) }
-    let(:archive_tag) { create(:tag, name: 'archive', project: project) }
+    let(:tag) { create(:tag, name: 'great idea', project: project) }
+    let(:archive_tag) { project.tags.find_by(name: 'Archive') }
 
     let(:valid_tag) { { tag: { name: 'great idea' } }.to_json }
 
@@ -75,7 +64,7 @@ RSpec.describe "V1::Tags", type: :request do
 
       it 'is expected to not update the tag' do
         archive_tag.reload
-        expect(archive_tag.name).to eq('archive')
+        expect(archive_tag.name).to eq('Archive')
       end
 
       include_examples 'bad_request'
@@ -100,7 +89,7 @@ RSpec.describe "V1::Tags", type: :request do
 
       it 'is expected to not update the tag' do
         tag.reload
-        expect(tag.name).to eq('issues')
+        expect(tag.name).to eq('great idea')
       end
 
       include_examples 'unauthorized'
@@ -124,12 +113,12 @@ RSpec.describe "V1::Tags", type: :request do
 
     context 'when the delete request is made on the archive tag' do
       before do
-        archive_tag = create(:tag, project: project, name: 'Archive')
+        archive_tag = project.tags.find_by(name: 'Archive')
         delete v1_project_tag_url(project, archive_tag), headers: auth_header(team.users.first)
       end
 
       it 'is expected to not delete the tag' do
-        expect(project.tags.count).to eq(5)
+        expect(project.tags.count).to eq(4)
       end
 
       include_examples 'bad_request'

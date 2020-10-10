@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2020_10_10_045752) do
 
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "content", null: false
-    t.string "tag_name", null: false
     t.string "sender_email"
     t.string "page_url"
     t.string "device"
@@ -28,7 +27,6 @@ ActiveRecord::Schema.define(version: 2020_10_10_045752) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_feedbacks_on_project_id"
     t.index ["tag_id"], name: "index_feedbacks_on_tag_id"
-    t.index ["tag_name"], name: "index_feedbacks_on_tag_name"
   end
 
   create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

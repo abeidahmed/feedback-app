@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :tag do
     project
-    name { 'Issue' }
+    sequence(:name) { |n| "hello#{n}" }
 
     factory :tag_with_feedbacks do
       transient do

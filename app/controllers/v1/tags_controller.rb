@@ -4,7 +4,6 @@ class V1::TagsController < ApplicationController
     return error('unauthorized') unless team_has_access?(project.team_members)
 
     @tag = project.tags.build(tag_params)
-    return error('bad_request') if @tag.is_archive_tag?
 
     if @tag.save
       render :new, status: :created
