@@ -11,6 +11,13 @@ class V1::TagsController < ApplicationController
     end
   end
 
+  def destroy
+    project = Project.find(params[:project_id])
+    return error('unauthorized') unless project.team_members.include?(current_user)
+    tag = project.tags.find(params[:id])
+    tag.destroy
+  end
+
   private
   def tag_params
     params.require(:tag).permit(:name)
