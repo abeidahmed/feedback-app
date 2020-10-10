@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       resources :projects, only: [:create, :update] do
         resources :tags, only: [:create]
+        resources :feedbacks, only: [:create]
       end
     end
   end
