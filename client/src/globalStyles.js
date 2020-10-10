@@ -40,7 +40,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    font-family: 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI',
+    font-family: 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI',
       'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif',
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     line-height: 1.5;
@@ -89,6 +89,7 @@ export const GlobalStyles = createGlobalStyle`
   h6 {
     font-size: inherit;
     font-weight: inherit;
+    font-family: 'PT Serif', 'system-ui'
   }
 
   a {
