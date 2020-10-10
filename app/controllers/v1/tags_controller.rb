@@ -2,6 +2,7 @@ class V1::TagsController < ApplicationController
   def create
     project = find_project
     return error('unauthorized') unless project.team_members.include?(current_user)
+    return error('bad_request') if params.dig(:tag, :name).downcase == 'archive'
     @tag = project.tags.build(tag_params)
 
     if @tag.save

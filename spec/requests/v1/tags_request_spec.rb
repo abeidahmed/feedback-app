@@ -6,7 +6,18 @@ RSpec.describe "V1::Tags", type: :request do
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
 
     let(:valid_tag) { { tag: { name: 'idea' } }.to_json }
+    let(:archive_tag) { { tag: { name: 'archive' } }.to_json }
     let(:invalid_tag) { { tag: { name: '' } }.to_json }
+
+    context 'when the post request is made to create a duplicate Archive tag' do
+      before do
+        post v1_project_tags_url(project), params: archive_tag, headers: auth_header(team.users.first)
+      end
+
+      it 'is expected to not create a tag' do
+        expect(Tag.count).to eq(4)
+      end
+    end
 
     context 'when the post request is made by a team member' do
       before do
