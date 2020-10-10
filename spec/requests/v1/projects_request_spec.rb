@@ -69,15 +69,15 @@ RSpec.describe "V1::Projects", type: :request do
   end
 
   describe '#update' do
-    let(:user) { create(:user) }
-    let(:project) { create(:project, name: 'Hello world', user_id: user.id) }
+    let(:team) { create(:team_with_users)}
+    let(:project) { create(:project, name: 'Hello world', user_id: team.users.first.id, team: team) }
 
     let(:valid_project) { { project: { name: 'Main website' } }.to_json }
     let(:invalid_project) { { project: { name: nil } }.to_json }
 
-    context 'when the patch request is made by user' do
+    context 'when the patch request is made by project team member' do
       before do
-        patch v1_project_url(project), params: valid_project, headers: auth_header(user)
+        patch v1_project_url(project), params: valid_project, headers: auth_header(team.users.second)
       end
 
       it 'is expected to update the project' do
@@ -102,7 +102,7 @@ RSpec.describe "V1::Projects", type: :request do
 
     context 'when the patch request is invalid' do
       before do
-        patch v1_project_url(project), params: invalid_project, headers: auth_header(user)
+        patch v1_project_url(project), params: invalid_project, headers: auth_header(team.users.first)
       end
 
       include_examples 'error'

@@ -14,4 +14,8 @@ class Project < ApplicationRecord
     self.tags.create! name: 'Idea'
     self.tags.create! name: 'Other'
   end
+
+  def team_members
+    self.team.users
+  end
 end

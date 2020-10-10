@@ -3,7 +3,7 @@ class V1::ProjectsController < ApplicationController
     @project = current_user.projects.build(project_params)
     team = Team.create!
     @project.team_id = team.id
-    team.users << current_user
+    team.add(current_user)
 
     if @project.save
       render :new, status: :created
@@ -14,7 +14,7 @@ class V1::ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    return error('unauthorized') unless current_user?(@project.user)
+    return error('unauthorized') unless @project.team_members.include?(current_user)
 
     if @project.update(project_params)
       render :new
