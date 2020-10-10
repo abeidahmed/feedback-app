@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_create { email.downcase!}
+  before_create { email.downcase! }
 
   has_secure_password
 

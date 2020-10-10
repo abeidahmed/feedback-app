@@ -113,7 +113,7 @@ RSpec.describe "V1::Projects", type: :request do
   end
 
   describe '#destroy' do
-    let(:team) { create(:team_with_users)}
+    let(:team) { create(:team_with_users) }
     let(:project) { create(:project, user_id: team.users.first.id, team: team) }
 
     context 'when the delete request is made by a team member' do
