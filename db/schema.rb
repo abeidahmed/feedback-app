@@ -10,11 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_161535) do
+ActiveRecord::Schema.define(version: 2020_10_10_040729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "content"
+    t.string "tag_name", null: false
+    t.string "sender_email"
+    t.string "page_url"
+    t.string "device"
+    t.uuid "project_id", null: false
+    t.uuid "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_feedbacks_on_project_id"
+    t.index ["tag_id"], name: "index_feedbacks_on_tag_id"
+    t.index ["tag_name"], name: "index_feedbacks_on_tag_name"
+  end
 
   create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +55,8 @@ ActiveRecord::Schema.define(version: 2020_10_09_161535) do
     t.index ["email"], name: "index_users_on_email"
   end
 
+  add_foreign_key "feedbacks", "projects"
+  add_foreign_key "feedbacks", "tags"
   add_foreign_key "projects", "users"
   add_foreign_key "tags", "projects"
 end
