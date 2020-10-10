@@ -2,9 +2,12 @@ class V1::ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
 
-    team = Team.create!
-    @project.team_id = team.id
-    team.add(current_user)
+    ActiveRecord::Base.transaction do
+      team = Team.create!
+      @project.team_id = team.id
+      team.add(current_user)
+      raise ActiveRecord::Rollback unless @project.valid?
+    end
 
     if @project.save
       render :new, status: :created

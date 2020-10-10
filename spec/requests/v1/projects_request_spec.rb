@@ -55,7 +55,7 @@ RSpec.describe "V1::Projects", type: :request do
         expect(Tag.count).to be_zero
       end
 
-      xit 'is expected to not create the team' do
+      it 'is expected to not create the team' do
         expect(Team.count).to be_zero
       end
 
