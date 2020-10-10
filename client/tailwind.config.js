@@ -15,6 +15,14 @@ module.exports = {
         ...defaultTheme.boxShadow,
         custom:
           'rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px',
+        'outline-blue': 'rgba(0, 93, 255, 0.6) 0px 0px 0px 3px',
+      },
+      colors: {
+        blue: {
+          ...defaultTheme.colors.blue,
+          '500': 'rgb(0, 93, 255)',
+          '600': 'rgb(22, 51, 255)',
+        },
       },
     },
   },
