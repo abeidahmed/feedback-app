@@ -40,6 +40,9 @@ client/coverage
 # production
 client/build
 
+# styles
+client/src/assets/stylesheets/main.css
+
 # misc
 client/.DS_Store
 client/.env.local
