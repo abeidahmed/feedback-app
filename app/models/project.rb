@@ -2,6 +2,7 @@ class Project < ApplicationRecord
   after_create :initialize_tags
 
   belongs_to :user
+  belongs_to :team
   has_many :tags, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
 

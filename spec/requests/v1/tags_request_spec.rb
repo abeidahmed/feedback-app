@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "V1::Tags", type: :request do
   describe '#create' do
     let(:user) { create(:user) }
-    let(:project) { create(:project) }
+    let(:project) { create(:project) } # project creates additional 3 tags (system generated)
 
     let(:valid_tag) { { tag: { name: 'idea' } }.to_json }
     let(:invalid_tag) { { tag: { name: '' } }.to_json }
@@ -14,7 +14,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to create a tag' do
-        expect(Tag.count).to eq(1)
+        expect(Tag.count).to eq(4)
       end
 
       include_examples 'created'
@@ -26,7 +26,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to not create a tag' do
-        expect(Tag.count).to be_zero
+        expect(Tag.count).to eq(3)
       end
 
       include_examples 'error'

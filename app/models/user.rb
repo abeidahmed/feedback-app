@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :projects
+  has_many :teamnations
+  has_many :teams, through: :teamnations
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 

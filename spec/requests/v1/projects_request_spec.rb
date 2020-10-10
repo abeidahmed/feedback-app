@@ -6,6 +6,33 @@ RSpec.describe "V1::Projects", type: :request do
     let(:valid_project) { { project: { name: 'Main website' } }.to_json }
     let(:invalid_project) { { project: { name: nil } }.to_json }
 
+    context 'before creating the project (when post request is valid)' do
+      before do
+        post v1_projects_url, params: valid_project, headers: auth_header(user)
+      end
+
+      it 'is expected to create a new team (before creating a project)' do
+        expect(Team.count).to eq(1)
+      end
+
+      it 'is expected to assign the user to the team' do
+        expect(user.teams.count).to eq(1)
+      end
+    end
+
+    context 'after creating the project' do
+      before do
+        post v1_projects_url, params: valid_project, headers: auth_header(user)
+      end
+
+      it 'is expected to create three tags with title: Issue, Idea, Other' do
+        expect(Tag.count).to eq(3)
+        expect(Tag.first.name).to eq('Issue')
+        expect(Tag.second.name).to eq('Idea')
+        expect(Tag.third.name).to eq('Other')
+      end
+    end
+
     context 'when the post request is valid' do
       before do
         post v1_projects_url, params: valid_project, headers: auth_header(user)
@@ -15,19 +42,20 @@ RSpec.describe "V1::Projects", type: :request do
         expect(Project.count).to eq(1)
       end
 
-      it 'is expected to create three tags with title: Issue, Idea, Other' do
-        expect(Tag.count).to eq(3)
-        expect(Tag.first.name).to eq('Issue')
-        expect(Tag.second.name).to eq('Idea')
-        expect(Tag.third.name).to eq('Other')
-      end
-
       include_examples 'created'
     end
 
     context 'when the post request is invalid' do
       before do
         post v1_projects_url, params: invalid_project, headers: auth_header(user)
+      end
+
+      it 'is expected to not create the tags' do
+        expect(Tag.count).to be_zero
+      end
+
+      xit 'is expected to not create the team' do
+        expect(Team.count).to be_zero
       end
 
       it 'is expected to not create the project' do

@@ -30,6 +30,8 @@ RSpec.describe User, type: :model do
 
   describe 'associations' do
     it { should have_many(:projects) }
+
+    it { should have_many(:teams) }
   end
 
   describe '::find_by_credentials' do

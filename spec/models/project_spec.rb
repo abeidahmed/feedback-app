@@ -13,5 +13,7 @@ RSpec.describe Project, type: :model do
     it { should have_many(:tags) }
 
     it { should have_many(:feedbacks) }
+
+    it { should belong_to(:team) }
   end
 end

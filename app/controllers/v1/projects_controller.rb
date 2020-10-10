@@ -1,6 +1,9 @@
 class V1::ProjectsController < ApplicationController
   def create
     @project = current_user.projects.build(project_params)
+    team = Team.create!
+    @project.team_id = team.id
+    team.users << current_user
 
     if @project.save
       render :new, status: :created
