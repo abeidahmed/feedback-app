@@ -3,6 +3,7 @@ import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 import { useCurrentUser } from 'store/currentUser';
 import { signupApi } from 'api/signup';
+import { Input, Checkbox } from 'components/Field';
 
 function Form() {
   const [email, setEmail] = useState('');
@@ -38,48 +39,41 @@ function Form() {
       className="w-full max-w-sm mx-auto my-8 space-y-5"
     >
       <section className="w-full space-y-3">
-        <div>
-          <label htmlFor="signup-email" className="sr-only">
-            Email address
-          </label>
-          <input
-            type="email"
-            id="signup-email"
-            className="block w-full transition duration-150 ease-in-out bg-gray-100 sm:text-sm form-input focus:shadow-outline-blue focus:bg-white"
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="signup-password" className="sr-only">
-            Password
-          </label>
-          <input
-            type="password"
-            id="signup-password"
-            className="block w-full transition duration-150 ease-in-out bg-gray-100 sm:text-sm form-input focus:shadow-outline-blue focus:bg-white"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <Input
+          id="signup-email"
+          label="Email address"
+          showLabel={false}
+          appearance="gray"
+          type="email"
+          placeholder="Email address"
+          error={error}
+          errorType="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Input
+          id="signup-password"
+          label="Password"
+          showLabel={false}
+          appearance="gray"
+          type="password"
+          placeholder="Password (min 6 char)"
+          error={error}
+          errorType="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </section>
       <div>
-        <label className="flex items-center">
-          <input
-            type="checkbox"
-            className="form-checkbox focus:shadow-outline-blue"
-            checked={agreed}
-            onChange={() => setAgreed(!agreed)}
-          />
-          <span className="ml-2 text-sm text-gray-600">
-            I agree to the{' '}
-            <Link to="/" className="underline">
-              Terms and conditions
-            </Link>
-          </span>
-        </label>
+        <Checkbox
+          checked={agreed}
+          onChange={(e) => setAgreed(e.target.checked)}
+        >
+          I agree to the{' '}
+          <Link to="/" className="underline">
+            Terms and conditions
+          </Link>
+        </Checkbox>
       </div>
       <button
         disabled={isLoading || !agreed}
