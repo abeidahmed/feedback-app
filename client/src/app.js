@@ -4,12 +4,13 @@ import { useQuery } from 'react-query';
 import { useCurrentUser } from 'store/currentUser';
 import { getCurrentUserApi } from 'api/getCurrentUser';
 import { GuestRoute, DashboardRoute } from 'routes';
+import * as q from 'global/queryKey';
 import { ProtectedRoute } from 'components/ProtectedRoute';
 
 function App() {
   const { setUser } = useCurrentUser();
   const { data: { data: { token } = {} } = {}, isLoading, isError } = useQuery(
-    'fetchCurrentUser',
+    q.GET_CURRENT_USER,
     getCurrentUserApi,
     {
       onSuccess: ({ data }) => {
