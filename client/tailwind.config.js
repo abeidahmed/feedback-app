@@ -25,6 +25,11 @@ module.exports = {
           '700': 'rgb(0, 32, 255)',
         },
       },
+      height: {
+        ...defaultTheme.height,
+        xs: '34px',
+        sm: '38px',
+      },
     },
   },
   variants: {

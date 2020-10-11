@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { handleLinkWrapping } from './utils';
 
 function StyledIconButton({
-  size = 'md',
+  size = 'sm',
   appearance = 'minimal',
   className,
   children,
@@ -13,7 +13,10 @@ function StyledIconButton({
   const buttonClass = cn([
     'rounded-md focus:outline-none focus:shadow-outline-blue border border-transparent focus:border-blue-600',
     {
-      'p-1.5': size === 'md',
+      'h-xs p-1.5': size === 'xs',
+      'h-sm p-2': size === 'sm',
+      'bg-blue-500 hover:bg-blue-600': appearance === 'primary',
+      'border-gray-300 hover:bg-gray-100 text-gray-500': appearance === 'white',
       'focus:bg-gray-50 bg-transparent': appearance === 'minimal',
     },
   ]);
@@ -26,8 +29,8 @@ function StyledIconButton({
 }
 
 StyledIconButton.propTypes = {
-  size: PropTypes.oneOf(['md']),
-  appearance: PropTypes.oneOf(['minimal']),
+  size: PropTypes.oneOf(['xs', 'sm']),
+  appearance: PropTypes.oneOf(['primary', 'white', 'minimal']),
 };
 
 export const IconButton = (props) =>
