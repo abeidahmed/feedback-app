@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
+    "js-cookie": "^2.2.1",
     "postcss-cli": "^8.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
