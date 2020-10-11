@@ -5,6 +5,7 @@ import Logo from 'assets/Logo';
 import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import { TagSelector } from 'components/Dropdown';
+import { IconButton } from 'components/Button';
 
 function Dashboard() {
   const [isActive, setIsActive] = useState(false);
@@ -36,12 +37,11 @@ function Dashboard() {
             <TagSelector />
           </div>
           <DesktopMenu />
-          <button
-            onClick={() => setIsActive(!isActive)}
-            className="p-1.5 ml-3 -mr-1.5 rounded-md focus:outline-none focus:shadow-outline-blue focus:bg-gray-50 md:hidden"
-          >
-            <Icon icon="chevron-down" className={toggleBtnIconClass} />
-          </button>
+          <div className="flex items-center justify-center ml-3 -mr-1.5 md:hidden">
+            <IconButton onClick={() => setIsActive(!isActive)}>
+              <Icon icon="chevron-down" className={toggleBtnIconClass} />
+            </IconButton>
+          </div>
         </div>
       </div>
       <MobileMenu isActive={isActive} />
