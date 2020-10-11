@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function ProjectCard() {
   return (
     <Link
-      to="/"
+      to="/app/helloworld"
       className="block min-w-0 col-span-1 p-4 border border-gray-200 rounded-md shadow focus:outline-none focus:shadow-outline-blue focus:border-blue-600 hover:shadow-md"
     >
       <h2 className="text-lg truncate">Google.com</h2>
