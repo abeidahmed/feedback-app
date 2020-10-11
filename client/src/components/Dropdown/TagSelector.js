@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import cn from 'classnames';
 import { Icon } from 'components/Icon';
 import { ComboMenu } from './components';
+import { OutsideClickHandler } from 'components/Container';
 
 function TagSelector() {
   const [isActive, setIsActive] = useState(false);
@@ -15,17 +16,18 @@ function TagSelector() {
     },
   ]);
 
-  const toggle = () => setIsActive(!isActive);
-
   const setMenu = (title) => {
     setTitle(title);
     setIsActive(false);
   };
 
   return (
-    <div className="relative flex-1 w-full max-w-sm ml-3 md:ml-4">
+    <OutsideClickHandler
+      onOutsideClick={() => setIsActive(false)}
+      className="relative flex-1 w-full max-w-sm ml-3 md:ml-4"
+    >
       <button
-        onClick={toggle}
+        onClick={() => setIsActive(!isActive)}
         className="flex shadow w-full bg-gray-50 py-1.5 px-3 focus:shadow-outline-blue rounded-md items-center justify-between focus:outline-none"
       >
         <span>{title}</span>
@@ -49,7 +51,7 @@ function TagSelector() {
           </button>
         </ul>
       </div>
-    </div>
+    </OutsideClickHandler>
   );
 }
 
