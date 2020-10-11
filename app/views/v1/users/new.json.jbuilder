@@ -1,4 +1,4 @@
-json.user do
+json.current_user do
   json.partial! 'user', user: @user
 end
 
