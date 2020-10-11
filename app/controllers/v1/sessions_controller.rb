@@ -12,6 +12,11 @@ class V1::SessionsController < ApplicationController
     end
   end
 
+  def show
+    @current_user = current_user
+    render :show
+  end
+
   private
   def email
     params.dig(:user, :email)

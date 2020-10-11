@@ -38,4 +38,16 @@ RSpec.describe "V1::Sessions", type: :request do
       include_examples 'user_token'
     end
   end
+
+  describe '#show' do
+    let(:user) { create(:user) }
+
+    context 'when the user is logged in' do
+      before do
+        get v1_session_url('current_user'), headers: auth_header(user)
+      end
+
+      include_examples 'user_token'
+    end
+  end
 end
