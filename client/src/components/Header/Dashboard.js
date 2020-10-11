@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { Icon } from 'components/Icon';
-import Logo from './Logo';
+import Logo from 'assets/Logo';
 import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import { TagSelector } from 'components/Dropdown';
