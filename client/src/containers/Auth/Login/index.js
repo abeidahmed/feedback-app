@@ -8,9 +8,11 @@ function Login() {
     <main className="flex items-center justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
       <div className="w-full sm:max-w-md">
         <div className="px-4">
-          <Link to="/">
-            <Logo width="48" height="48" className="mx-auto" />
-          </Link>
+          <div className="flex justify-center">
+            <Link to="/">
+              <Logo className="w-12 h-12" />
+            </Link>
+          </div>
           <h1 className="text-3xl font-bold text-center sm:text-3xl lg:text-4xl">
             Sign in to Feeder
           </h1>
