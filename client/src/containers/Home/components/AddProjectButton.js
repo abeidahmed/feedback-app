@@ -4,7 +4,7 @@ import { Icon } from 'components/Icon';
 function AddProjectButton({ ...props }) {
   return (
     <button
-      className="block col-span-1 p-4 transition duration-150 ease-in-out border border-gray-200 rounded-md shadow focus:border-blue-600 focus:outline-none focus:shadow-outline-blue hover:shadow-md"
+      className="block col-span-1 p-4 border border-gray-200 rounded-md shadow focus:border-blue-600 focus:outline-none focus:shadow-outline-blue hover:shadow-md"
       {...props}
     >
       <span className="inline-flex items-center justify-center w-10 h-10 border border-blue-500 border-dashed rounded-full border-1">

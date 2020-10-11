@@ -8,10 +8,7 @@ function Footer() {
       <div className="mt-4">
         <p className="text-sm text-gray-600">
           By signing in you agree to our{' '}
-          <Link
-            to="/"
-            className="font-medium underline transition duration-150 ease-in-out hover:text-gray-500"
-          >
+          <Link to="/" className="font-medium underline hover:text-gray-500">
             terms and conditions
           </Link>
           .

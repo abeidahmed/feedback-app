@@ -11,7 +11,7 @@ function StyledButton({
   ...props
 }) {
   const buttonClass = cn([
-    'inline-flex items-center justify-center relative border border-transparent transition duration-150 ease-in-out rounded-md focus:outline-none focus:shadow-outline-blue',
+    'inline-flex items-center justify-center relative rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-600',
     {
       'px-3 py-2 leading-6 font-medium': size === 'md',
       'text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700':

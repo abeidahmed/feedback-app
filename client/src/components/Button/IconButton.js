@@ -11,7 +11,7 @@ function StyledIconButton({
   ...props
 }) {
   const buttonClass = cn([
-    'rounded-md focus:outline-none focus:shadow-outline-blue',
+    'rounded-md focus:outline-none focus:shadow-outline-blue border border-transparent focus:border-blue-600',
     {
       'p-1.5': size === 'md',
       'focus:bg-gray-50 bg-transparent': appearance === 'minimal',

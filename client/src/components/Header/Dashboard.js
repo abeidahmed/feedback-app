@@ -20,7 +20,7 @@ function Dashboard() {
   ]);
 
   const toggleBtnIconClass = cn([
-    'w-5 h-5 text-gray-700 transition duration-150 ease-in-out',
+    'w-5 h-5 text-gray-700',
     {
       'transform rotate-180': isActive,
     },

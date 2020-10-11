@@ -28,7 +28,7 @@ function TagSelector() {
     >
       <button
         onClick={() => setIsActive(!isActive)}
-        className="flex shadow w-full bg-gray-50 py-1.5 px-3 focus:shadow-outline-blue rounded-md items-center justify-between focus:outline-none"
+        className="flex shadow w-full bg-gray-50 py-1.5 px-3 border border-transparent focus:border-blue-600 hover:bg-gray-100 focus:shadow-outline-blue rounded-md items-center justify-between focus:outline-none"
       >
         <span>{title}</span>
         <Icon icon="selector" className="w-5 h-5 text-gray-600" />
@@ -45,7 +45,7 @@ function TagSelector() {
             to="/"
             onClick={() => setMenu('Meta broker')}
           />
-          <button className="inline-flex items-center justify-between w-full px-3 py-2 text-left text-gray-700 transition duration-150 ease-in-out focus:outline-none focus:bg-gray-100 hover:bg-gray-100">
+          <button className="inline-flex items-center justify-between w-full px-3 py-2 text-left text-gray-700 focus:outline-none focus:bg-gray-100 hover:bg-gray-100">
             <span>New Project</span>
             <Icon icon="plus" className="w-5 h-5 text-gray-400" />
           </button>

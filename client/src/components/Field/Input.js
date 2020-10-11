@@ -28,7 +28,7 @@ function Input({
   ]);
 
   const inputClass = cn([
-    'block w-full transition duration-150 ease-in-out sm:text-sm form-input focus:shadow-outline-blue shadow-sm',
+    'block w-full sm:text-sm form-input focus:border-blue-600 focus:shadow-outline-blue shadow-sm',
     {
       'bg-gray-100 focus:bg-white': appearance === 'gray',
       'mt-1': showLabel,
@@ -44,7 +44,7 @@ function Input({
         {to && (
           <Link
             to={pathname}
-            className="text-sm font-medium text-blue-600 transition duration-150 ease-in-out hover:text-blue-500"
+            className="text-sm font-medium text-blue-600 hover:text-blue-500"
           >
             {title}
           </Link>

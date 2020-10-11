@@ -1,3 +1,4 @@
+/* Button */
 button:disabled,
 button[disabled] {
   opacity: 0.5;
@@ -5,6 +6,16 @@ button[disabled] {
   pointer-events: none;
 }
 
+button,
+a,
+input,
+input[type='radio'],
+input[type='submit'],
+input[type='checkbox'] {
+  transition: all 150ms ease-in-out;
+}
+
+/* Heading */
 h1,
 h2,
 h3,
@@ -15,7 +26,6 @@ h6 {
 }
 
 /* Spinner */
-
 .lds-dual-ring {
   display: inline-block;
   width: 40px;
