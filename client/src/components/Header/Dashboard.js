@@ -6,6 +6,7 @@ import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import { TagSelector } from 'components/Dropdown';
 import { IconButton } from 'components/Button';
+import { Container } from 'components/Container';
 
 function Dashboard() {
   const [isActive, setIsActive] = useState(false);
@@ -30,7 +31,7 @@ function Dashboard() {
       <div className={overlayClass}>
         <div className="absolute inset-0 bg-gray-300 opacity-75 "></div>
       </div>
-      <div className="relative z-10 w-full max-w-5xl px-4 mx-auto bg-white">
+      <Container className="relative z-10 bg-white">
         <div className="flex items-center justify-between h-16 border-b border-gray-200">
           <div className="flex items-center flex-1">
             <Logo width="48" height="48" />
@@ -43,7 +44,7 @@ function Dashboard() {
             </IconButton>
           </div>
         </div>
-      </div>
+      </Container>
       <MobileMenu isActive={isActive} />
     </header>
   );
