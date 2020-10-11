@@ -22,6 +22,7 @@ module.exports = {
           ...defaultTheme.colors.blue,
           '500': 'rgb(0, 93, 255)',
           '600': 'rgb(22, 51, 255)',
+          '700': 'rgb(0, 32, 255)',
         },
       },
     },
