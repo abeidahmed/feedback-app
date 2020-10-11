@@ -1,0 +1,1 @@
+export { handleLinkWrapping } from './handleLinkWrapping';

@@ -4,6 +4,7 @@ import { useMutation } from 'react-query';
 import { loginApi } from 'api/login';
 import { useCurrentUser } from 'store/currentUser';
 import { Input } from 'components/Field';
+import { Button } from 'components/Button';
 
 function Form() {
   const [email, setEmail] = useState('');
@@ -57,13 +58,9 @@ function Form() {
         {error && <p className="text-sm font-medium text-red-700">{error}</p>}
       </section>
       <div>
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="block w-full px-3 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700"
-        >
+        <Button disabled={isLoading} appearance="primary" className="w-full">
           Sign in
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'components/Button';
 
 function Footer() {
   return (
@@ -22,14 +23,9 @@ function Footer() {
       <div>
         <p className="text-gray-700">New to our platform?</p>
         <div className="mt-4">
-          <span className="rounded-md shadow-sm">
-            <Link
-              to="/signup"
-              className="block w-full px-3 py-2 text-base font-medium leading-6 text-center text-gray-700 whitespace-no-wrap transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50"
-            >
-              Create an account
-            </Link>
-          </span>
+          <Button to="/signup" className="w-full">
+            Create an account
+          </Button>
         </div>
       </div>
     </>

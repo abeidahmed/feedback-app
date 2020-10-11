@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useCurrentUser } from 'store/currentUser';
 import { signupApi } from 'api/signup';
 import { Input, Checkbox } from 'components/Field';
+import { Button } from 'components/Button';
 
 function Form() {
   const [email, setEmail] = useState('');
@@ -76,12 +77,13 @@ function Form() {
           </Link>
         </Checkbox>
       </div>
-      <button
+      <Button
+        className="w-full"
+        appearance="primary"
         disabled={isLoading || !agreed}
-        className="block w-full px-3 py-2 font-medium leading-6 text-white transition duration-150 ease-in-out bg-blue-500 rounded-md focus:outline-none focus:shadow-outline-blue hover:bg-blue-600"
       >
         Join Feeder
-      </button>
+      </Button>
     </form>
   );
 }
