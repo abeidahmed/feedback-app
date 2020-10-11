@@ -4,29 +4,28 @@ import { useQuery } from 'react-query';
 import { useCurrentUser } from 'store/currentUser';
 import { getCurrentUserApi } from 'api/getCurrentUser';
 import { GuestRoute, DashboardRoute } from 'routes';
-import { Spinner } from 'components/Loader';
+import { ProtectedRoute } from 'components/ProtectedRoute';
 
 function App() {
-  const { setUser, token } = useCurrentUser();
-  const { isLoading, isError } = useQuery(
+  const { setUser } = useCurrentUser();
+  const { data: { data: { token } = {} } = {}, isLoading, isError } = useQuery(
     'fetchCurrentUser',
     getCurrentUserApi,
     {
       onSuccess: ({ data }) => {
-        if (token) {
-          setUser(data);
-        }
+        setUser(data);
       },
     }
   );
 
-  if (isError) window.location.href = '/login';
-  if (isLoading) return <Spinner />;
-
   return (
     <Router>
       <Switch>
-        <Route path="/app" component={DashboardRoute} />
+        <ProtectedRoute
+          path="/app"
+          component={DashboardRoute}
+          currentUser={{ token, isError, isLoading }}
+        />
         <Route path="/" component={GuestRoute} />
       </Switch>
     </Router>
