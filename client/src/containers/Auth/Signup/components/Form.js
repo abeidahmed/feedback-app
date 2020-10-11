@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useCurrentUser } from 'store/currentUser';
 import { signupApi } from 'api/signup';
 import { Input, Checkbox } from 'components/Field';
@@ -12,10 +12,11 @@ function Form() {
   const [error, setError] = useState([]);
 
   const { setUser } = useCurrentUser();
-
+  const history = useHistory();
   const [mutate, { isLoading }] = useMutation(signupApi, {
     onSuccess: ({ data }) => {
       setUser(data);
+      history.push('/app');
     },
     throwOnError: true,
   });
