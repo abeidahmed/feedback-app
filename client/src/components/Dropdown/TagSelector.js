@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from 'components/Icon';
 import { ComboMenu } from './components';
 import { OutsideClickHandler } from 'components/Container';
 
-function TagSelector() {
+function TagSelector({ location }) {
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState('Sand diver');
 
@@ -20,6 +21,8 @@ function TagSelector() {
     setTitle(title);
     setIsActive(false);
   };
+
+  if (location.pathname === '/app') return null;
 
   return (
     <OutsideClickHandler
@@ -55,4 +58,4 @@ function TagSelector() {
   );
 }
 
-export default TagSelector;
+export default withRouter(TagSelector);
