@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           patch :archive, on: :member
         end
       end
+      resources :colors, only: [:index]
     end
   end
 end
