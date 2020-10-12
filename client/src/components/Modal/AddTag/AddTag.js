@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useModalType } from 'store/modal';
+import { useGetColors } from 'api/getColors';
 import ModalWrapper from '../ModalWrapper';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
 
 function AddTag() {
-  const {
-    modalProps: { tags },
-  } = useModalType();
   const [tagName, setTagName] = useState('');
-  const [textColor, setTextColor] = useState('#f4f5f7');
-  const [bgColor, setBgColor] = useState('#374151');
+  const [textColor, setTextColor] = useState('#374151');
+  const [bgColor, setBgColor] = useState('#f4f5f7');
+
+  const { colors, isLoading, isError } = useGetColors();
 
   function handleColor(textColor, bgColor) {
     setTextColor(textColor);
@@ -40,18 +39,20 @@ function AddTag() {
               </span>
             </div>
             <div className="grid grid-cols-10 gap-4">
-              {tags.map(({ id, textColor, bgColor }) => (
-                <div key={id} className="w-10 h-10 col-span-1">
-                  <button
-                    type="button"
-                    className="flex items-center justify-center flex-shrink-0 w-full h-full p-2 border border-transparent rounded-full focus:border-blue-600 focus:outline-none focus:shadow-outline-blue"
-                    style={{ color: textColor, backgroundColor: bgColor }}
-                    onClick={() => handleColor(textColor, bgColor)}
-                  >
-                    a
-                  </button>
-                </div>
-              ))}
+              {isLoading || isError
+                ? null
+                : colors.map(({ id, textColor, bgColor }) => (
+                    <div key={id} className="w-10 h-10 col-span-1">
+                      <button
+                        type="button"
+                        className="flex items-center justify-center flex-shrink-0 w-full h-full p-2 border border-transparent rounded-full focus:border-blue-600 focus:outline-none focus:shadow-outline-blue"
+                        style={{ color: textColor, backgroundColor: bgColor }}
+                        onClick={() => handleColor(textColor, bgColor)}
+                      >
+                        a
+                      </button>
+                    </div>
+                  ))}
             </div>
           </div>
         </section>
