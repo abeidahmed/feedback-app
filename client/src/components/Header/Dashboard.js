@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
+import { useQuery } from 'react-query';
+import { allProjectsApi } from 'api/allProjects';
 import { Icon } from 'components/Icon';
 import Logo from 'assets/Logo';
 import MobileMenu from './MobileMenu';
@@ -10,6 +12,12 @@ import { Container } from 'components/Container';
 
 function Dashboard() {
   const [isActive, setIsActive] = useState(false);
+
+  const {
+    data: { data: { projects } = {} } = {},
+    isLoading,
+    isError,
+  } = useQuery('fetchHeadProjects', allProjectsApi);
 
   const overlayClass = cn([
     'fixed inset-0 md:hidden',
@@ -35,7 +43,7 @@ function Dashboard() {
         <div className="flex items-center justify-between h-16 border-b border-gray-200">
           <div className="flex items-center flex-1">
             <Logo width="48" height="48" />
-            <TagSelector />
+            {isLoading || isError ? null : <TagSelector projects={projects} />}
           </div>
           <DesktopMenu />
           <div className="flex items-center justify-center ml-3 -mr-1.5 md:hidden">

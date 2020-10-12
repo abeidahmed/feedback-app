@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation, Redirect } from 'react-router-dom';
 import cn from 'classnames';
 import { Icon } from 'components/Icon';
 import { ComboMenu } from './components';
 import { OutsideClickHandler } from 'components/Container';
 
-function TagSelector({ location }) {
+function TagSelector({ projects }) {
+  const location = useLocation();
+  const paramId = location.pathname.split('/')[2];
+  const { name, id } = projects.find((project) => project.id === paramId) || {};
+
   const [isActive, setIsActive] = useState(false);
-  const [title, setTitle] = useState('Sand diver');
+  const [title, setTitle] = useState('');
 
   const dropdownClass = cn([
     'absolute w-full mt-2 overflow-hidden bg-white rounded-md shadow-md',
@@ -17,11 +21,12 @@ function TagSelector({ location }) {
     },
   ]);
 
-  const setMenu = (title) => {
-    setTitle(title);
-    setIsActive(false);
-  };
+  useEffect(() => {
+    setTitle(name);
+  }, [id, name]);
 
+  if (location.pathname === '/app/')
+    return <Redirect to={{ pathname: '/app' }} />;
   if (location.pathname === '/app') return null;
 
   return (
@@ -38,16 +43,16 @@ function TagSelector({ location }) {
       </button>
       <div className={dropdownClass}>
         <ul className="w-full py-1">
-          <ComboMenu
-            title="Sand diver"
-            to="/"
-            onClick={() => setMenu('Sand diver')}
-          />
-          <ComboMenu
-            title="Meta broker"
-            to="/"
-            onClick={() => setMenu('Meta broker')}
-          />
+          {projects.map(({ id, name }) => (
+            <ComboMenu
+              key={id}
+              title={name}
+              tagLink={`/app/${id}`}
+              settingLink="/"
+              onClick={() => setIsActive(false)}
+            />
+          ))}
+          <hr className="my-1 border-gray-200" />
           <button className="inline-flex items-center justify-between w-full px-3 py-2 text-left text-gray-700 focus:outline-none focus:bg-gray-100 hover:bg-gray-100">
             <span>New Project</span>
             <Icon icon="plus" className="w-5 h-5 text-gray-400" />
@@ -58,4 +63,4 @@ function TagSelector({ location }) {
   );
 }
 
-export default withRouter(TagSelector);
+export default TagSelector;
