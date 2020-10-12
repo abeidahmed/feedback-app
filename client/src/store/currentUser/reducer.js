@@ -2,9 +2,11 @@ import Cookies from 'js-cookie';
 import { types } from './types';
 import * as c from './constants';
 
+const TOKEN = Cookies.get(c.TOKEN);
+
 export const initialState = {
   currentUser: {},
-  token: Cookies.get(c.TOKEN),
+  token: TOKEN ? TOKEN : undefined,
 };
 
 export function currentUserReducer(state = initialState, action) {
@@ -20,7 +22,7 @@ export function currentUserReducer(state = initialState, action) {
       Cookies.remove(c.TOKEN);
       return {
         currentUser: {},
-        token: null,
+        token: undefined,
       };
     default:
       throw new Error(`Unhandle type: ${action.type}`);

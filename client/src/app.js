@@ -13,7 +13,7 @@ function App() {
     q.GET_CURRENT_USER,
     getCurrentUserApi,
     {
-      enabled: authToken !== 'undefined',
+      enabled: authToken,
       onSuccess: (data) => {
         setUser(data);
       },
