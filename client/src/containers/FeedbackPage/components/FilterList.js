@@ -8,7 +8,7 @@ function FilterList() {
     <div className="hidden md:block md:col-span-1">
       <div className="flex items-baseline justify-between">
         <p className="text-sm font-medium text-gray-500 uppercase">Filter</p>
-        <IconButton size="sm" appearance="white" size="xs">
+        <IconButton size="xs" appearance="white">
           <Icon icon="plus" className="w-5 h-5" />
         </IconButton>
       </div>
