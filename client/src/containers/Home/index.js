@@ -1,15 +1,28 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import { allProjectsApi } from 'api/allProjects';
 import { Container } from 'components/Container';
 import { ProjectCard } from 'components/Card';
 import { AddProjectButton } from './components';
+import { Spinner } from 'components/Loader';
 
 function Home() {
+  const {
+    data: { data: { projects } = {} } = {},
+    isLoading,
+    isError,
+  } = useQuery('allProjects', allProjectsApi);
+
+  if (isLoading || isError) return <Spinner />;
+
   return (
     <main>
       <Container>
         <section className="grid gap-4 py-8 sm:grid-cols-2 md:grid-cols-3">
           <AddProjectButton />
-          <ProjectCard />
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
         </section>
       </Container>
     </main>

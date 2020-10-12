@@ -1,4 +1,8 @@
 class V1::ProjectsController < ApplicationController
+  def index
+    @projects = Project.includes(:feedbacks, :team)
+  end
+
   def create
     @project = current_user.projects.build(project_params)
     @project.initialize_team(current_user)
