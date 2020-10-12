@@ -5,3 +5,31 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Feedback.destroy_all
+Tag.destroy_all
+Project.destroy_all
+Team.destroy_all
+User.destroy_all
+
+6.times do
+  user = User.create! email: Faker::Internet.unique.email, password: 'mamakane'
+
+  team = Team.new
+  team.users << user
+
+  project = Project.create! name: Faker::App.unique.name, user: user, team: team
+
+  tag_ref = rand(1..3)
+
+  3.times do
+    feedback = Feedback.create!(
+      content: Faker::Lorem.paragraph,
+      sender_email: Faker::Internet.email,
+      page_url: '/about',
+      device: 'MacOS 64',
+      project: project,
+      tag: project.tags[tag_ref]
+    )
+  end
+end
