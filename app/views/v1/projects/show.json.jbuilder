@@ -3,8 +3,8 @@ default_tag = [{
   id: 1,
   name: 'All',
   feedbacksCount: @project.feedbacks.count,
-  text_color: color_hash[:contrast],
-  bg_color: color_hash[:accent]
+  textColor: color_hash[:contrast],
+  bgColor: color_hash[:accent]
 }].freeze
 
 json.project do
