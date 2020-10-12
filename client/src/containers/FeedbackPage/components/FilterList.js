@@ -22,7 +22,7 @@ function FilterList({ tags, setFilterable }) {
   function openAddTagModal() {
     modalOn({
       modalType: types.ADD_TAG,
-      modalProps: { tags },
+      modalProps: {},
     });
   }
 
