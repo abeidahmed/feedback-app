@@ -13,20 +13,20 @@ function FeedbackCard({ feedback }) {
       </div>
       <p className="mt-4 leading-7 text-gray-600">{content}</p>
       <div className="mt-3">
-        <div className="space-y-2 md:grid md:grid-cols-2 md:gap-x-5 md:space-y-0 md:gap-y-2">
-          <div className="md:col-span-1">
+        <div className="space-y-2">
+          <div>
             <span className="text-xs tracking-wide text-gray-400 uppercase">
               User
             </span>
             <p className="text-sm font-medium text-gray-700">{senderEmail}</p>
           </div>
-          <div className="md:col-span-1">
+          <div>
             <span className="text-xs tracking-wide text-gray-400 uppercase">
               Device
             </span>
             <p className="text-sm font-medium text-gray-700">{device}</p>
           </div>
-          <div className="md:col-span-1">
+          <div>
             <span className="text-xs tracking-wide text-gray-400 uppercase">
               Page
             </span>
