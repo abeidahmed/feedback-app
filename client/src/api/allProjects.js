@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { header } from 'utils/header';
 import * as q from 'global/queryKey';
 
-export async function allProjectsApi(key) {
+async function allProjectsApi(key) {
   const { data } = await axios.get('/v1/projects', header());
 
   return data;
