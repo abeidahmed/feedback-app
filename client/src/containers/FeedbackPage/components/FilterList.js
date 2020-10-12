@@ -1,15 +1,27 @@
 import React from 'react';
+import cn from 'classnames';
 import { useAddQuery } from 'utils/useAddQuery';
 import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
 function FilterList({ tags, setFilterable }) {
-  const addQuery = useAddQuery();
+  const { addQuery, queryString } = useAddQuery();
 
-  const handleFilter = (tagName, id) => {
-    addQuery('filter', tagName);
+  const handleFilter = (id) => {
+    addQuery('query', id);
     setFilterable(id);
   };
+
+  function filterClass(id) {
+    return cn([
+      'flex items-center justify-between w-full px-3 py-2 leading-5 text-gray-500 rounded-md focus:outline-none',
+      {
+        'bg-gray-200 hover:bg-gray-200': queryString.query === id,
+        'bg-transparent focus:bg-gray-100 hover:bg-gray-100':
+          queryString.query !== id,
+      },
+    ]);
+  }
 
   return (
     <div className="hidden md:block md:col-span-1">
@@ -24,8 +36,8 @@ function FilterList({ tags, setFilterable }) {
           {tags.map(({ id, name, feedbacksCount }) => (
             <button
               key={id}
-              className="flex items-center justify-between w-full px-3 py-2 leading-5 text-gray-500 bg-transparent rounded-md focus:outline-none focus:bg-gray-100 hover:bg-gray-100"
-              onClick={() => handleFilter(name, id)}
+              className={filterClass(id)}
+              onClick={() => handleFilter(id)}
             >
               <div className="flex items-center">
                 <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
