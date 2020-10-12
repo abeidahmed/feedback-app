@@ -20,9 +20,8 @@ User.destroy_all
 
   project = Project.create! name: Faker::App.unique.name, user: user, team: team
 
-  tag_ref = rand(1..3)
-
-  3.times do
+  6.times do
+    tag_ref = rand(1..3)
     feedback = Feedback.create!(
       content: Faker::Lorem.paragraph,
       sender_email: Faker::Internet.email,
