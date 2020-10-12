@@ -4,6 +4,7 @@ class V1::TagsController < ApplicationController
     return error('unauthorized') unless team_has_access?(project.team_members)
 
     @tag = project.tags.build(tag_params)
+    @tag.set_color(color_id) if color_id.present?
 
     if @tag.save
       render :new, status: :created
@@ -18,6 +19,8 @@ class V1::TagsController < ApplicationController
 
     @tag = project.tags.find(params[:id])
     return error('bad_request') if @tag.is_archive_tag?
+
+    @tag.set_color(color_id) if color_id.present?
 
     if @tag.update(tag_params)
       render :new
@@ -38,7 +41,11 @@ class V1::TagsController < ApplicationController
 
   private
   def tag_params
-    params.require(:tag).permit(:name, :color)
+    params.require(:tag).permit(:name)
+  end
+
+  def color_id
+    params.dig(:tag, :color_id)
   end
 
   def find_project(id)

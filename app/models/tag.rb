@@ -9,4 +9,10 @@ class Tag < ApplicationRecord
   def is_archive_tag?
     self.name.downcase == 'archive'
   end
+
+  def set_color(color_id)
+    color = Color.new(color_id).pick
+    self.bg_color = color[:accent]
+    self.text_color = color[:contrast]
+  end
 end

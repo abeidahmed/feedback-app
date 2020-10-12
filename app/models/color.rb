@@ -4,7 +4,7 @@ class Color
   end
 
   def pick
-    COLORS.find { |color| color[:id] == @id }.except(:id)
+    COLORS.find { |color| color[:id] == @id }
   end
 
   COLORS = [

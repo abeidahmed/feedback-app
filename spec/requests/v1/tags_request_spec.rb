@@ -5,7 +5,7 @@ RSpec.describe "V1::Tags", type: :request do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
 
-    let(:valid_tag) { { tag: { name: 'best idea', color: '#BEE3F8' } }.to_json }
+    let(:valid_tag) { { tag: { name: 'best idea', color_id: 1 } }.to_json }
     let(:invalid_tag) { { tag: { name: '' } }.to_json }
 
     context 'when the post request is made by a team member' do
@@ -15,6 +15,10 @@ RSpec.describe "V1::Tags", type: :request do
 
       it 'is expected to create a tag' do
         expect(Tag.count).to eq(5)
+      end
+
+      it 'is expected to set the appropriate color of the tag' do
+        expect(Tag.last.bg_color).to eq(Color.new(1).pick[:accent])
       end
 
       include_examples 'created'
@@ -55,7 +59,7 @@ RSpec.describe "V1::Tags", type: :request do
     let(:tag) { create(:tag, name: 'great idea', project: project) }
     let(:archive_tag) { project.tags.find_by(name: 'Archive') }
 
-    let(:valid_tag) { { tag: { name: 'great idea' } }.to_json }
+    let(:valid_tag) { { tag: { name: 'great idea', color_id: 1 } }.to_json }
 
     context 'when the patch request is made on the archive tag' do
       before do
@@ -78,6 +82,11 @@ RSpec.describe "V1::Tags", type: :request do
       it 'is expected to update the tag' do
         tag.reload
         expect(tag.name).to eq('great idea')
+      end
+
+      it 'is expected to update the color' do
+        tag.reload
+        expect(tag.bg_color).to eq(Color.new(1).pick[:accent])
       end
     end
 
