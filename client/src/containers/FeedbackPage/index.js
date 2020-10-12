@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import { useAddQuery } from 'utils/useAddQuery';
-import { showProjectApi } from 'api/showProject';
+import { useShowProject } from 'api/showProject';
 import { useGetFeedbacks } from 'api/allFeedbacks';
 import { Container } from 'components/Container';
 import { FeedbackCard } from 'components/Card';
@@ -15,11 +14,7 @@ function FeedbackPage() {
   const { queryString } = useAddQuery();
   const [filterable, setFilterable] = useState(queryString.query);
 
-  const {
-    data: { data: { project } = {} } = {},
-    isLoading,
-    isError,
-  } = useQuery(['showProject', { id }], showProjectApi);
+  const { project, isLoading, isError } = useShowProject({ id });
 
   const {
     feedbacks,
