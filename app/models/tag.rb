@@ -17,9 +17,9 @@ class Tag < ApplicationRecord
   end
 
   DEFAULT_TAGS = [
-    { color: 'gray', name: 'Issue' },
-    { color: 'red', name: 'Idea' },
-    { color: 'yellow', name: 'Other' },
+    { color: 'red', name: 'Issue' },
+    { color: 'yellow', name: 'Idea' },
+    { color: 'teal', name: 'Other' },
     { color: 'purple', name: 'Archive' }
   ].freeze
 end
