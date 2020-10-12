@@ -1,11 +1,13 @@
 import React from 'react';
 import cn from 'classnames';
 import { useAddQuery } from 'utils/useAddQuery';
+import { useModalType } from 'store/modal';
 import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
 function FilterList({ tags, setFilterable }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
+  const { modalOn, types } = useModalType();
 
   const handleFilter = (id) => {
     addQuery('query', id);
@@ -16,6 +18,13 @@ function FilterList({ tags, setFilterable }) {
     deleteQuery(key);
     setFilterable('');
   };
+
+  function openAddTagModal() {
+    modalOn({
+      modalType: types.ADD_TAG,
+      modalProps: { tags },
+    });
+  }
 
   function filterClass(id) {
     return cn([
@@ -32,7 +41,7 @@ function FilterList({ tags, setFilterable }) {
     <div className="hidden md:block md:col-span-1">
       <div className="flex items-baseline justify-between">
         <p className="text-sm font-medium text-gray-500 uppercase">Filter</p>
-        <IconButton size="xs" appearance="white">
+        <IconButton size="xs" appearance="white" onClick={openAddTagModal}>
           <Icon icon="plus" className="w-5 h-5" />
         </IconButton>
       </div>
