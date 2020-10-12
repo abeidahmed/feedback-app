@@ -6,7 +6,7 @@ json.project do
       json.partial! 'v1/tags/tag', tag: tag
     end
 
-    json.feedbacks @project.feedbacks do |feedback|
+    json.feedbacks @project_feedbacks do |feedback|
       json.partial! 'v1/feedbacks/feedback', feedback: feedback
     end
   end
