@@ -6,6 +6,7 @@ import { Icon } from 'components/Icon';
 
 function FilterList({ tags, setFilterable }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
+  console.log(tags);
 
   const handleFilter = (id) => {
     addQuery('query', id);
@@ -21,7 +22,8 @@ function FilterList({ tags, setFilterable }) {
     return cn([
       'flex items-center justify-between w-full px-3 py-2 leading-5 text-gray-500 rounded-md focus:outline-none',
       {
-        'bg-gray-200 hover:bg-gray-200': queryString.query === id,
+        'bg-gray-200 hover:bg-gray-200 font-medium text-gray-700':
+          queryString.query === id,
         'bg-transparent focus:bg-gray-100 hover:bg-gray-100':
           queryString.query !== id,
       },
@@ -38,29 +40,33 @@ function FilterList({ tags, setFilterable }) {
       </div>
       <nav className="flex flex-col h-full -ml-3 space-y-2 overflow-hidden max-h-72">
         <ul className="mt-4 space-y-2 overflow-y-auto">
-          <button
-            onClick={() => handleResetUrl('query')}
-            className={filterClass(undefined)}
-          >
-            <div className="flex items-center">
-              <div className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span className="ml-2">All</span>
-            </div>
-            {tags.length}
-          </button>
-          {tags.map(({ id, name, feedbacksCount }) => (
-            <button
-              key={id}
-              className={filterClass(id)}
-              onClick={() => handleFilter(id)}
-            >
-              <div className="flex items-center">
-                <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
-                <span className="ml-2">{name}</span>
-              </div>
-              {feedbacksCount}
-            </button>
-          ))}
+          {tags.map(({ id, name, feedbacksCount }) =>
+            id === 1 ? (
+              <button
+                key={id}
+                className={filterClass(undefined)}
+                onClick={() => handleResetUrl('query')}
+              >
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="ml-2">{name}</span>
+                </div>
+                {feedbacksCount}
+              </button>
+            ) : (
+              <button
+                key={id}
+                className={filterClass(id)}
+                onClick={() => handleFilter(id)}
+              >
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="ml-2">{name}</span>
+                </div>
+                {feedbacksCount}
+              </button>
+            )
+          )}
         </ul>
       </nav>
     </div>
