@@ -14,15 +14,16 @@ async function allFeedbacksApi(key, { projectId, filter = '' }) {
     },
     { skipEmptyString: true }
   );
-  return await axios.get(url, header());
+  const { data } = await axios.get(url, header());
+
+  return data;
 }
 
 export function useGetFeedbacks({ projectId, filter }) {
-  const {
-    data: { data: { feedbacks } = {} } = {},
-    isLoading,
-    isError,
-  } = useQuery([q.GET_FEEDBACKS, { projectId, filter }], allFeedbacksApi);
+  const { data: { feedbacks } = ({} = {}), isLoading, isError } = useQuery(
+    [q.GET_FEEDBACKS, { projectId, filter }],
+    allFeedbacksApi
+  );
 
   return { feedbacks, isLoading, isError };
 }

@@ -4,15 +4,16 @@ import { header } from 'utils/header';
 import * as q from 'global/queryKey';
 
 export async function allProjectsApi(key) {
-  return await axios.get('/v1/projects', header());
+  const { data } = await axios.get('/v1/projects', header());
+
+  return data;
 }
 
 export function useGetProjects() {
-  const {
-    data: { data: { projects } = {} } = {},
-    isLoading,
-    isError,
-  } = useQuery(q.GET_PROJECTS, allProjectsApi);
+  const { data: { projects } = ({} = {}), isLoading, isError } = useQuery(
+    q.GET_PROJECTS,
+    allProjectsApi
+  );
 
   return { projects, isLoading, isError };
 }
