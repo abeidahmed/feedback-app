@@ -16,7 +16,6 @@ class V1::ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @project_feedbacks = @project.feedbacks.filterable(params[:filter])
   end
 
   def update
