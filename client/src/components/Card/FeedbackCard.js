@@ -14,32 +14,40 @@ function FeedbackCard({ feedback }) {
       <p className="mt-4 leading-7 text-gray-600">{content}</p>
       <div className="mt-3">
         <div className="space-y-2">
-          <div>
-            <span className="text-xs tracking-wide text-gray-400 uppercase">
-              User
-            </span>
-            <p className="text-sm font-medium text-gray-700">{senderEmail}</p>
-          </div>
-          <div>
-            <span className="text-xs tracking-wide text-gray-400 uppercase">
-              Device
-            </span>
-            <p className="text-sm font-medium text-gray-700">{device}</p>
-          </div>
-          <div>
-            <span className="text-xs tracking-wide text-gray-400 uppercase">
-              Page
-            </span>
-            <p className="text-sm font-medium text-gray-700">{pageUrl}</p>
-          </div>
+          {senderEmail && (
+            <div>
+              <span className="text-xs tracking-wide text-gray-400 uppercase">
+                User
+              </span>
+              <p className="text-sm font-medium text-gray-700">{senderEmail}</p>
+            </div>
+          )}
+          {device && (
+            <div>
+              <span className="text-xs tracking-wide text-gray-400 uppercase">
+                Device
+              </span>
+              <p className="text-sm font-medium text-gray-700">{device}</p>
+            </div>
+          )}
+          {pageUrl && (
+            <div>
+              <span className="text-xs tracking-wide text-gray-400 uppercase">
+                Page
+              </span>
+              <p className="text-sm font-medium text-gray-700">{pageUrl}</p>
+            </div>
+          )}
         </div>
         <div className="flex justify-end space-x-2">
           <Button appearance="gray" size="xs">
             Archive
           </Button>
-          <Button appearance="blue" size="xs">
-            Reply with mail
-          </Button>
+          {senderEmail && (
+            <Button appearance="blue" size="xs">
+              Reply with mail
+            </Button>
+          )}
         </div>
       </div>
     </div>
