@@ -1,10 +1,10 @@
 class Color
-  def initialize(id)
-    @id = id
+  def pick_by_id(id)
+    COLORS.find { |color| color[:id] == id }
   end
 
-  def pick
-    COLORS.find { |color| color[:id] == @id }
+  def pick_by_name(color_name)
+    COLORS.find { |color| color[:color_name] == color_name }
   end
 
   COLORS = [

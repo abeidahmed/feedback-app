@@ -18,7 +18,7 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       it 'is expected to set the appropriate color of the tag' do
-        expect(Tag.last.bg_color).to eq(Color.new(1).pick[:accent])
+        expect(Tag.last.bg_color).to eq(Color.new.pick_by_id(1)[:accent])
       end
 
       include_examples 'created'
@@ -86,7 +86,7 @@ RSpec.describe "V1::Tags", type: :request do
 
       it 'is expected to update the color' do
         tag.reload
-        expect(tag.bg_color).to eq(Color.new(1).pick[:accent])
+        expect(tag.bg_color).to eq(Color.new.pick_by_id(1)[:accent])
       end
     end
 

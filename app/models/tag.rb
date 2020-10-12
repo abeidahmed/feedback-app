@@ -11,7 +11,7 @@ class Tag < ApplicationRecord
   end
 
   def set_color(color_id)
-    color = Color.new(color_id).pick
+    color = Color.new.pick_by_id(color_id)
     self.bg_color = color[:accent]
     self.text_color = color[:contrast]
   end
