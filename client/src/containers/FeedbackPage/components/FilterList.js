@@ -6,7 +6,6 @@ import { Icon } from 'components/Icon';
 
 function FilterList({ tags, setFilterable }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
-  console.log(tags);
 
   const handleFilter = (id) => {
     addQuery('query', id);
@@ -22,8 +21,7 @@ function FilterList({ tags, setFilterable }) {
     return cn([
       'flex items-center justify-between w-full px-3 py-2 leading-5 text-gray-500 rounded-md focus:outline-none',
       {
-        'bg-gray-200 hover:bg-gray-200 font-medium text-gray-700':
-          queryString.query === id,
+        'bg-gray-200 hover:bg-gray-200 font-medium': queryString.query === id,
         'bg-transparent focus:bg-gray-100 hover:bg-gray-100':
           queryString.query !== id,
       },
@@ -40,15 +38,23 @@ function FilterList({ tags, setFilterable }) {
       </div>
       <nav className="flex flex-col h-full -ml-3 space-y-2 overflow-hidden max-h-72">
         <ul className="mt-4 space-y-2 overflow-y-auto">
-          {tags.map(({ id, name, feedbacksCount }) =>
+          {tags.map(({ id, name, feedbacksCount, textColor, bgColor }) =>
             id === 1 ? (
               <button
                 key={id}
                 className={filterClass(undefined)}
                 onClick={() => handleResetUrl('query')}
+                style={
+                  typeof queryString.query === 'undefined'
+                    ? { backgroundColor: bgColor, color: textColor }
+                    : {}
+                }
               >
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
+                  <div
+                    className="flex-shrink-0 w-2 h-2 rounded-full"
+                    style={{ backgroundColor: textColor }}
+                  ></div>
                   <span className="ml-2">{name}</span>
                 </div>
                 {feedbacksCount}
@@ -58,9 +64,17 @@ function FilterList({ tags, setFilterable }) {
                 key={id}
                 className={filterClass(id)}
                 onClick={() => handleFilter(id)}
+                style={
+                  queryString.query === id
+                    ? { backgroundColor: bgColor, color: textColor }
+                    : {}
+                }
               >
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
+                  <div
+                    className="flex-shrink-0 w-2 h-2 rounded-full"
+                    style={{ backgroundColor: textColor }}
+                  ></div>
                   <span className="ml-2">{name}</span>
                 </div>
                 {feedbacksCount}

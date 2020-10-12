@@ -3,7 +3,14 @@ import { Button } from 'components/Button';
 import { Badge } from 'components/Badge';
 
 function FeedbackCard({ feedback }) {
-  const { content, device, pageUrl, senderEmail, tag, createdAt } = feedback;
+  const {
+    content,
+    device,
+    pageUrl,
+    senderEmail,
+    included: { tag },
+    createdAt,
+  } = feedback;
 
   return (
     <div className="p-4 border border-gray-200 rounded-md shadow-sm">
