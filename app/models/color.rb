@@ -1,10 +1,10 @@
 class Color
-  def initialize(index)
-    @index = index
+  def initialize(id)
+    @id = id
   end
 
-  def pick(id)
-    COLORS.find { |color| color[:id] == id }.except(:id)
+  def pick
+    COLORS.find { |color| color[:id] == @id }.except(:id)
   end
 
   COLORS = [
