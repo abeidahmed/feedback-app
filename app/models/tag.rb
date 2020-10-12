@@ -15,4 +15,11 @@ class Tag < ApplicationRecord
     self.bg_color = color[:accent]
     self.text_color = color[:contrast]
   end
+
+  DEFAULT_TAGS = [
+    { color: 'gray', name: 'Issue' },
+    { color: 'red', name: 'Idea' },
+    { color: 'yellow', name: 'Other' },
+    { color: 'purple', name: 'Archive' }
+  ].freeze
 end
