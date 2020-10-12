@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-import { useQuery } from 'react-query';
-import { allProjectsApi } from 'api/allProjects';
+import { useGetProjects } from 'api/allProjects';
 import { Icon } from 'components/Icon';
 import Logo from 'assets/Logo';
 import MobileMenu from './MobileMenu';
@@ -13,11 +12,7 @@ import { Container } from 'components/Container';
 function Dashboard() {
   const [isActive, setIsActive] = useState(false);
 
-  const {
-    data: { data: { projects } = {} } = {},
-    isLoading,
-    isError,
-  } = useQuery('fetchHeadProjects', allProjectsApi);
+  const { projects, isLoading, isError } = useGetProjects();
 
   const overlayClass = cn([
     'fixed inset-0 md:hidden',

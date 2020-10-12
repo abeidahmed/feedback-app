@@ -1,18 +1,12 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { allProjectsApi } from 'api/allProjects';
+import { useGetProjects } from 'api/allProjects';
 import { Container } from 'components/Container';
 import { ProjectCard } from 'components/Card';
 import { AddProjectButton } from './components';
 import { Spinner } from 'components/Loader';
 
 function Home() {
-  const {
-    data: { data: { projects } = {} } = {},
-    isLoading,
-    isError,
-  } = useQuery('allProjects', allProjectsApi);
-
+  const { projects, isLoading, isError } = useGetProjects();
   if (isLoading || isError) return <Spinner />;
 
   return (
