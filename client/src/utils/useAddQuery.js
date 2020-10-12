@@ -19,7 +19,20 @@ export function useAddQuery() {
     [location, history]
   );
 
+  const deleteQuery = useCallback(
+    (key) => {
+      let pathname = location.pathname;
+      let searchParams = new URLSearchParams(location.search);
+      searchParams.delete(key);
+      history.push({
+        pathname: pathname,
+        search: searchParams.toString(),
+      });
+    },
+    [location, history]
+  );
+
   const queryString = qs.parse(location.search);
 
-  return { addQuery, queryString };
+  return { addQuery, deleteQuery, queryString };
 }
