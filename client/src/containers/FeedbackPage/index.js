@@ -30,10 +30,7 @@ function FeedbackPage() {
     allFeedbacksApi
   );
 
-  if (isLoading || isError) return null;
-  const {
-    included: { tags },
-  } = project;
+  if (isLoading || isError) return <Spinner />;
 
   return (
     <main>
@@ -45,7 +42,10 @@ function FeedbackPage() {
           <ActionButtonGroup />
           <Tab />
           <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
-            <FilterList tags={tags} setFilterable={setFilterable} />
+            <FilterList
+              tags={project?.included?.tags}
+              setFilterable={setFilterable}
+            />
             <div className="relative space-y-4 md:col-span-2">
               {feedbacksLoading || feedbacksError ? (
                 <Spinner />
