@@ -8,11 +8,12 @@ import * as q from 'global/queryKey';
 import { ProtectedRoute } from 'components/ProtectedRoute';
 
 function App() {
-  const { setUser } = useCurrentUser();
+  const { setUser, token: authToken } = useCurrentUser();
   const { data: { data: { token } = {} } = {}, isLoading, isError } = useQuery(
     q.GET_CURRENT_USER,
     getCurrentUserApi,
     {
+      enabled: authToken !== 'undefined',
       onSuccess: ({ data }) => {
         setUser(data);
       },
