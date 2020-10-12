@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :show]
       resources :projects, only: [:index, :create, :show, :update, :destroy] do
         resources :tags, only: [:create, :destroy, :update]
-        resources :feedbacks, only: [:create] do
+        resources :feedbacks, only: [:index, :create] do
           patch :archive, on: :member
         end
       end

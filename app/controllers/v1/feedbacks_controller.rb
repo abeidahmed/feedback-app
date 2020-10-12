@@ -1,6 +1,11 @@
 class V1::FeedbacksController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
 
+  def index
+    project = Project.find(params[:project_id])
+    @feedbacks = project.feedbacks.filterable(params[:filter])
+  end
+
   def create
     project = Project.find(params[:project_id])
     tag = project.tags.find_by!(name: params[:tag])
