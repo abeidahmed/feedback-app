@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useAddQuery } from 'utils/useAddQuery';
 import { showProjectApi } from 'api/showProject';
-import { allFeedbacksApi } from 'api/allFeedbacks';
+import { useGetFeedbacks } from 'api/allFeedbacks';
 import { Container } from 'components/Container';
 import { FeedbackCard } from 'components/Card';
 import { Tab } from 'components/Tab';
@@ -22,13 +22,10 @@ function FeedbackPage() {
   } = useQuery(['showProject', { id }], showProjectApi);
 
   const {
-    data: { data: { feedbacks } = {} } = {},
+    feedbacks,
     isLoading: feedbacksLoading,
     isError: feedbacksError,
-  } = useQuery(
-    ['allFeedbacks', { projectId: id, filter: filterable }],
-    allFeedbacksApi
-  );
+  } = useGetFeedbacks({ projectId: id, filter: filterable });
 
   if (isLoading || isError) return <Spinner />;
 
