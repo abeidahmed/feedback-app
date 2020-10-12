@@ -14,6 +14,10 @@ class V1::ProjectsController < ApplicationController
     end
   end
 
+  def show
+    @project = Project.find(params[:id])
+  end
+
   def update
     @project = Project.find(params[:id])
     return error('unauthorized') unless team_has_access?(@project.team_members)

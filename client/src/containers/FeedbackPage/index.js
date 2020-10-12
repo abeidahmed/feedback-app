@@ -1,10 +1,25 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { showProjectApi } from 'api/showProject';
 import { Container } from 'components/Container';
 import { FeedbackCard } from 'components/Card';
 import { Tab } from 'components/Tab';
 import { FilterList, ActionButtonGroup } from './components';
 
 function FeedbackPage() {
+  const { id } = useParams();
+  const {
+    data: { data: { project } = {} } = {},
+    isLoading,
+    isError,
+  } = useQuery(['showProject', { id }], showProjectApi);
+
+  if (isLoading || isError) return null;
+  const {
+    included: { feedbacks, tags },
+  } = project;
+
   return (
     <main>
       <Container>
@@ -15,8 +30,12 @@ function FeedbackPage() {
           <ActionButtonGroup />
           <Tab />
           <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
-            <FilterList />
-            <FeedbackCard />
+            <FilterList tags={tags} />
+            <div className="space-y-4 md:col-span-2">
+              {feedbacks.map((feedback) => (
+                <FeedbackCard key={feedback.id} feedback={feedback} />
+              ))}
+            </div>
           </section>
         </section>
       </Container>
