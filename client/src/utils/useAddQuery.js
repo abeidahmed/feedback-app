@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import qs from 'query-string';
 
 export function useAddQuery() {
   const location = useLocation();
@@ -18,5 +19,7 @@ export function useAddQuery() {
     [location, history]
   );
 
-  return addQuery;
+  const queryString = qs.parse(location.search);
+
+  return { addQuery, queryString };
 }
