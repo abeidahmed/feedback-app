@@ -5,11 +5,16 @@ import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
 function FilterList({ tags, setFilterable }) {
-  const { addQuery, queryString } = useAddQuery();
+  const { addQuery, deleteQuery, queryString } = useAddQuery();
 
   const handleFilter = (id) => {
     addQuery('query', id);
     setFilterable(id);
+  };
+
+  const handleResetUrl = (key) => {
+    deleteQuery(key);
+    setFilterable('');
   };
 
   function filterClass(id) {
@@ -33,6 +38,16 @@ function FilterList({ tags, setFilterable }) {
       </div>
       <nav className="flex flex-col h-full -ml-3 space-y-2 overflow-hidden max-h-72">
         <ul className="mt-4 space-y-2 overflow-y-auto">
+          <button
+            onClick={() => handleResetUrl('query')}
+            className={filterClass(undefined)}
+          >
+            <div className="flex items-center">
+              <div className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span className="ml-2">All</span>
+            </div>
+            {tags.length}
+          </button>
           {tags.map(({ id, name, feedbacksCount }) => (
             <button
               key={id}
