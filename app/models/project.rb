@@ -19,10 +19,15 @@ class Project < ApplicationRecord
   end
 
   def initialize_tags
-    self.tags.create! name: 'Issue'
-    self.tags.create! name: 'Idea'
-    self.tags.create! name: 'Other'
-    self.tags.create! name: 'Archive'
+    gray_color = Color.new.pick_by_name('gray')
+    red_color = Color.new.pick_by_name('red')
+    yellow_color = Color.new.pick_by_name('yellow')
+    purple_color = Color.new.pick_by_name('purple')
+
+    self.tags.create! name: 'Issue', text_color: red_color[:contrast], bg_color: red_color[:accent]
+    self.tags.create! name: 'Idea', text_color: yellow_color[:contrast], bg_color: yellow_color[:accent]
+    self.tags.create! name: 'Other', text_color: purple_color[:contrast], bg_color: purple_color[:accent]
+    self.tags.create! name: 'Archive', text_color: gray_color[:contrast], bg_color: gray_color[:accent]
   end
 
   def team_members
