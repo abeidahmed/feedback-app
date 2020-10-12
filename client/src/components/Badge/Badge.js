@@ -6,7 +6,7 @@ function Badge({ tag, ...props }) {
 
   return (
     <span
-      className="block px-3 text-sm py-0.5 leading-5 rounded-full"
+      className="block px-2 py-1.5 text-sm font-medium leading-3 rounded-full"
       style={{ backgroundColor: bgColor, color: textColor }}
       {...props}
     >
