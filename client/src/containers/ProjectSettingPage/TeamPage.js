@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'components/Button';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
 
-function TeamPage() {
+function TeamPage({ project }) {
+  const [email, setEmail] = useState('');
+  const {
+    included: { teamMembers },
+  } = project;
+
   return (
     <BoxContainer>
       <BoxTop title="Your team">
         <div className="space-y-2">
-          <div className="flex items-center justify-between min-w-0 space-x-3">
-            <p className="text-sm text-gray-700 truncate md:text-base">
-              abeidmama@gmail.com
-            </p>
-            <p className="text-sm text-gray-400 md:text-base">Member</p>
-          </div>
+          {teamMembers.map(({ id, email }) => (
+            <div
+              key={id}
+              className="flex items-center justify-between min-w-0 space-x-3"
+            >
+              <p className="text-sm text-gray-700 truncate md:text-base">
+                {email}
+              </p>
+              <p className="text-sm text-gray-400 md:text-base">Member</p>
+            </div>
+          ))}
         </div>
       </BoxTop>
       <BoxBottom>
@@ -25,9 +35,17 @@ function TeamPage() {
               label="Invite member"
               showLabel={false}
               placeholder="colleague@exmaple.com"
+              required
+              autoComplete="off"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <Button size="sm" className="whitespace-no-wrap">
+          <Button
+            size="sm"
+            className="whitespace-no-wrap"
+            disabled={!email.length}
+          >
             Invite member
           </Button>
         </form>

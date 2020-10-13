@@ -75,7 +75,10 @@ function ProjectSettingPage() {
                 path={path}
                 render={(props) => <GeneralPage project={project} {...props} />}
               />
-              <Route path={`${path}/team`} component={TeamPage} />
+              <Route
+                path={`${path}/team`}
+                render={(props) => <TeamPage project={project} {...props} />}
+              />
             </Switch>
           )}
         </div>
