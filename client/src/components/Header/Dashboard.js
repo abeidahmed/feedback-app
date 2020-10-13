@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useGetProjects } from 'api/allProjects';
 import { Icon } from 'components/Icon';
@@ -37,7 +38,9 @@ function Dashboard() {
       <Container className="relative z-10 bg-white">
         <div className="flex items-center justify-between h-16 border-b border-gray-200">
           <div className="flex items-center flex-1">
-            <Logo width="48" height="48" />
+            <Link to="/app">
+              <Logo width="48" height="48" />
+            </Link>
             {isLoading || isError ? null : <TagSelector projects={projects} />}
           </div>
           <DesktopMenu />
