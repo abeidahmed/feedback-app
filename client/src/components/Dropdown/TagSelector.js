@@ -54,6 +54,7 @@ function TagSelector({ projects }) {
         <ul className="w-full py-1">
           {projects.map(({ id, name }) => (
             <Link
+              key={id}
               to={`/app/${id}`}
               className="block px-3 py-2 text-gray-700 focus:bg-gray-100 hover:bg-gray-100 focus:outline-none"
               onClick={() => setIsActive(false)}
