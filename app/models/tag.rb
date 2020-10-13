@@ -6,6 +6,9 @@ class Tag < ApplicationRecord
   validates_length_of :name, maximum: 50
   validates_uniqueness_of :name, case_sensitive: false, scope: :project_id
 
+  scope :except_archive, -> { where.not(name: 'Archive' ) }
+  scope :get_archive, -> { where(name: 'Archive' ) }
+
   def is_archive_tag?
     self.name.downcase == 'archive'
   end

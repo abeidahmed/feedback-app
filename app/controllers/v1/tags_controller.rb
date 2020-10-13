@@ -1,7 +1,7 @@
 class V1::TagsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
-    @tags = @project.tags
+    @tags = @project.tags.except_archive
   end
 
   def create
@@ -32,6 +32,12 @@ class V1::TagsController < ApplicationController
     else
       render json: { message: @tag.errors.full_messages }, status: :bad_request
     end
+  end
+
+  def archive
+    project = Project.find(params[:project_id])
+    @archive_tag = project.tags.get_archive.first
+    render :archive
   end
 
   def destroy

@@ -11,8 +11,8 @@ RSpec.describe "V1::Tags", type: :request do
         get v1_project_tags_url(project), headers: auth_header(project.team.users.first)
       end
 
-      it 'is expected to list all the tags respective to the project' do
-        expect(json[:tags].count).to eq(7)
+      it 'is expected to list all the tags (except archive tag) respective to the project' do
+        expect(json[:tags].count).to eq(6)
       end
     end
   end
@@ -160,6 +160,22 @@ RSpec.describe "V1::Tags", type: :request do
       end
 
       include_examples 'unauthorized'
+    end
+  end
+
+  describe '#archive' do
+    let(:user) { create(:user) }
+    let(:project) { create(:project) }
+    let(:tag) { create(:tag, name: 'Archive', project: project) }
+
+    context 'when the request is valid' do
+      before do
+        get archive_v1_project_tags_url(project), headers: auth_header(user)
+      end
+
+      it 'is expected to return only the archive tag' do
+        expect(json.dig(:tag, :name)).to eq('Archive')
+      end
     end
   end
 end
