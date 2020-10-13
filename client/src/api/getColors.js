@@ -10,7 +10,7 @@ async function getColorsApi(key) {
 }
 
 export function useGetColors() {
-  const { data: { colors } = ({} = {}), isLoading, isError } = useQuery(
+  const { data: { colors } = {}, isLoading, isError } = useQuery(
     q.GET_COLORS,
     getColorsApi
   );

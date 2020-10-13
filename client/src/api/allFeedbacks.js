@@ -20,7 +20,7 @@ async function allFeedbacksApi(key, { projectId, filter = '' }) {
 }
 
 export function useGetFeedbacks({ projectId, filter }) {
-  const { data: { feedbacks } = ({} = {}), isLoading, isError } = useQuery(
+  const { data: { feedbacks } = {}, isLoading, isError } = useQuery(
     [q.GET_FEEDBACKS, { projectId, filter }],
     allFeedbacksApi
   );

@@ -10,7 +10,7 @@ async function allProjectsApi(key) {
 }
 
 export function useGetProjects() {
-  const { data: { projects } = ({} = {}), isLoading, isError } = useQuery(
+  const { data: { projects } = {}, isLoading, isError } = useQuery(
     q.GET_PROJECTS,
     allProjectsApi
   );
