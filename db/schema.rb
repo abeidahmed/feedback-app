@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2020_10_10_045752) do
     t.string "sender_email"
     t.string "page_url"
     t.string "device"
-    t.boolean "archived", default: false
     t.uuid "project_id", null: false
     t.uuid "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
