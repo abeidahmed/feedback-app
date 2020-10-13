@@ -16,7 +16,7 @@ function ModalWrapper({ modalTitle, children }) {
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
         <OutsideClickHandler
           onOutsideClick={modalOff}
-          className="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          className="inline-block w-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
         >
           <header className="flex items-center justify-between px-6 border-b border-gray-300 h-14">
             <h2 className="text-xl font-bold">{modalTitle}</h2>
