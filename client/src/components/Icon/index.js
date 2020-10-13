@@ -8,6 +8,12 @@ const Glyph = ({ icon }) => {
           <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeWidth="2" />
         </g>
       );
+    case 'chevron-left':
+      return (
+        <g>
+          <path d="M15 19l-7-7 7-7" strokeLinecap="round" strokeWidth="2" />
+        </g>
+      );
     case 'cog':
       return (
         <g>
