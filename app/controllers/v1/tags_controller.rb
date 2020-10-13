@@ -1,4 +1,9 @@
 class V1::TagsController < ApplicationController
+  def index
+    @project = Project.find(params[:project_id])
+    @tags = @project.tags
+  end
+
   def create
     project = find_project(params[:project_id])
     return error('unauthorized') unless team_has_access?(project.team_members)

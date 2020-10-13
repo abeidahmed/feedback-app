@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe "V1::Tags", type: :request do
+  describe '#index' do
+    let(:team) { create(:team_with_users) }
+    let(:project) { create(:project_with_tags, team: team, tags_count: 2) }
+    let(:another_project) { create(:project_with_tags, team: team, tags_count: 2) }
+
+    context 'when the request is valid' do
+      before do
+        get v1_project_tags_url(project), headers: auth_header(project.team.users.first)
+      end
+
+      it 'is expected to list all the tags respective to the project' do
+        expect(json[:tags].count).to eq(7)
+      end
+    end
+  end
+
   describe '#create' do
     let(:team) { create(:team_with_users) }
     let(:project) { create(:project, team: team) } # project creates additional 4 tags (system generated)
