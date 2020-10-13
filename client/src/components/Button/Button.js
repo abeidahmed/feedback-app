@@ -18,6 +18,8 @@ function StyledButton({
       'px-3 py-2 leading-6 font-medium': size === 'md',
       'text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700':
         appearance === 'primary',
+      'text-red-700 bg-red-100 hover:text-red-500 active:bg-red-200':
+        appearance === 'danger',
       'text-gray-700 bg-white border-gray-300 hover:text-gray-500 active:bg-gray-50':
         appearance === 'minimal',
       'text-gray-800 bg-gray-100 hover:text-gray-500': appearance === 'gray',
@@ -34,7 +36,7 @@ function StyledButton({
 
 StyledButton.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md']),
-  appearance: PropTypes.oneOf(['primary', 'minimal', 'gray', 'blue']),
+  appearance: PropTypes.oneOf(['primary', 'minimal', 'gray', 'blue', 'danger']),
 };
 
 export const Button = (props) => handleLinkWrapping(StyledButton, props);
