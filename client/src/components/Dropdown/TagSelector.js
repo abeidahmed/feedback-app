@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
+import { useLocation, Redirect, Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useModalType } from 'store/modal';
 import { Icon } from 'components/Icon';
-import { ComboMenu } from './components';
 import { OutsideClickHandler } from 'components/Container';
 
 function TagSelector({ projects }) {
@@ -54,13 +53,13 @@ function TagSelector({ projects }) {
       <div className={dropdownClass}>
         <ul className="w-full py-1">
           {projects.map(({ id, name }) => (
-            <ComboMenu
-              key={id}
-              title={name}
-              tagLink={`/app/${id}`}
-              settingLink="/"
+            <Link
+              to={`/app/${id}`}
+              className="block px-3 py-2 text-gray-700 focus:bg-gray-100 hover:bg-gray-100 focus:outline-none"
               onClick={() => setIsActive(false)}
-            />
+            >
+              {name}
+            </Link>
           ))}
           <hr className="my-1 border-gray-200" />
           <button
