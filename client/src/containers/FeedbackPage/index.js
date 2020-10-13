@@ -35,7 +35,7 @@ function FeedbackPage() {
           <h1 className="text-2xl font-bold text-center sm:text-3xl lg:text-4xl">
             Feedback for {project.name}
           </h1>
-          <ActionButtonGroup />
+          <ActionButtonGroup projectId={id} />
           {tagLoading || tagError ? null : (
             <Tab tags={tags} setFilterable={setFilterable} />
           )}
