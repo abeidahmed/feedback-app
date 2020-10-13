@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, queryCache } from 'react-query';
 import { useGetColors } from 'api/getColors';
 import { postTagApi } from 'api/postTag';
 import { useModalType } from 'store/modal';
+import * as q from 'global/queryKey';
 import ModalWrapper from '../ModalWrapper';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
@@ -22,6 +23,7 @@ function AddTag() {
   const { colors, isLoading, isError } = useGetColors();
   const [mutate, { isLoading: posting }] = useMutation(postTagApi, {
     onSuccess: () => {
+      queryCache.refetchQueries(q.GET_TAGS);
       modalOff();
     },
     throwOnError: true,
@@ -56,6 +58,7 @@ function AddTag() {
             error={error}
             errorType="name"
             value={tagName}
+            autoComplete="off"
             onChange={(e) => setTagName(e.target.value)}
           />
           <div className="space-y-2">
