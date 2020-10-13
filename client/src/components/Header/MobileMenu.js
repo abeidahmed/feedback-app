@@ -1,8 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import cn from 'classnames';
+import { useCurrentUser } from 'store/currentUser';
 
 function MobileMenu({ isActive }) {
+  const { logout } = useCurrentUser();
+  const history = useHistory();
+
+  function handleLogout() {
+    logout();
+    history.push('/');
+  }
+
   const mobileMenuClass = cn([
     'absolute w-full bg-white shadow md:hidden z-10',
     {
@@ -20,9 +29,12 @@ function MobileMenu({ isActive }) {
         <Link to="/" className="block w-full px-4 py-3">
           Help
         </Link>
-        <Link to="/" className="block w-full px-4 py-3">
+        <button
+          className="block w-full px-4 py-3 text-left"
+          onClick={handleLogout}
+        >
           Logout
-        </Link>
+        </button>
       </ul>
     </nav>
   );
