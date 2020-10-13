@@ -4,10 +4,12 @@ import { useModalType } from 'store/modal';
 import * as modal from './types';
 import { AddProject } from './AddProject';
 import { AddTag } from './AddTag';
+import { AddWidget } from './AddWidget';
 
 const MODAL_COMPONENTS = {
   [modal.ADD_PROJECT]: AddProject,
   [modal.ADD_TAG]: AddTag,
+  [modal.ADD_WIDGET]: AddWidget,
 };
 
 function ModalRoot() {
