@@ -20,7 +20,7 @@ function PageHeader({
           <header className="flex items-center justify-between">
             {backButton && (
               <button
-                className="inline-flex items-center text-sm text-gray-500 w-14 hover:text-gray-700 focus:outline-none focus:text-gray-900"
+                className="inline-flex items-center -ml-1 text-sm text-gray-500 w-14 hover:text-gray-700 focus:outline-none focus:text-gray-900"
                 onClick={() => history.push(url)}
               >
                 <Icon icon="chevron-left" className="w-4 h-4" />
