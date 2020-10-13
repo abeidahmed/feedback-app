@@ -3,7 +3,7 @@ import { useModalType } from 'store/modal';
 import { IconButton, Button } from 'components/Button';
 import { Icon } from 'components/Icon';
 
-function ActionButtonGroup({ projectId, project }) {
+function ActionButtonGroup({ project }) {
   const { id, name } = project;
   const { modalOn, types } = useModalType();
 
@@ -20,11 +20,7 @@ function ActionButtonGroup({ projectId, project }) {
   return (
     <div className="flex justify-end mb-4">
       <div className="flex items-center space-x-4 sm:hidden">
-        <IconButton
-          appearance="white"
-          size="sm"
-          to={`/app/${projectId}/settings`}
-        >
+        <IconButton appearance="white" size="sm" to={`/app/${id}/settings`}>
           <Icon icon="cog" className="w-5 h-5" />
         </IconButton>
         <IconButton
@@ -37,11 +33,7 @@ function ActionButtonGroup({ projectId, project }) {
         </IconButton>
       </div>
       <div className="hidden space-x-4 sm:items-center sm:flex">
-        <IconButton
-          appearance="white"
-          size="sm"
-          to={`/app/${projectId}/settings`}
-        >
+        <IconButton appearance="white" size="sm" to={`/app/${id}/settings`}>
           <Icon icon="cog" className="w-5 h-5" />
         </IconButton>
         <Button appearance="primary" size="sm" onClick={handleAddWidget}>
