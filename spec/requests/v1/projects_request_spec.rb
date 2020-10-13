@@ -1,6 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "V1::Projects", type: :request do
+  describe '#index' do
+    let(:team) { create(:team_with_users) }
+    let(:another_team) { create(:team_with_users) }
+    let(:project) { create(:project, name: 'Hello world', user: team.users.first, team: team) }
+    let(:another_project) { create(:project, name: 'Hello world', user_id: another_team.users.first.id, team: another_team) }
+
+    context 'when the request is valid' do
+      before do
+        get v1_projects_url, headers: auth_header(project.team.users.first)
+      end
+
+      it 'is expected to get all the projects where user is part of' do
+        expect(json[:projects].size).to eq(1)
+      end
+    end
+  end
+
   describe '#create' do
     let(:user) { create(:user) }
     let(:valid_project) { { project: { name: 'Main website' } }.to_json }

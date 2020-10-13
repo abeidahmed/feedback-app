@@ -1,6 +1,6 @@
 class V1::ProjectsController < ApplicationController
   def index
-    @projects = Project.includes(:feedbacks, :team)
+    @projects = Project.user_part_of(current_user).includes(:feedbacks, :team)
   end
 
   def create

@@ -9,6 +9,8 @@ class Project < ApplicationRecord
   validates_presence_of :name
   validates_length_of :name, maximum: 50
 
+  scope :user_part_of, ->(user) { where(team_id: user.teams.pluck(:id)) }
+
   def initialize_team(current_user)
     ActiveRecord::Base.transaction do
       team = Team.create!
