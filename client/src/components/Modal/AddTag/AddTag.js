@@ -55,6 +55,7 @@ function AddTag() {
           <Input
             label="Tag name"
             id="add-tag"
+            placeholder="Ex: UI Bug"
             error={error}
             errorType="name"
             value={tagName}
