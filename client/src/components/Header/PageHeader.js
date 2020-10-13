@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container } from 'components/Container';
 import { Icon } from 'components/Icon';
 
@@ -11,6 +11,7 @@ function PageHeader({
   children,
 }) {
   const history = useHistory();
+  const { url } = useRouteMatch('/app/:id');
 
   return (
     <main>
@@ -20,7 +21,7 @@ function PageHeader({
             {backButton && (
               <button
                 className="inline-flex items-center text-sm text-gray-500 w-14 hover:text-gray-700 focus:outline-none focus:text-gray-900"
-                onClick={() => history.goBack()}
+                onClick={() => history.push(url)}
               >
                 <Icon icon="chevron-left" className="w-4 h-4" />
                 <span className="pl-1">Back</span>
