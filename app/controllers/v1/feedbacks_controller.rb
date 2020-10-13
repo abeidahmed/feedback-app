@@ -3,7 +3,7 @@ class V1::FeedbacksController < ApplicationController
 
   def index
     project = Project.find(params[:project_id])
-    @feedbacks = project.feedbacks.filterable(params[:filter])
+    @feedbacks = project.feedbacks.except_archived.filterable(params[:filter])
   end
 
   def create

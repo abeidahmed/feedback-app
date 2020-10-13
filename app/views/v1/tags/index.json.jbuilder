@@ -2,7 +2,7 @@ color_hash = Color.new.pick_by_name('blue')
 default_tag = [{
   id: 1,
   name: 'All',
-  feedbacksCount: @project.feedbacks.count,
+  feedbacksCount: @project.feedbacks.except_archived.count,
   textColor: color_hash[:contrast],
   bgColor: color_hash[:accent]
 }].freeze
