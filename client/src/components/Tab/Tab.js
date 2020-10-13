@@ -1,18 +1,8 @@
 import React from 'react';
 import { useAddQuery } from 'utils/useAddQuery';
 
-function Tab({ tags, setFilterable }) {
+function Tab({ tags }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
-
-  const handleFilter = (id) => {
-    addQuery('query', id);
-    setFilterable(id);
-  };
-
-  const handleResetUrl = (key) => {
-    deleteQuery(key);
-    setFilterable('');
-  };
 
   return (
     <nav className="mt-6 overflow-hidden md:hidden">
@@ -22,7 +12,7 @@ function Tab({ tags, setFilterable }) {
             <button
               key={id}
               className="block px-4 py-1 text-sm whitespace-no-wrap border-b-2 focus:outline-none"
-              onClick={() => handleResetUrl('query')}
+              onClick={() => deleteQuery('query')}
               style={
                 typeof queryString.query === 'undefined'
                   ? { borderColor: textColor }
@@ -35,7 +25,7 @@ function Tab({ tags, setFilterable }) {
             <button
               key={id}
               className="block px-4 py-1 text-sm whitespace-no-wrap border-b-2 focus:outline-none"
-              onClick={() => handleFilter(id)}
+              onClick={() => addQuery('query', id)}
               style={
                 queryString.query === id
                   ? { borderColor: textColor }

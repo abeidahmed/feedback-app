@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useAddQuery } from 'utils/useAddQuery';
 import { useShowProject } from 'api/showProject';
@@ -13,7 +13,6 @@ import { PageHeader } from 'components/Header';
 function FeedbackPage() {
   const { id } = useParams();
   const { queryString } = useAddQuery();
-  const [filterable, setFilterable] = useState(queryString.query);
 
   const { project, isLoading, isError } = useShowProject({ id });
   const { tags, isLoading: tagLoading, isError: tagError } = useGetTags({
@@ -24,7 +23,7 @@ function FeedbackPage() {
     feedbacks,
     isLoading: feedbacksLoading,
     isError: feedbacksError,
-  } = useGetFeedbacks({ projectId: id, filter: filterable });
+  } = useGetFeedbacks({ projectId: id, filter: queryString.query });
 
   if (isLoading || isError) return <Spinner />;
 
@@ -35,16 +34,10 @@ function FeedbackPage() {
       pageDescription={`Project ID: ${project.id}`}
     >
       <ActionButtonGroup projectId={id} />
-      {tagLoading || tagError ? null : (
-        <Tab tags={tags} setFilterable={setFilterable} />
-      )}
+      {tagLoading || tagError ? null : <Tab tags={tags} />}
       <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
         {tagLoading || tagError ? null : (
-          <FilterList
-            tags={tags}
-            setFilterable={setFilterable}
-            projectId={id}
-          />
+          <FilterList tags={tags} projectId={id} />
         )}
         <div className="relative space-y-4 md:col-span-2">
           {feedbacksLoading || feedbacksError ? (

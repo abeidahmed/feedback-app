@@ -5,19 +5,9 @@ import { useModalType } from 'store/modal';
 import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
-function FilterList({ tags, setFilterable, projectId }) {
+function FilterList({ tags, projectId }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
   const { modalOn, types } = useModalType();
-
-  const handleFilter = (id) => {
-    addQuery('query', id);
-    setFilterable(id);
-  };
-
-  const handleResetUrl = (key) => {
-    deleteQuery(key);
-    setFilterable('');
-  };
 
   function openAddTagModal() {
     modalOn({
@@ -54,7 +44,7 @@ function FilterList({ tags, setFilterable, projectId }) {
               <button
                 key={id}
                 className={filterClass(undefined)}
-                onClick={() => handleResetUrl('query')}
+                onClick={() => deleteQuery('query')}
                 style={
                   typeof queryString.query === 'undefined'
                     ? { backgroundColor: bgColor, color: textColor }
@@ -74,7 +64,7 @@ function FilterList({ tags, setFilterable, projectId }) {
               <button
                 key={id}
                 className={filterClass(id)}
-                onClick={() => handleFilter(id)}
+                onClick={() => addQuery('query', id)}
                 style={
                   queryString.query === id
                     ? { backgroundColor: bgColor, color: textColor }
