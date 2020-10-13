@@ -4,7 +4,6 @@ import { useAddQuery } from 'utils/useAddQuery';
 import { useShowProject } from 'api/showProject';
 import { useGetFeedbacks } from 'api/allFeedbacks';
 import { useGetTags } from 'api/getTags';
-import { Container } from 'components/Container';
 import { FeedbackCard } from 'components/Card';
 import { Tab } from 'components/Tab';
 import { FilterList, ActionButtonGroup } from './components';
