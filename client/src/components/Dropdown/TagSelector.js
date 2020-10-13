@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import cn from 'classnames';
+import { useModalType } from 'store/modal';
 import { Icon } from 'components/Icon';
 import { ComboMenu } from './components';
 import { OutsideClickHandler } from 'components/Container';
@@ -9,6 +10,7 @@ function TagSelector({ projects }) {
   const location = useLocation();
   const paramId = location.pathname.split('/')[2];
   const { name, id } = projects.find((project) => project.id === paramId) || {};
+  const { modalOn, types } = useModalType();
 
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState('');
@@ -24,6 +26,14 @@ function TagSelector({ projects }) {
   useEffect(() => {
     setTitle(name);
   }, [id, name]);
+
+  function handleAddProject() {
+    modalOn({
+      modalType: types.ADD_PROJECT,
+      modalProps: {},
+    });
+    setIsActive(false);
+  }
 
   if (location.pathname === '/app/')
     return <Redirect to={{ pathname: '/app' }} />;
@@ -53,7 +63,10 @@ function TagSelector({ projects }) {
             />
           ))}
           <hr className="my-1 border-gray-200" />
-          <button className="inline-flex items-center justify-between w-full px-3 py-2 text-left text-gray-700 focus:outline-none focus:bg-gray-100 hover:bg-gray-100">
+          <button
+            className="inline-flex items-center justify-between w-full px-3 py-2 text-left text-gray-700 focus:outline-none focus:bg-gray-100 hover:bg-gray-100"
+            onClick={handleAddProject}
+          >
             <span>New Project</span>
             <Icon icon="plus" className="w-5 h-5 text-gray-400" />
           </button>
