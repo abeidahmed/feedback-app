@@ -4,7 +4,7 @@ import { Icon } from 'components/Icon';
 
 function ActionButtonGroup({ projectId }) {
   return (
-    <div className="flex justify-end my-4">
+    <div className="flex justify-end mb-4">
       <div className="flex items-center space-x-4 sm:hidden">
         <IconButton
           appearance="white"
