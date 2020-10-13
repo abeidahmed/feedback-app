@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 function MobileMenu({ isActive }) {
   const mobileMenuClass = cn([
-    'absolute w-full bg-white shadow md:hidden',
+    'absolute w-full bg-white shadow md:hidden z-10',
     {
       block: isActive,
       hidden: !isActive,

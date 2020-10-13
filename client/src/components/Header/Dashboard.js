@@ -16,7 +16,7 @@ function Dashboard() {
   const { projects, isLoading, isError } = useGetProjects();
 
   const overlayClass = cn([
-    'fixed inset-0 md:hidden',
+    'fixed inset-0 md:hidden z-10',
     {
       hidden: !isActive,
       block: isActive,
