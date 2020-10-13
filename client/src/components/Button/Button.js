@@ -18,7 +18,7 @@ function StyledButton({
       'px-3 py-2 leading-6 font-medium': size === 'md',
       'text-white bg-blue-500 hover:bg-blue-600 active:bg-blue-700':
         appearance === 'primary',
-      'text-gray-700 border-gray-300 hover:text-gray-500 active:bg-gray-50':
+      'text-gray-700 bg-white border-gray-300 hover:text-gray-500 active:bg-gray-50':
         appearance === 'minimal',
       'text-gray-800 bg-gray-100 hover:text-gray-500': appearance === 'gray',
       'text-blue-700 bg-blue-100 hover:text-blue-500': appearance === 'blue',
