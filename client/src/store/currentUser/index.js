@@ -9,10 +9,9 @@ function useCurrentUser() {
   const [{ currentUser, token }, dispatch] = useContext(CurrentUserContext);
 
   const logout = () => dispatch({ type: types.logout });
-  const clearAll = () => dispatch({ type: types.error });
   const setUser = (payload) => dispatch({ type: types.setUser, payload });
 
-  return { logout, clearAll, setUser, currentUser, token };
+  return { logout, setUser, currentUser, token };
 }
 
 function CurrentUserStore({ children }) {

@@ -6,10 +6,10 @@ import { Spinner } from 'components/Loader';
 
 function ProtectedRoute({ component: Component, currentUser, ...rest }) {
   const { token, isLoading, isError } = currentUser;
-  const { clearAll } = useCurrentUser();
+  const { logout } = useCurrentUser();
 
   if (!Cookies.get(TOKEN) || isError) {
-    clearAll();
+    logout();
     window.location.href = '/login';
   }
   if (isLoading) return <Spinner />;
