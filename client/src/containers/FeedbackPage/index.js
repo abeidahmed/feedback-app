@@ -9,6 +9,7 @@ import { FeedbackCard } from 'components/Card';
 import { Tab } from 'components/Tab';
 import { FilterList, ActionButtonGroup } from './components';
 import { Spinner } from 'components/Loader';
+import { PageHeader } from 'components/Header';
 
 function FeedbackPage() {
   const { id } = useParams();
@@ -29,37 +30,34 @@ function FeedbackPage() {
   if (isLoading || isError) return <Spinner />;
 
   return (
-    <main>
-      <Container>
-        <section className="py-8">
-          <h1 className="text-2xl font-bold text-center sm:text-3xl lg:text-4xl">
-            Feedback for {project.name}
-          </h1>
-          <ActionButtonGroup projectId={id} />
-          {tagLoading || tagError ? null : (
-            <Tab tags={tags} setFilterable={setFilterable} />
+    <PageHeader
+      pageTitle={`Feedback for ${project.name}`}
+      backButton={false}
+      pageDescription={`Project ID: ${project.id}`}
+    >
+      <ActionButtonGroup projectId={id} />
+      {tagLoading || tagError ? null : (
+        <Tab tags={tags} setFilterable={setFilterable} />
+      )}
+      <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
+        {tagLoading || tagError ? null : (
+          <FilterList
+            tags={tags}
+            setFilterable={setFilterable}
+            projectId={id}
+          />
+        )}
+        <div className="relative space-y-4 md:col-span-2">
+          {feedbacksLoading || feedbacksError ? (
+            <Spinner />
+          ) : (
+            feedbacks.map((feedback) => (
+              <FeedbackCard key={feedback.id} feedback={feedback} />
+            ))
           )}
-          <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
-            {tagLoading || tagError ? null : (
-              <FilterList
-                tags={tags}
-                setFilterable={setFilterable}
-                projectId={id}
-              />
-            )}
-            <div className="relative space-y-4 md:col-span-2">
-              {feedbacksLoading || feedbacksError ? (
-                <Spinner />
-              ) : (
-                feedbacks.map((feedback) => (
-                  <FeedbackCard key={feedback.id} feedback={feedback} />
-                ))
-              )}
-            </div>
-          </section>
-        </section>
-      </Container>
-    </main>
+        </div>
+      </section>
+    </PageHeader>
   );
 }
 
