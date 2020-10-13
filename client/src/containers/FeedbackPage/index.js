@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAddQuery } from 'utils/useAddQuery';
 import { useShowProject } from 'api/showProject';
 import { useGetFeedbacks } from 'api/allFeedbacks';
+import { useGetTags } from 'api/getTags';
 import { Container } from 'components/Container';
 import { FeedbackCard } from 'components/Card';
 import { Tab } from 'components/Tab';
@@ -15,6 +16,9 @@ function FeedbackPage() {
   const [filterable, setFilterable] = useState(queryString.query);
 
   const { project, isLoading, isError } = useShowProject({ id });
+  const { tags, isLoading: tagLoading, isError: tagError } = useGetTags({
+    projectId: id,
+  });
 
   const {
     feedbacks,
@@ -29,16 +33,18 @@ function FeedbackPage() {
       <Container>
         <section className="py-8">
           <h1 className="text-2xl font-bold text-center sm:text-3xl lg:text-4xl">
-            Feedback
+            Feedback for {project.name}
           </h1>
           <ActionButtonGroup />
           <Tab />
           <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
-            <FilterList
-              tags={project?.included?.tags}
-              setFilterable={setFilterable}
-              projectId={id}
-            />
+            {tagLoading || tagError ? null : (
+              <FilterList
+                tags={tags}
+                setFilterable={setFilterable}
+                projectId={id}
+              />
+            )}
             <div className="relative space-y-4 md:col-span-2">
               {feedbacksLoading || feedbacksError ? (
                 <Spinner />
