@@ -47,13 +47,26 @@ function FeedbackCard({ feedback }) {
           )}
         </div>
         <div className="flex justify-end space-x-2">
-          <Button appearance="gray" size="xs">
-            Archive
-          </Button>
-          {senderEmail && (
-            <Button appearance="blue" size="xs">
-              Reply with mail
-            </Button>
+          {tag.name === 'Archive' ? (
+            <>
+              <Button appearance="gray" size="xs">
+                Undo Archive
+              </Button>
+              <Button appearance="danger" size="xs">
+                Delete
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button appearance="gray" size="xs">
+                Archive
+              </Button>
+              {senderEmail && (
+                <Button appearance="blue" size="xs">
+                  Reply with mail
+                </Button>
+              )}
+            </>
           )}
         </div>
       </div>
