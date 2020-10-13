@@ -36,9 +36,11 @@ function FeedbackPage() {
       <ActionButtonGroup project={project} />
       {tagLoading || tagError ? null : <Tab tags={tags} projectId={id} />}
       <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
-        {tagLoading || tagError ? null : (
-          <FilterList tags={tags} projectId={id} />
-        )}
+        <div className="hidden md:block md:col-span-1">
+          {tagLoading || tagError ? null : (
+            <FilterList tags={tags} projectId={id} />
+          )}
+        </div>
         <div className="relative space-y-4 md:col-span-2">
           {feedbacksLoading || feedbacksError ? (
             <Spinner />

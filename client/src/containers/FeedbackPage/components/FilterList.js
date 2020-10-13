@@ -35,7 +35,7 @@ function FilterList({ tags, projectId }) {
   if (isLoading || isError) return null;
 
   return (
-    <div className="hidden md:block md:col-span-1">
+    <>
       <div className="flex items-baseline justify-between">
         <p className="text-sm font-medium text-gray-500 uppercase">Filter</p>
         <IconButton size="xs" appearance="white" onClick={openAddTagModal}>
@@ -108,7 +108,7 @@ function FilterList({ tags, projectId }) {
           {tag.feedbacksCount}
         </button>
       </nav>
-    </div>
+    </>
   );
 }
 
