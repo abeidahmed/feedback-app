@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { useModalType } from 'store/modal';
 import * as modal from './types';
+import { AddProject } from './AddProject';
 import { AddTag } from './AddTag';
 
 const MODAL_COMPONENTS = {
+  [modal.ADD_PROJECT]: AddProject,
   [modal.ADD_TAG]: AddTag,
 };
 
