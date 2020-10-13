@@ -1,8 +1,12 @@
+import { useGetArchiveTag } from 'api/getTags';
 import React from 'react';
 import { useAddQuery } from 'utils/useAddQuery';
 
-function Tab({ tags }) {
+function Tab({ tags, projectId }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
+  const { tag, isLoading, isError } = useGetArchiveTag({ projectId });
+
+  if (isLoading || isError) return null;
 
   return (
     <nav className="mt-6 overflow-hidden md:hidden">
@@ -36,6 +40,17 @@ function Tab({ tags }) {
             </button>
           )
         )}
+        <button
+          className="block px-4 py-1 text-sm whitespace-no-wrap border-b-2 focus:outline-none"
+          onClick={() => addQuery('query', tag.id)}
+          style={
+            queryString.query === tag.id
+              ? { borderColor: tag.textColor }
+              : { borderColor: 'transparent' }
+          }
+        >
+          {tag.name}
+        </button>
       </ul>
     </nav>
   );

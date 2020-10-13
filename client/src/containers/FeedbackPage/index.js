@@ -34,7 +34,7 @@ function FeedbackPage() {
       pageDescription={`Project ID: ${project.id}`}
     >
       <ActionButtonGroup project={project} />
-      {tagLoading || tagError ? null : <Tab tags={tags} />}
+      {tagLoading || tagError ? null : <Tab tags={tags} projectId={id} />}
       <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
         {tagLoading || tagError ? null : (
           <FilterList tags={tags} projectId={id} />

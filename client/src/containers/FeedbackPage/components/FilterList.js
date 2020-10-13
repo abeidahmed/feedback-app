@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import { useGetArchiveTag } from 'api/getTags';
 import { useAddQuery } from 'utils/useAddQuery';
 import { useModalType } from 'store/modal';
 import { IconButton } from 'components/Button';
@@ -8,6 +9,8 @@ import { Icon } from 'components/Icon';
 function FilterList({ tags, projectId }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
   const { modalOn, types } = useModalType();
+
+  const { tag, isLoading, isError } = useGetArchiveTag({ projectId });
 
   function openAddTagModal() {
     modalOn({
@@ -28,6 +31,8 @@ function FilterList({ tags, projectId }) {
       },
     ]);
   }
+
+  if (isLoading || isError) return null;
 
   return (
     <div className="hidden md:block md:col-span-1">
@@ -83,6 +88,25 @@ function FilterList({ tags, projectId }) {
             )
           )}
         </ul>
+        <hr className="my-1 border-gray-200" />
+        <button
+          className={filterClass(tag.id)}
+          onClick={() => addQuery('query', tag.id)}
+          style={
+            queryString.query === tag.id
+              ? { backgroundColor: tag.bgColor, color: tag.textColor }
+              : {}
+          }
+        >
+          <div className="flex items-center">
+            <div
+              className="flex-shrink-0 w-2 h-2 rounded-full"
+              style={{ backgroundColor: tag.textColor }}
+            ></div>
+            <span className="ml-2">{tag.name}</span>
+          </div>
+          {tag.feedbacksCount}
+        </button>
       </nav>
     </div>
   );
