@@ -37,6 +37,7 @@ function FeedbackPage() {
             <FilterList
               tags={project?.included?.tags}
               setFilterable={setFilterable}
+              projectId={id}
             />
             <div className="relative space-y-4 md:col-span-2">
               {feedbacksLoading || feedbacksError ? (

@@ -5,7 +5,7 @@ import { useModalType } from 'store/modal';
 import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
-function FilterList({ tags, setFilterable }) {
+function FilterList({ tags, setFilterable, projectId }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
   const { modalOn, types } = useModalType();
 
@@ -22,7 +22,9 @@ function FilterList({ tags, setFilterable }) {
   function openAddTagModal() {
     modalOn({
       modalType: types.ADD_TAG,
-      modalProps: {},
+      modalProps: {
+        projectId,
+      },
     });
   }
 
