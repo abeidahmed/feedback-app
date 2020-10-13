@@ -15,8 +15,8 @@ function Dashboard() {
         <DashboardHeader />
         <Switch>
           <Route exact path="/app" component={Home} />
+          <Route exact path="/app/:id" component={FeedbackPage} />
           <Route path="/app/:id/settings" component={ProjectSettingPage} />
-          <Route path="/app/:id" component={FeedbackPage} />
         </Switch>
       </div>
     </ModalStore>
