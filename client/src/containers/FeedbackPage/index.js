@@ -36,7 +36,9 @@ function FeedbackPage() {
             Feedback for {project.name}
           </h1>
           <ActionButtonGroup />
-          <Tab />
+          {tagLoading || tagError ? null : (
+            <Tab tags={tags} setFilterable={setFilterable} />
+          )}
           <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
             {tagLoading || tagError ? null : (
               <FilterList
