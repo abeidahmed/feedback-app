@@ -1,11 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { useModalType } from 'store/modal';
 import { OutsideClickHandler } from 'components/Container';
 import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
-function ModalWrapper({ modalTitle, children }) {
+function ModalWrapper({ modalTitle, size = 'sm', children }) {
   const { modalOff } = useModalType();
+
+  const modalClass = cn([
+    'inline-block w-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:w-full',
+    {
+      'sm:max-w-lg': size === 'sm',
+      'sm:max-w-xl': size === 'md',
+      'sm:max-w-2xl': size === 'lg',
+    },
+  ]);
 
   return (
     <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -14,10 +25,7 @@ function ModalWrapper({ modalTitle, children }) {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-        <OutsideClickHandler
-          onOutsideClick={modalOff}
-          className="inline-block w-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-        >
+        <OutsideClickHandler onOutsideClick={modalOff} className={modalClass}>
           <header className="flex items-center justify-between px-6 border-b border-gray-300 h-14">
             <h2 className="text-xl font-bold">{modalTitle}</h2>
             <IconButton size="xs" className="-mr-3" onClick={modalOff}>
@@ -30,5 +38,10 @@ function ModalWrapper({ modalTitle, children }) {
     </div>
   );
 }
+
+ModalWrapper.propTypes = {
+  modalTitle: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+};
 
 export default ModalWrapper;

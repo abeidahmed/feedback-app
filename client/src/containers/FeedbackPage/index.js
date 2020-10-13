@@ -33,7 +33,7 @@ function FeedbackPage() {
       backButton={false}
       pageDescription={`Project ID: ${project.id}`}
     >
-      <ActionButtonGroup projectId={id} />
+      <ActionButtonGroup projectId={id} project={project} />
       {tagLoading || tagError ? null : <Tab tags={tags} />}
       <section className="py-4 md:grid md:grid-cols-3 md:gap-6 lg:gap-16">
         {tagLoading || tagError ? null : (
