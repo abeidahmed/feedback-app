@@ -24,6 +24,12 @@ export function currentUserReducer(state = initialState, action) {
         currentUser: {},
         token: undefined,
       };
+    case types.error:
+      Cookies.remove(c.TOKEN);
+      return {
+        currentUser: {},
+        token: undefined,
+      };
     default:
       throw new Error(`Unhandle type: ${action.type}`);
   }
