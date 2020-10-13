@@ -5,6 +5,7 @@ class CreateFeedbacks < ActiveRecord::Migration[6.0]
       t.string :sender_email
       t.string :page_url
       t.string :device
+      t.boolean :archived,      default: false
       t.references :project,    null: false, type: :uuid, foreign_key: true
       t.references :tag,        null: false, type: :uuid, foreign_key: true
 

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_045752) do
     t.string "sender_email"
     t.string "page_url"
     t.string "device"
+    t.boolean "archived", default: false
     t.uuid "project_id", null: false
     t.uuid "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -41,8 +42,8 @@ ActiveRecord::Schema.define(version: 2020_10_10_045752) do
 
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "text_color", default: "#f4f5f7"
-    t.string "bg_color", default: "#374151"
+    t.string "text_color", default: "#374151"
+    t.string "bg_color", default: "#f4f5f7"
     t.uuid "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
