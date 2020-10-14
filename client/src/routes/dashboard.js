@@ -6,11 +6,13 @@ import ProjectSettingPage from 'containers/ProjectSettingPage';
 import { DashboardHeader } from 'components/Header';
 import { ModalStore } from 'store/modal';
 import { ModalRoot } from 'components/Modal';
+import { Notification } from 'components/Notification';
 
 function Dashboard() {
   return (
     <ModalStore>
       <div>
+        <Notification />
         <ModalRoot />
         <DashboardHeader />
         <Switch>
