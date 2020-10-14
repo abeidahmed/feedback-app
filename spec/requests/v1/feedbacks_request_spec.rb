@@ -58,4 +58,33 @@ RSpec.describe "V1::Feedbacks", type: :request do
       end
     end
   end
+
+  describe '#destroy' do
+    let(:team) { create(:team_with_users) }
+    let(:project) { create(:project_with_tags, user: team.users.first, team: team) }
+    let(:feedback) { project.tags.first.feedbacks.create! content: 'hello', project: project }
+
+    context 'when the request is valid' do
+      before do
+        delete v1_project_feedback_url(project, feedback), headers: auth_header(team.users.first)
+      end
+
+      it 'is expected to delete the feedback' do
+        expect(Feedback.count).to be_zero
+      end
+    end
+
+    context 'when the request is made by another user' do
+      before do
+        user = create(:user)
+        delete v1_project_feedback_url(project, feedback), headers: auth_header(user)
+      end
+
+      it 'is expected to not delete the feedback' do
+        expect(Feedback.count).to be(1)
+      end
+
+      include_examples 'unauthorized'
+    end
+  end
 end

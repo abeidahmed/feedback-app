@@ -31,6 +31,14 @@ class V1::FeedbacksController < ApplicationController
     end
   end
 
+  def destroy
+    project = Project.find(params[:project_id])
+    return error('unauthorized') unless team_has_access?(project.team_members)
+
+    feedback = project.feedbacks.find(params[:id])
+    feedback.destroy
+  end
+
   private
   def feedback_params
     params.require(:feedback).permit(

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         resources :tags, only: [:index, :create, :destroy, :update] do
           get :archive, on: :collection
         end
-        resources :feedbacks, only: [:index, :create] do
+        resources :feedbacks, only: [:index, :create, :destroy] do
           patch :archive, on: :member
         end
       end
