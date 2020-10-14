@@ -6,6 +6,7 @@ import { Container } from 'components/Container';
 import Feature from './Feature';
 import CodeBlock from './CodeBlock';
 import Hero from './Hero';
+import { Footer } from 'components/Footer';
 
 function LandingPage() {
   return (
@@ -26,6 +27,9 @@ function LandingPage() {
       <Container>
         <CodeBlock />
         <Feature />
+      </Container>
+      <Container size="md">
+        <Footer />
       </Container>
     </main>
   );
