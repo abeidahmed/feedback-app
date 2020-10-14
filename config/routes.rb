@@ -14,4 +14,5 @@ Rails.application.routes.draw do
       resources :colors, only: [:index]
     end
   end
+  get "/*path", to: "root#root"
 end
