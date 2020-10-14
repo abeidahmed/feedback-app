@@ -1,5 +1,4 @@
-function PostReqCode() {
-  return `fetch('https://api.feedback.fish/feedback', {
+export const postCode = `fetch('https://api.feedback.fish/feedback', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -12,6 +11,3 @@ function PostReqCode() {
     metadata: {},
   }),
 })`;
-}
-
-export default PostReqCode;
