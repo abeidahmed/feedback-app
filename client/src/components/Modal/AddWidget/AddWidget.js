@@ -24,7 +24,7 @@ function AddWidget() {
           Build your own form and submit the feedback to our API endpoint. Send
           a POST request to{' '}
           <Highlight underline breakWord>
-            https://feeder.com/v1/projects/:projectId/feedbacks
+            https://feeder-fish.herokuapp.com/v1/projects/:projectId/feedbacks?type=your_tag_name
           </Highlight>{' '}
           that looks like this:
         </P>
