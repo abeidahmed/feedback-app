@@ -1,9 +1,13 @@
 import React from 'react';
+import { useRefetchMutation } from 'utils/useRefetchMutation';
+import { archiveFeedbackApi } from 'api/patchFeedback';
+import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Badge } from 'components/Badge';
 
-function FeedbackCard({ feedback }) {
+function FeedbackCard({ feedback, projectId }) {
   const {
+    id,
     content,
     device,
     pageUrl,
@@ -12,6 +16,22 @@ function FeedbackCard({ feedback }) {
     createdAt,
     archived,
   } = feedback;
+
+  const [
+    mutate,
+    { isLoading: archiving },
+  ] = useRefetchMutation(archiveFeedbackApi, [
+    q.GET_FEEDBACKS,
+    q.GET_TAGS,
+    q.GET_ARCHIVE_TAG,
+  ]);
+
+  async function handleArchive() {
+    await mutate({
+      id,
+      projectId,
+    });
+  }
 
   return (
     <div className="p-4 border border-gray-200 rounded-md shadow-sm">
@@ -50,7 +70,12 @@ function FeedbackCard({ feedback }) {
         <div className="flex justify-end space-x-2">
           {archived ? (
             <>
-              <Button appearance="gray" size="xs">
+              <Button
+                appearance="gray"
+                size="xs"
+                onClick={handleArchive}
+                disabled={archiving}
+              >
                 Undo Archive
               </Button>
               <Button appearance="danger" size="xs">
@@ -59,7 +84,12 @@ function FeedbackCard({ feedback }) {
             </>
           ) : (
             <>
-              <Button appearance="gray" size="xs">
+              <Button
+                appearance="gray"
+                size="xs"
+                onClick={handleArchive}
+                disabled={archiving}
+              >
                 Archive
               </Button>
               {senderEmail && (

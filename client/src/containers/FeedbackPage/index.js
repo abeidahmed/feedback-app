@@ -46,7 +46,11 @@ function FeedbackPage() {
             <Spinner />
           ) : (
             feedbacks.map((feedback) => (
-              <FeedbackCard key={feedback.id} feedback={feedback} />
+              <FeedbackCard
+                key={feedback.id}
+                feedback={feedback}
+                projectId={id}
+              />
             ))
           )}
         </div>
