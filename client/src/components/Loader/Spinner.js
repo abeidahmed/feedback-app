@@ -1,6 +1,7 @@
 import React from 'react';
 import { keyframes } from '@emotion/core';
 import styled from '@emotion/styled';
+import { color } from 'global/theme';
 
 const spin = keyframes`
   0% {
@@ -27,8 +28,8 @@ const StyledSpinner = styled.div`
     height: 40px;
     margin: 8px;
     border-radius: 50%;
-    border: 4px solid rgb(0, 93, 255);
-    border-color: rgb(0, 93, 255) transparent rgb(0, 93, 255) transparent;
+    border: 4px solid ${color.blue500};
+    border-color: ${color.blue500} transparent ${color.blue500} transparent;
     animation: ${spin} 1.2s linear infinite;
   }
 `;
