@@ -42,12 +42,13 @@ const CodeBlockWrapper = styled.div`
   padding: 48px 16px;
   margin: 32px -16px 0px -16px;
   background-color: ${color.gray800};
-  border-top-right-radius: 56px;
-  border-bottom-left-radius: 56px;
 
   ${media.sm`
     margin-left: 0;
     margin-right: 0;
+    border-top-right-radius: 56px;
+    border-bottom-left-radius: 56px;
+
   `}
 
   ${media.md`
