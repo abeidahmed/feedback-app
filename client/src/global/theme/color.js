@@ -12,4 +12,7 @@ export const color = {
   blue500: '#005dff',
   blue600: '#1633ff',
   blue700: '#0020ff',
+  green50: '#f3faf7',
+  green100: '#def7ec',
+  green700: '#046c4e',
 };
