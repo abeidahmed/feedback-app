@@ -21,14 +21,15 @@ User.destroy_all
   project = Project.create! name: Faker::App.unique.name, user: user, team: team
 
   6.times do
-    tag_ref = rand(1..3)
+    tag_ref = rand(0..2)
     feedback = Feedback.create!(
       content: Faker::Lorem.paragraph,
       sender_email: Faker::Internet.email,
       page_url: '/about',
       device: 'MacOS 64',
       project: project,
-      tag: project.tags[tag_ref]
+      archived: false,
+      tag: project.tags.where.not(name: 'Archive')[tag_ref]
     )
   end
 end
