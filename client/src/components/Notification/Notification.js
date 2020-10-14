@@ -56,7 +56,7 @@ const NotificationWrapper = styled.div`
   }
 
   ${(props) =>
-    props.color === 'success' &&
+    props.color === 'SUCCESS' &&
     css`
       background-color: ${color.green50};
       color: ${color.green700};
