@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRefetchMutation } from 'utils/useRefetchMutation';
 import { archiveFeedbackApi } from 'api/patchFeedback';
+import { deleteFeedbackApi } from 'api/deleteFeedback';
 import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Badge } from 'components/Badge';
@@ -18,7 +19,7 @@ function FeedbackCard({ feedback, projectId }) {
   } = feedback;
 
   const [
-    mutate,
+    archiveFeedback,
     { isLoading: archiving },
   ] = useRefetchMutation(archiveFeedbackApi, [
     q.GET_FEEDBACKS,
@@ -27,7 +28,22 @@ function FeedbackCard({ feedback, projectId }) {
   ]);
 
   async function handleArchive() {
-    await mutate({
+    await archiveFeedback({
+      id,
+      projectId,
+    });
+  }
+
+  const [
+    deleteFeedback,
+    { isLoading: deleting },
+  ] = useRefetchMutation(deleteFeedbackApi, [
+    q.GET_ARCHIVE_TAG,
+    q.GET_FEEDBACKS,
+  ]);
+
+  async function handleDelete() {
+    await deleteFeedback({
       id,
       projectId,
     });
@@ -78,7 +94,12 @@ function FeedbackCard({ feedback, projectId }) {
               >
                 Undo Archive
               </Button>
-              <Button appearance="danger" size="xs">
+              <Button
+                appearance="danger"
+                size="xs"
+                onClick={handleDelete}
+                disabled={deleting}
+              >
                 Delete
               </Button>
             </>
