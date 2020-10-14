@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import React from 'react';
 import cn from 'classnames';
 import { useGetArchiveTag } from 'api/getTags';
@@ -35,7 +37,7 @@ function FilterList({ tags, projectId }) {
   if (isLoading || isError) return null;
 
   return (
-    <>
+    <React.Fragment>
       <div className="flex items-baseline justify-between">
         <p className="text-sm font-medium text-gray-500 uppercase">Filter</p>
         <IconButton size="xs" appearance="white" onClick={openAddTagModal}>
@@ -50,16 +52,20 @@ function FilterList({ tags, projectId }) {
                 key={id}
                 className={filterClass(undefined)}
                 onClick={() => deleteQuery('query')}
-                style={
-                  typeof queryString.query === 'undefined'
-                    ? { backgroundColor: bgColor, color: textColor }
-                    : {}
+                css={
+                  typeof queryString.query === 'undefined' &&
+                  css`
+                    background-color: ${bgColor};
+                    color: ${textColor};
+                  `
                 }
               >
                 <div className="flex items-center">
                   <div
                     className="flex-shrink-0 w-2 h-2 rounded-full"
-                    style={{ backgroundColor: textColor }}
+                    css={css`
+                      background-color: ${textColor};
+                    `}
                   ></div>
                   <span className="ml-2">{name}</span>
                 </div>
@@ -70,10 +76,12 @@ function FilterList({ tags, projectId }) {
                 key={id}
                 className={filterClass(id)}
                 onClick={() => addQuery('query', id)}
-                style={
-                  queryString.query === id
-                    ? { backgroundColor: bgColor, color: textColor }
-                    : {}
+                css={
+                  queryString.query === id &&
+                  css`
+                    background-color: ${bgColor};
+                    color: ${textColor};
+                  `
                 }
               >
                 <div className="flex items-center">
@@ -92,23 +100,27 @@ function FilterList({ tags, projectId }) {
         <button
           className={filterClass(tag.id)}
           onClick={() => addQuery('query', tag.id)}
-          style={
-            queryString.query === tag.id
-              ? { backgroundColor: tag.bgColor, color: tag.textColor }
-              : {}
+          css={
+            queryString.query === tag.id &&
+            css`
+              background-color: ${tag.bgColor};
+              color: ${tag.textColor};
+            `
           }
         >
           <div className="flex items-center">
             <div
               className="flex-shrink-0 w-2 h-2 rounded-full"
-              style={{ backgroundColor: tag.textColor }}
+              css={css`
+                background-color: ${tag.textColor};
+              `}
             ></div>
             <span className="ml-2">{tag.name}</span>
           </div>
           {tag.feedbacksCount}
         </button>
       </nav>
-    </>
+    </React.Fragment>
   );
 }
 
