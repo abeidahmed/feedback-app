@@ -16,6 +16,9 @@ function Form() {
   const [mutate, { isLoading }] = useMutation(loginApi, {
     onSuccess: ({ data }) => {
       setUser(data);
+      setEmail('');
+      setPassword('');
+      setError('');
       history.push('/app');
     },
     throwOnError: true,
