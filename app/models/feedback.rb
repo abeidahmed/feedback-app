@@ -6,11 +6,17 @@ class Feedback < ApplicationRecord
   validates_length_of :content, maximum: 300
 
   default_scope -> { order(created_at: :desc) }
-  scope :except_archived, -> { includes(:tag).where.not(tags: { name: 'Archive' }) }
+  scope :except_archived, -> { where.not(archived: true) }
+  scope :archived, -> { where(archived: true) }
 
-  def self.filterable(tag_id)
+  def self.filterable(tag_id, project)
     if tag_id.present?
-      unscoped.where(tag: tag_id)
+      @archive_tag = Tag.find(tag_id)
+      if @archive_tag.name == 'Archive'
+        unscoped.where(project_id: project.id, archived: true)
+      else
+        where(tag: tag_id)
+      end
     else
       self.all
     end

@@ -35,8 +35,8 @@ class V1::TagsController < ApplicationController
   end
 
   def archive
-    project = Project.find(params[:project_id])
-    @archive_tag = project.tags.get_archive.first
+    @project = Project.find(params[:project_id])
+    @archive_tag = @project.tags.get_archive.first
     render :archive
   end
 
