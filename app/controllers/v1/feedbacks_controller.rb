@@ -24,7 +24,11 @@ class V1::FeedbacksController < ApplicationController
     archive_tag = project.tags.find_by(name: 'Archive')
     feedback = project.feedbacks.find(params[:id])
 
-    feedback.update(tag: archive_tag)
+    if feedback.archived?
+      feedback.update(archived: false)
+    else
+      feedback.update(archived: true)
+    end
   end
 
   private

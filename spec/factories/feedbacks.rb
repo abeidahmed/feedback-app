@@ -3,7 +3,6 @@ FactoryBot.define do
     project
     tag
     content { 'Feedback content' }
-    tag_name { tag.name }
     sender_email { 'hello@example.com' }
     page_url { '/about' }
     device { 'Chrome 65' }
