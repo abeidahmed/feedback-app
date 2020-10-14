@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container } from 'components/Container';
 import { Icon } from 'components/Icon';
+import { H1 } from 'components/Typography';
 
 function PageHeader({
   backButton = true,
@@ -28,9 +29,7 @@ function PageHeader({
               </button>
             )}
             <div className="mx-auto">
-              <h1 className="text-2xl font-bold text-center sm:text-3xl lg:text-4xl">
-                {pageTitle}
-              </h1>
+              <H1 align="center">{pageTitle}</H1>
               {pageDescription && (
                 <p className="text-sm text-center text-gray-500 md:text-base">
                   {pageDescription}
