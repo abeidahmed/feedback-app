@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { Container } from 'components/Container';
 import { Icon } from 'components/Icon';
-import { H1 } from 'components/Typography';
+import { H1, P } from 'components/Typography';
 
 function PageHeader({
   backButton = true,
@@ -30,11 +30,7 @@ function PageHeader({
             )}
             <div className="mx-auto">
               <H1 align="center">{pageTitle}</H1>
-              {pageDescription && (
-                <p className="text-sm text-center text-gray-500 md:text-base">
-                  {pageDescription}
-                </p>
-              )}
+              {pageDescription && <P align="center">{pageDescription}</P>}
             </div>
             {backButton && (
               <span aria-hidden="true" className="inline-block w-14"></span>

@@ -1,7 +1,8 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import { Button } from 'components/Button';
 import { Icon } from 'components/Icon';
-import { H1 } from 'components/Typography';
+import { H1, P } from 'components/Typography';
 
 function Hero() {
   return (
@@ -9,10 +10,17 @@ function Hero() {
       <H1 size="display">
         Get feedback. <br /> Make your customers happy.
       </H1>
-      <p className="max-w-md mt-3 text-base leading-7 text-gray-600 md:text-lg">
+      <P
+        size="display"
+        css={css`
+          margin-top: 12px;
+          max-width: 28rem;
+          line-height: 28px;
+        `}
+      >
         Collect issues, ideas and compliments with a simple widget. Receive them
         as email. Dive deep with the dashboard.
-      </p>
+      </P>
       <div className="mt-4">
         <Button
           to="/signup"
