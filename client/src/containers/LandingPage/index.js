@@ -1,14 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from 'assets/Logo';
+import MobilePattern from './MobilePattern';
+import { Container } from 'components/Container';
+import Feature from './Feature';
+import CodeBlock from './CodeBlock';
+import Hero from './Hero';
 
 function LandingPage() {
   return (
-    <div>
-      <h1>hello from LandingPage</h1>
-      <Link to="/login">login</Link>
-      <Link to="/signup">signup</Link>
-      <Link to="/app">app</Link>
-    </div>
+    <main className="py-5">
+      <Container size="md" className="md:grid md:grid-cols-2">
+        <div className="md:col-span-1">
+          <header>
+            <Link to="/">
+              <Logo className="w-12 h-12" />
+            </Link>
+          </header>
+          <Hero />
+        </div>
+        <div className="hidden md:block md:col-span-1">
+          <MobilePattern className="ml-auto md:h-72 lg:h-96 xl:h-120 md:w-auto" />
+        </div>
+      </Container>
+      <Container>
+        <CodeBlock />
+        <Feature />
+      </Container>
+    </main>
   );
 }
 
