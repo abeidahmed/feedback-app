@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRefetchMutation } from 'utils/useRefetchMutation';
+import { useNotification } from 'store/notification';
 import { archiveFeedbackApi } from 'api/patchFeedback';
 import { deleteFeedbackApi } from 'api/deleteFeedback';
 import * as q from 'global/queryKey';
@@ -18,6 +19,8 @@ function FeedbackCard({ feedback, projectId }) {
     archived,
   } = feedback;
 
+  const { addNotification, states } = useNotification();
+
   const [
     archiveFeedback,
     { isLoading: archiving },
@@ -27,10 +30,14 @@ function FeedbackCard({ feedback, projectId }) {
     q.GET_ARCHIVE_TAG,
   ]);
 
-  async function handleArchive() {
+  async function handleArchive(content) {
     await archiveFeedback({
       id,
       projectId,
+    });
+    handleNotification({
+      content,
+      appearance: states.success,
     });
   }
 
@@ -46,6 +53,20 @@ function FeedbackCard({ feedback, projectId }) {
     await deleteFeedback({
       id,
       projectId,
+    });
+    handleNotification({
+      content: 'Deleted feedback!',
+      appearance: states.success,
+    });
+  }
+
+  function handleNotification({ content, appearance }) {
+    addNotification({
+      element: {
+        id,
+        appearance,
+        content,
+      },
     });
   }
 
@@ -89,7 +110,7 @@ function FeedbackCard({ feedback, projectId }) {
               <Button
                 appearance="gray"
                 size="xs"
-                onClick={handleArchive}
+                onClick={() => handleArchive('Unarchived feedback!')}
                 disabled={archiving}
               >
                 Undo Archive
@@ -108,7 +129,7 @@ function FeedbackCard({ feedback, projectId }) {
               <Button
                 appearance="gray"
                 size="xs"
-                onClick={handleArchive}
+                onClick={() => handleArchive('Archived feedback!')}
                 disabled={archiving}
               >
                 Archive
