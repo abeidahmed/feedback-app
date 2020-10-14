@@ -1,44 +1,68 @@
-import React, { useEffect } from 'react';
-import Prism from 'prismjs';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import { useModalType } from 'store/modal';
 import ModalWrapper from '../ModalWrapper';
 import { CodeBlock, postCode } from 'components/CodeBlock';
+import { H2, P } from 'components/Typography';
+import { color, media } from 'global/theme';
+import styled from '@emotion/styled';
 
 function AddWidget() {
   const {
     modalProps: { id, name },
   } = useModalType();
 
-  useEffect(() => {
-    Prism.highlightAll();
-  }, []);
-
   return (
     <ModalWrapper size="lg">
       <section>
-        <h2 className="text-2xl font-bold text-center sm:text-3xl">
-          Get started with Feeder
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-gray-600 md:text-base">
+        <H2 align="center">Get started with Feeder</H2>
+        <P
+          css={css`
+            margin-top: 8px;
+          `}
+        >
           Build your own form and submit the feedback to our API endpoint. Send
           a POST request to{' '}
-          <span className="font-medium text-gray-900 underline">
+          <Highlight underline breakWord>
             https://feeder.com/v1/projects/:projectId/feedbacks
-          </span>{' '}
+          </Highlight>{' '}
           that looks like this:
-        </p>
+        </P>
       </section>
-      <section className="mt-4 space-y-4">
+      <MainContent>
         <CodeBlock lang="js" code={postCode} />
-        <footer className="text-sm leading-6 text-gray-600 md:text-base">
-          <span className="font-medium text-gray-900 underline">PS:</span> The
-          projectId varies with your project. Here is the projectId:{' '}
-          <span className="font-medium text-gray-900">{id}</span> for your{' '}
-          <span className="font-medium text-gray-900">{name}</span> project.
-        </footer>
-      </section>
+        <Footer>
+          <Highlight underline>PS:</Highlight> The projectId varies with your
+          project. Here is the projectId: <Highlight>{id}</Highlight> for your{' '}
+          <Highlight>{name}</Highlight> project.
+        </Footer>
+      </MainContent>
     </ModalWrapper>
   );
 }
+
+const MainContent = styled.section`
+  margin-top: 16px;
+  > * + * {
+    margin-top: 16px;
+  }
+`;
+
+const Highlight = styled.span`
+  font-weight: medium;
+  color: ${color.gray900};
+  text-decoration: ${(props) => (props.underline ? 'underline' : 'none')};
+  overflow-wrap: ${(props) => (props.breakWord ? 'break-word' : 'normal')};
+`;
+
+const Footer = styled.footer`
+  font-size: 14px;
+  line-height: 24px;
+  color: ${color.gray600};
+
+  ${media.md`
+    font-size: 16px;
+  `}
+`;
 
 export default AddWidget;
