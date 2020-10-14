@@ -1,4 +1,4 @@
-export const postCode = `fetch('https://feeder.com/v1/projects/:project_id/feedbacks?tag=Issue', {
+export const postCode = `fetch('https://feeder-fish.herokuapp.com/v1/projects/:project_id/feedbacks?tag=Issue', {
   // The "tag" query param is case sensitive. Eg: "Issue", "Idea", "Other", etc..
   method: 'POST',
   headers: {
