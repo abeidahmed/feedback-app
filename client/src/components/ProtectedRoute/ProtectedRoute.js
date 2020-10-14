@@ -1,14 +1,13 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import { TOKEN, useCurrentUser } from 'store/currentUser';
+import { useCurrentUser } from 'store/currentUser';
 import { Spinner } from 'components/Loader';
 
 function ProtectedRoute({ component: Component, currentUser, ...rest }) {
   const { token, isLoading, isError } = currentUser;
   const { logout } = useCurrentUser();
 
-  if (!Cookies.get(TOKEN) || isError) {
+  if (isError) {
     logout();
     window.location.href = '/login';
   }
