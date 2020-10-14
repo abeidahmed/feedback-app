@@ -41,7 +41,7 @@ function Feature() {
           </div>
           <div>
             <h4 className="font-sans font-semibold text-gray-700">
-              More than 40 languages
+              One-click screenshots
             </h4>
             <p className="mt-2 text-sm text-gray-600 md:text-base">
               See what your users see with screenshots. Device information is
@@ -55,7 +55,7 @@ function Feature() {
           </div>
           <div>
             <h4 className="font-sans font-semibold text-gray-700">
-              More than 40 languages
+              Team Friendly
             </h4>
             <p className="mt-2 text-sm text-gray-600 md:text-base">
               Bring your team on the same page. Give your colleagues access to
