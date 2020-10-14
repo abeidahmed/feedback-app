@@ -10,6 +10,7 @@ function FeedbackCard({ feedback }) {
     senderEmail,
     included: { tag },
     createdAt,
+    archived,
   } = feedback;
 
   return (
@@ -47,7 +48,7 @@ function FeedbackCard({ feedback }) {
           )}
         </div>
         <div className="flex justify-end space-x-2">
-          {tag.name === 'Archive' ? (
+          {archived ? (
             <>
               <Button appearance="gray" size="xs">
                 Undo Archive
