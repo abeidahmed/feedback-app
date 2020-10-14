@@ -1,9 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { TOKEN } from 'store/currentUser';
 import Logo from 'assets/Logo';
 import { AvatarGroup, Form, Footer } from './components';
 
 function Signup() {
+  if (Cookies.get(TOKEN)) return <Redirect to={{ pathname: '/app' }} />;
+
   return (
     <main className="flex items-center justify-center min-h-screen px-4">
       <div className="w-full">
