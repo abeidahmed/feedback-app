@@ -1,13 +1,8 @@
-import React, { useEffect } from 'react';
-import Prism from 'prismjs';
-import { PostReqCode } from 'components/CodeBlock';
+import React from 'react';
+import { postCode, CodeBlock as CodeWrapper } from 'components/CodeBlock';
 import { H2, P } from 'components/Typography';
 
 function CodeBlock() {
-  useEffect(() => {
-    Prism.highlightAll();
-  }, []);
-
   return (
     <section className="py-10">
       <div>
@@ -28,11 +23,7 @@ function CodeBlock() {
           </P>
         </div>
         <div className="mt-4">
-          <pre className="p-4 text-sm bg-gray-100 rounded-md md:text-base">
-            <code className="language-js">
-              <PostReqCode />
-            </code>
-          </pre>
+          <CodeWrapper lang="js" code={postCode} />
         </div>
       </div>
     </section>

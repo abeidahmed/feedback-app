@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Prism from 'prismjs';
 import { useModalType } from 'store/modal';
 import ModalWrapper from '../ModalWrapper';
+import { CodeBlock, postCode } from 'components/CodeBlock';
 
 function AddWidget() {
   const {
@@ -28,11 +29,7 @@ function AddWidget() {
         </p>
       </section>
       <section className="mt-4 space-y-4">
-        <pre className="p-4 text-sm bg-gray-100 rounded-md">
-          <code className="language-js">
-            <CodeBlock />
-          </code>
-        </pre>
+        <CodeBlock lang="js" code={postCode} />
         <footer className="text-sm leading-6 text-gray-600 md:text-base">
           <span className="font-medium text-gray-900 underline">PS:</span> The
           projectId varies with your project. Here is the projectId:{' '}
@@ -42,22 +39,6 @@ function AddWidget() {
       </section>
     </ModalWrapper>
   );
-}
-
-function CodeBlock() {
-  return `fetch('https://api.feedback.fish/feedback', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    projectId: 'ae77fce6b9fb09',
-    text: feedbackText,
-    category: '', // Either "issue", "idea" or "other",
-    userId: currentUser.email,
-    metadata: {},
-  }),
-})`;
 }
 
 export default AddWidget;
