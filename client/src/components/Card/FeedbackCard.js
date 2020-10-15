@@ -3,6 +3,7 @@ import { useRefetchMutation } from 'utils/useRefetchMutation';
 import { useNotification } from 'store/notification';
 import { archiveFeedbackApi } from 'api/patchFeedback';
 import { deleteFeedbackApi } from 'api/deleteFeedback';
+import { simpleEmailValidation } from 'utils/simpleEmailValidation';
 import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Badge } from 'components/Badge';
@@ -134,8 +135,12 @@ function FeedbackCard({ feedback, projectId }) {
               >
                 Archive
               </Button>
-              {senderEmail && (
-                <Button appearance="blue" size="xs">
+              {simpleEmailValidation(senderEmail) && (
+                <Button
+                  href={`mailto:${senderEmail}`}
+                  appearance="blue"
+                  size="xs"
+                >
                   Reply with mail
                 </Button>
               )}
