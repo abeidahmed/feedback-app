@@ -9,6 +9,7 @@ function Notification() {
   const { element = {}, hideNotification } = useNotification();
   const { id, appearance, content } = element;
 
+  /* eslint-disable */
   useEffect(() => {
     const timer = setTimeout(() => {
       hideNotification();
@@ -16,6 +17,7 @@ function Notification() {
 
     return () => clearTimeout(timer);
   }, [id]);
+  /* eslint-enable */
 
   if (!id) return null;
 
