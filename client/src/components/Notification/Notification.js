@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { color, boxShadow } from 'global/theme';
+import { color, boxShadow, media } from 'global/theme';
 import { useNotification } from 'store/notification';
 import { Icon } from 'components/Icon';
 
@@ -25,10 +25,19 @@ function Notification() {
     <Aside>
       <NotificationWrapper color={appearance}>
         <MetaWrapper>
-          <p>{content}</p>
-          <button onClick={hideNotification}>
-            <XIcon icon="x" />
-          </button>
+          <CheckIconWrapper>
+            <div>
+              <Icon icon="check" width={16} height={16} />
+            </div>
+          </CheckIconWrapper>
+          <MainContent>
+            <p>{content}</p>
+            <div>
+              <button onClick={hideNotification}>
+                <XIcon icon="x" />
+              </button>
+            </div>
+          </MainContent>
         </MetaWrapper>
       </NotificationWrapper>
     </Aside>
@@ -39,18 +48,24 @@ const Aside = styled.aside`
   position: sticky;
   top: 0;
   z-index: 999;
-  > * + * {
-    margin-top: 64px;
-  }
 `;
 
 const NotificationWrapper = styled.div`
   position: absolute;
-  top: 50px;
-  right: 50px;
+  top: 10px;
+  right: 10px;
   padding: 16px;
-  border-left: 4px solid ${color.green700};
   box-shadow: ${boxShadow.default};
+  border-radius: 6px;
+  margin-left: 10px;
+
+  ${media.md`
+    top: 20px;
+  `}
+
+  ${media.lg`
+    right: 50px;
+  `}
 
   p {
     font-size: 14px;
@@ -76,12 +91,35 @@ const NotificationWrapper = styled.div`
     `}
 `;
 
+const MainContent = styled.div`
+  margin-left: 12px;
+  display: flex;
+
+  > * + * {
+    margin-left: 16px;
+  }
+`;
+
 const MetaWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  > * + * {
-    margin-left: 24px;
+`;
+
+const CheckIconWrapper = styled.div`
+  border-radius: 9999px;
+
+  > div {
+    background-color: ${color.green400};
+    border-radius: 9999px;
+    flex-shrink: 0;
+    padding: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+
+    > svg {
+      color: #fff;
+    }
   }
 `;
 
