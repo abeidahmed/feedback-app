@@ -1,10 +1,19 @@
 import React from 'react';
 import { Global, css } from '@emotion/core';
+import { color } from './color';
 
 function GlobalStyle() {
   return (
     <Global
       styles={css`
+        body {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          min-height: 100vh;
+          color: ${color.gray900};
+          background-color: #fff;
+        }
+
         button:disabled,
         button[disabled] {
           opacity: 0.5;
