@@ -7,7 +7,7 @@ function GeneralPage({ project }) {
   return (
     <Wrapper>
       <EditProjectBox project={project} />
-      <DeleteProjectBox />
+      <DeleteProjectBox project={project} />
     </Wrapper>
   );
 }
