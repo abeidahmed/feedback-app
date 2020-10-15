@@ -103,15 +103,17 @@ function Brand({ isActive, onClose }) {
           </ActionButton>
         </ButtonWrapper>
         <FormContentWrapper isActive={activeForm}>
-          <Label htmlFor="feedback">Send in your feedback</Label>
-          <Textarea
-            ref={textareaRef}
-            id="feedback"
-            rows="2"
-            placeholder="Type your feedback.."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></Textarea>
+          <div>
+            <Label htmlFor="feedback">Send in your feedback</Label>
+            <Textarea
+              ref={textareaRef}
+              id="feedback"
+              rows="3"
+              placeholder="Share your feedback.."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            ></Textarea>
+          </div>
           <StyledButton disabled={isLoading || !content.length}>
             Send feedback
           </StyledButton>
@@ -122,6 +124,9 @@ function Brand({ isActive, onClose }) {
               <Icon icon="check" width="24" height="24" />
             </div>
             <h4>Thank you for your feedback!</h4>
+            <button onClick={() => setActiveForm(types.initial)}>
+              Submit more feedback
+            </button>
           </div>
         </SuccessWrapper>
       </Section>
@@ -134,6 +139,7 @@ function Brand({ isActive, onClose }) {
 
 const Section = styled.section`
   padding: 12px 0;
+  height: 130.8px;
 `;
 
 const SuccessWrapper = styled.div`
@@ -163,10 +169,36 @@ const SuccessWrapper = styled.div`
       color: #fff;
     }
   }
+
+  button {
+    margin-top: 6px;
+    font-size: 12px;
+    border-radius: 6px;
+    padding: 0 8px;
+    line-height: 20px;
+    color: ${color.gray500};
+    background-color: ${color.gray100};
+    border: 1px solid transparent;
+
+    &:hover {
+      color: ${color.gray800};
+    }
+
+    &:focus {
+      outline: none;
+      border-color: ${color.gray700};
+    }
+  }
 `;
 
 const FormContentWrapper = styled.div`
   display: ${(props) => (props.isActive === types.feedback ? 'block' : 'none')};
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 const Label = styled.label`
@@ -190,6 +222,7 @@ const Textarea = styled.textarea`
   padding: 8px;
   font-size: 14px;
   font-weight: 500;
+  flex: 1;
 
   &:focus {
     outline: none;
