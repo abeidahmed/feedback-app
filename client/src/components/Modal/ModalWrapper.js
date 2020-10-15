@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { useModalType } from 'store/modal';
-import { OutsideClickHandler } from 'components/Container';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { IconButton } from 'components/Button';
 import { Icon } from 'components/Icon';
 
@@ -25,15 +25,17 @@ function ModalWrapper({ modalTitle, size = 'sm', children }) {
           <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen"></span>
-        <OutsideClickHandler onOutsideClick={modalOff} className={modalClass}>
-          <header className="flex items-center justify-between px-6 border-b border-gray-300 h-14">
-            <h2 className="text-xl font-bold">{modalTitle}</h2>
-            <IconButton size="xs" className="-mr-3" onClick={modalOff}>
-              <Icon icon="x" className="w-5 h-5" />
-            </IconButton>
-          </header>
-          <div className="p-6 bg-white">{children}</div>
-        </OutsideClickHandler>
+        <div className={modalClass}>
+          <OutsideClickHandler onOutsideClick={modalOff}>
+            <header className="flex items-center justify-between px-6 border-b border-gray-300 h-14">
+              <h2 className="text-xl font-bold">{modalTitle}</h2>
+              <IconButton size="xs" className="-mr-3" onClick={modalOff}>
+                <Icon icon="x" className="w-5 h-5" />
+              </IconButton>
+            </header>
+            <div className="p-6 bg-white">{children}</div>
+          </OutsideClickHandler>
+        </div>
       </div>
     </div>
   );
