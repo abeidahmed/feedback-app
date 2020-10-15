@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { useCurrentUser } from 'store/currentUser';
 import { color, media, boxShadow } from 'global/theme';
 import { BrandFeedbackForm } from 'components/FeedbackForm';
@@ -15,20 +16,26 @@ function MobileMenu({ isActive }) {
     history.push('/');
   }
 
+  function closeFeedbackForm() {
+    setFeedbackActive(false);
+  }
+
   return (
     <Nav isActive={isActive}>
       <ul>
-        <WidgetWrapper>
-          <NavButton onClick={() => setFeedbackActive(!feedbackActive)}>
-            Give your feedback
-          </NavButton>
-          <FeedbackWrapper>
-            <BrandFeedbackForm
-              isActive={feedbackActive}
-              onClose={() => setFeedbackActive(false)}
-            />
-          </FeedbackWrapper>
-        </WidgetWrapper>
+        <OutsideClickHandler onOutsideClick={closeFeedbackForm}>
+          <WidgetWrapper>
+            <NavButton onClick={() => setFeedbackActive(!feedbackActive)}>
+              Give your feedback
+            </NavButton>
+            <FeedbackWrapper>
+              <BrandFeedbackForm
+                isActive={feedbackActive}
+                onClose={closeFeedbackForm}
+              />
+            </FeedbackWrapper>
+          </WidgetWrapper>
+        </OutsideClickHandler>
         <NavButton onClick={handleLogout}>Logout</NavButton>
       </ul>
     </Nav>

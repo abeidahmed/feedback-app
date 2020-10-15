@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { useCurrentUser } from 'store/currentUser';
 import { color } from 'global/theme';
 import { BrandFeedbackForm } from 'components/FeedbackForm';
@@ -23,18 +24,20 @@ function DesktopMenu() {
   return (
     <nav className="items-center hidden space-x-4 md:flex md:space-x-8">
       <FormWrapper>
-        <StyledButton
-          className="text-gray-600 hover:text-gray-900"
-          onClick={() => setFeedbackActive(!feedbackActive)}
-        >
-          Give your feedback
-        </StyledButton>
-        <FeedbackWrapper>
-          <BrandFeedbackForm
-            isActive={feedbackActive}
-            onClose={closeFeedbackForm}
-          />
-        </FeedbackWrapper>
+        <OutsideClickHandler onOutsideClick={closeFeedbackForm}>
+          <StyledButton
+            className="text-gray-600 hover:text-gray-900"
+            onClick={() => setFeedbackActive(!feedbackActive)}
+          >
+            Give your feedback
+          </StyledButton>
+          <FeedbackWrapper>
+            <BrandFeedbackForm
+              isActive={feedbackActive}
+              onClose={closeFeedbackForm}
+            />
+          </FeedbackWrapper>
+        </OutsideClickHandler>
       </FormWrapper>
       <StyledButton
         className="text-gray-600 hover:text-gray-900"
