@@ -2,13 +2,42 @@
 import { useState, useRef, useEffect } from 'react';
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
+import { useLocation } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { useCurrentUser } from 'store/currentUser';
 import { Icon } from 'components/Icon';
+import { postFeedbackApi } from 'api/postFeedback';
 import { boxShadow, color } from 'global/theme';
 import { IssueIcon, IdeaIcon } from './icon';
+import { types, tagTypes } from './types';
+import * as c from './constants';
 
 function Brand({ isActive, onClose }) {
-  const [activeForm, setActiveForm] = useState(false);
-  const [formTitle, setFormTitle] = useState("What's on your mind?");
+  const [activeForm, setActiveForm] = useState(types.initial);
+  const [formTitle, setFormTitle] = useState(c.INITIAL_TITLE);
+  const [activeTag, setActiveTag] = useState('');
+  const [content, setContent] = useState('');
+
+  const location = useLocation();
+  const { currentUser } = useCurrentUser();
+  const [mutate, { isLoading }] = useMutation(postFeedbackApi, {
+    onSuccess: () => {
+      setContent('');
+      setActiveForm(types.success);
+    },
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await mutate({
+      projectId: c.PROJECT_ID,
+      content,
+      currentUserEmail: currentUser.email || c.DEFAULT_EMAIL,
+      pageUrl: location.pathname,
+      device: '',
+      tag: activeTag,
+    });
+  }
 
   const textareaRef = useRef(null);
 
@@ -16,50 +45,51 @@ function Brand({ isActive, onClose }) {
     textareaRef.current.focus();
   }, [activeForm]);
 
-  function handleActiveTag(title) {
-    setActiveForm(true);
+  function handleActiveTag(title, tagName) {
+    setActiveForm(types.feedback);
     setFormTitle(title);
+    setActiveTag(tagName);
   }
 
   function handleBack() {
-    setActiveForm(false);
-    setFormTitle("What's on your mind?");
+    setActiveForm(types.initial);
+    setFormTitle(c.INITIAL_TITLE);
   }
 
   return (
-    <Form isActive={isActive}>
+    <Form onSubmit={handleSubmit} isActive={isActive}>
       <Header>
-        {activeForm ? (
+        {activeForm === types.feedback ? (
           <IconButton type="button" onClick={handleBack}>
             <Icon icon="chevron-left" className="w-4 h-4 text-gray-500" />
           </IconButton>
         ) : (
           <span></span>
         )}
-        <H4>{formTitle}</H4>
+        {activeForm !== types.success && <H4>{formTitle}</H4>}
         <IconButton type="button" onClick={onClose}>
           <Icon icon="x" className="w-4 h-4 text-gray-500" />
         </IconButton>
       </Header>
       <Section>
-        <ButtonWrapper isActive={!activeForm}>
+        <ButtonWrapper isActive={activeForm}>
           <ActionButton
             type="button"
-            onClick={() => handleActiveTag('Report an issue')}
+            onClick={() => handleActiveTag(c.ISSUE_TITLE, tagTypes.issue)}
           >
             <IssueIcon />
             <span>Issue</span>
           </ActionButton>
           <ActionButton
             type="button"
-            onClick={() => handleActiveTag('Share an idea')}
+            onClick={() => handleActiveTag(c.IDEA_TITLE, tagTypes.idea)}
           >
             <IdeaIcon />
             <span>Idea</span>
           </ActionButton>
           <ActionButton
             type="button"
-            onClick={() => handleActiveTag('Tell us anything!')}
+            onClick={() => handleActiveTag(c.OTHER_TITLE, tagTypes.other)}
           >
             <Icon
               icon="dots-horizontal"
@@ -79,9 +109,21 @@ function Brand({ isActive, onClose }) {
             id="feedback"
             rows="2"
             placeholder="Type your feedback.."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           ></Textarea>
-          <StyledButton>Send feedback</StyledButton>
+          <StyledButton disabled={isLoading || !content.length}>
+            Send feedback
+          </StyledButton>
         </FormContentWrapper>
+        <SuccessWrapper isActive={activeForm}>
+          <div>
+            <div>
+              <Icon icon="check" width="24" height="24" />
+            </div>
+            <h4>Thank you for your feedback!</h4>
+          </div>
+        </SuccessWrapper>
       </Section>
       <Footer>
         Widget by <span>Feeder</span>
@@ -94,8 +136,37 @@ const Section = styled.section`
   padding: 12px 0;
 `;
 
+const SuccessWrapper = styled.div`
+  display: ${(props) => (props.isActive === types.success ? 'flex' : 'none')};
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  > div {
+    h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    div {
+      border-radius: 50%;
+      background-color: ${color.green400};
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg {
+      margin: 0 auto;
+      color: #fff;
+    }
+  }
+`;
+
 const FormContentWrapper = styled.div`
-  display: ${(props) => (props.isActive ? 'block' : 'none')};
+  display: ${(props) => (props.isActive === types.feedback ? 'block' : 'none')};
 `;
 
 const Label = styled.label`
@@ -150,7 +221,7 @@ const StyledButton = styled.button`
 `;
 
 const ButtonWrapper = styled.div`
-  display: ${(props) => (props.isActive ? 'flex' : 'none')};
+  display: ${(props) => (props.isActive === types.initial ? 'flex' : 'none')};
 
   > * + * {
     margin-left: 12px;
