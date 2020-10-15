@@ -1,7 +1,14 @@
-import React from 'react';
+import styled from '@emotion/styled';
+import { media, color } from 'global/theme';
 
-function BoxBottom({ children }) {
-  return <div className="p-4 bg-gray-100 md:px-5">{children}</div>;
-}
+const BoxBottom = styled.div`
+  padding: 16px;
+  background-color: ${color.gray100};
+
+  ${media.md`
+    padding-left: 20px;
+    padding-right: 20px;
+  `}
+`;
 
 export default BoxBottom;
