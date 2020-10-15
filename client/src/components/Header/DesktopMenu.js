@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useCurrentUser } from 'store/currentUser';
@@ -36,9 +36,6 @@ function DesktopMenu() {
           />
         </FeedbackWrapper>
       </FormWrapper>
-      <StyledLink to="/" className="text-gray-600 hover:text-gray-900">
-        Help
-      </StyledLink>
       <StyledButton
         className="text-gray-600 hover:text-gray-900"
         onClick={handleLogout}
@@ -69,10 +66,6 @@ const button = css`
 
 const StyledButton = styled.button`
   ${button}
-`;
-
-const StyledLink = styled(Link)`
-  ${button};
 `;
 
 export default DesktopMenu;
