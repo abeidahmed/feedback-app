@@ -5,11 +5,13 @@ import * as modal from './types';
 import { AddProject } from './AddProject';
 import { AddTag } from './AddTag';
 import { AddWidget } from './AddWidget';
+import { DeleteProject } from './DeleteProject';
 
 const MODAL_COMPONENTS = {
   [modal.ADD_PROJECT]: AddProject,
   [modal.ADD_TAG]: AddTag,
   [modal.ADD_WIDGET]: AddWidget,
+  [modal.DELETE_PROJECT]: DeleteProject,
 };
 
 function ModalRoot() {
