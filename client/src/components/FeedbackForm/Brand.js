@@ -292,16 +292,17 @@ const Form = styled.form`
   background-color: #fff;
   border-radius: 8px;
   box-shadow: ${boxShadow.lg};
-  padding: 12px;
+  padding: 12px 12px 0 12px;
   margin-top: 16px;
   z-index: 99999;
   display: ${(props) => (props.isActive ? 'block' : 'none')};
 `;
 
 const Footer = styled.footer`
-  font-size: 12px;
+  font-size: 10px;
   color: ${color.gray500};
   text-align: center;
+  padding: 4px 0;
 
   > span {
     font-weight: 500;
