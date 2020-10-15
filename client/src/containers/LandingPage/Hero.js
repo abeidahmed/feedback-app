@@ -1,10 +1,17 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
+import { useCurrentUser } from 'store/currentUser';
 import { Button } from 'components/Button';
 import { Icon } from 'components/Icon';
 import { H1, P } from 'components/Typography';
 
 function Hero() {
+  const { currentUser } = useCurrentUser();
+  const buttonTitle =
+    !Object.keys(currentUser).length && currentUser.constructor === Object
+      ? 'Get started'
+      : 'Go to dashboard';
+
   return (
     <section className="py-10">
       <H1 size="display">
@@ -28,7 +35,7 @@ function Hero() {
           size="sm"
           className="rounded-full md:hidden"
         >
-          Get started
+          {buttonTitle}
           <Icon
             icon="chevron-right"
             className="w-4 h-5 ml-1 -mr-1 text-white"
@@ -40,7 +47,7 @@ function Hero() {
           size="md"
           className="hidden rounded-full md:inline-flex"
         >
-          Get started
+          {buttonTitle}
           <Icon
             icon="chevron-right"
             className="w-4 h-5 ml-1 -mr-1 text-white"
