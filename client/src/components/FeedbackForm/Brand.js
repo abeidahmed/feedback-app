@@ -61,7 +61,7 @@ function Brand({ isActive, onClose }) {
       <Header>
         {activeForm === types.feedback ? (
           <IconButton type="button" onClick={handleBack}>
-            <Icon icon="chevron-left" className="w-4 h-4 text-gray-500" />
+            <Icon icon="arrow-left" className="w-4 h-4 text-gray-500" />
           </IconButton>
         ) : (
           <span></span>

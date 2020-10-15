@@ -2,6 +2,16 @@ import React from 'react';
 
 const Glyph = ({ icon }) => {
   switch (icon) {
+    case 'arrow-left':
+      return (
+        <g>
+          <path
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+        </g>
+      );
     case 'check':
       return (
         <g>
