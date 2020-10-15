@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { pluralize } from 'utils/pluralize';
 
 function ProjectCard({ project }) {
   const { id, name, included: { feedbacks, members } = {} } = project;
@@ -21,14 +22,14 @@ function ProjectCard({ project }) {
           <div className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full"></div>
           <p className="ml-2 text-sm leading-5 text-gray-500">
             <span className="font-medium text-gray-700">{feedbacksCount}</span>{' '}
-            Feedbacks
+            {pluralize(feedbacksCount, 'Feedback')}
           </p>
         </div>
         <div className="flex items-center">
           <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
           <p className="ml-2 text-sm leading-5 text-gray-500">
             <span className="font-medium text-gray-700">{membersCount}</span>{' '}
-            Member
+            {pluralize(membersCount, 'Member')}
           </p>
         </div>
       </div>
