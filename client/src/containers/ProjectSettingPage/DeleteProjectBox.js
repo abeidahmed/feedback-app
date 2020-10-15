@@ -1,10 +1,24 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useModalType } from 'store/modal';
 import { color, media } from 'global/theme';
 import { BoxContainer, BoxTop } from './components';
 import { Button } from 'components/Button';
 
-function DeleteProjectBox() {
+function DeleteProjectBox({ project }) {
+  const { id, name } = project;
+  const { modalOn, types } = useModalType();
+
+  function handleDelete() {
+    modalOn({
+      modalType: types.DELETE_PROJECT,
+      modalProps: {
+        id,
+        name,
+      },
+    });
+  }
+
   return (
     <BoxContainer>
       <BoxTop title="Delete Project">
@@ -13,7 +27,7 @@ function DeleteProjectBox() {
             Once you delete this project, there is no going back. Everything
             related to this project, your team, feedbacks, tags will be deleted.
           </p>
-          <Button appearance="danger" size="sm">
+          <Button appearance="danger" size="sm" onClick={handleDelete}>
             Delete project
           </Button>
         </InnerContainer>
