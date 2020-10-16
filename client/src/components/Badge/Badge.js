@@ -1,22 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 
 function Badge({ tag, ...props }) {
   const { name, bgColor, textColor } = tag;
 
   return (
-    <span
-      className="block px-2 py-1.5 text-sm font-medium leading-3 rounded-full"
-      style={{ backgroundColor: bgColor, color: textColor }}
-      {...props}
-    >
+    <StyledBadge backgroundColor={bgColor} color={textColor} {...props}>
       {name}
-    </span>
+    </StyledBadge>
   );
 }
 
+const StyledBadge = styled.span`
+  display: block;
+  padding: 6px 8px;
+  font-size: 14px;
+  line-height: 12px;
+  border-radius: 9999px;
+  background-color: ${(props) => props.backgroundColor};
+  color: ${(props) => props.color};
+`;
+
 Badge.propTypes = {
-  tag: PropTypes.object,
+  tag: PropTypes.object.isRequired,
 };
 
 export default Badge;
