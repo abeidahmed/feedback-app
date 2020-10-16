@@ -33,6 +33,12 @@ class User
       self.password_reset_sent_at < 2.hours.ago
     end
 
+    def reset_password_reset_fields
+      self.password_reset_token = nil
+      self.password_reset_sent_at = nil
+      save!
+    end
+
     private
     def generate_token(column)
       begin

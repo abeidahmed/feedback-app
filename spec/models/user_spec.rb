@@ -87,4 +87,14 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#reset_password_reset_fields' do
+    it 'is expected to reset the password_reset_token fields' do
+      user = create(:user, :password_reset)
+      user.reset_password_reset_fields
+
+      expect(user.reload.password_reset_token).to be_nil
+      expect(user.reload.password_reset_sent_at).to be_nil
+    end
+  end
 end
