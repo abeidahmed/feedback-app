@@ -52,7 +52,7 @@ function Form() {
           id="signin-password"
           type="password"
           to={{
-            pathname: '/',
+            pathname: '/password_reset',
             title: 'Forgot password?',
           }}
           value={password}
