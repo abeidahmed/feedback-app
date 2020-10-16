@@ -69,10 +69,10 @@ ActiveRecord::Schema.define(version: 2020_10_16_120956) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "reset_token"
-    t.datetime "reset_token_sent_at"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.index ["email"], name: "index_users_on_email"
-    t.index ["reset_token"], name: "index_users_on_reset_token"
+    t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
 
   add_foreign_key "feedbacks", "projects"
