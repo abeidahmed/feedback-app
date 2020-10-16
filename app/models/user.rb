@@ -23,6 +23,6 @@ class User < ApplicationRecord
   end
 
   def send_feedback_mail(feedback)
-    FeedbackMailer.feedback_mail(feedback: feedback, to_address: self).deliver_now
+    FeedbackMailer.feedback_mail(feedback: feedback, to_address: self.email).deliver_now
   end
 end
