@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_045752) do
+ActiveRecord::Schema.define(version: 2020_10_16_120956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -69,7 +69,10 @@ ActiveRecord::Schema.define(version: 2020_10_10_045752) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "reset_token"
+    t.datetime "reset_token_sent_at"
     t.index ["email"], name: "index_users_on_email"
+    t.index ["reset_token"], name: "index_users_on_reset_token"
   end
 
   add_foreign_key "feedbacks", "projects"
