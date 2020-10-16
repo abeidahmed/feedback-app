@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "V1::Feedbacks", type: :request do
   describe '#create' do
-    let(:project) { create(:project) }
+    let(:team) { create(:team_with_users) }
+    let(:project) { create(:project, user_id: team.users.first.id, team: team) }
 
     let(:valid_feedback) {
       {
@@ -24,6 +25,13 @@ RSpec.describe "V1::Feedbacks", type: :request do
         target_project = Project.find(project.id)
         tag_name = target_project.tags.find_by(name: 'Issue')
         expect(tag_name.feedbacks.first.content).to eq('hello world')
+      end
+
+      it "is expected to notify the team members via email" do
+        project.team_members.each do |user|
+          user.send_feedback_mail('mamakane@example.com')
+        end
+        expect(ActionMailer::Base.deliveries.last.subject).to eq('You have received a new feedback')
       end
 
       include_examples 'created'

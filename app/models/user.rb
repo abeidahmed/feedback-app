@@ -21,4 +21,8 @@ class User < ApplicationRecord
     return nil unless user
     user.authenticate(password) ? user : nil
   end
+
+  def send_feedback_mail(feedbacker)
+    FeedbackMailer.feedback_mail(from: feedbacker, to_address: self).deliver_now
+  end
 end
