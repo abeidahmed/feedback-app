@@ -29,7 +29,7 @@ RSpec.describe "V1::Feedbacks", type: :request do
 
       it "is expected to notify the team members via email" do
         project.team_members.each do |user|
-          user.send_feedback_mail('mamakane@example.com')
+          user.send_feedback_mail(project.feedbacks.first)
         end
         expect(ActionMailer::Base.deliveries.last.subject).to eq('You have received a new feedback')
       end

@@ -1,2 +1,7 @@
-<p>Hi,</p>
-<p>You have received a new feedback from <%= @guest_mail %></p>
+<p>Hi <%= @to_address %>,</p>
+<% if @feedback.sender_email.present? %>
+  <p>You have received a new feedback from <%= @feedback.sender_email %>.</p>
+<% else %>
+  <p>You have received a new feedback from an annonymous user.</p>
+<% end %>
+<p>You can view the feedback by clicking on this <a href="https://feeder-fish.herokuapp.com/app/<%= @feedback.project.id %>">link</a>.</p>

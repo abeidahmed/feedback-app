@@ -1,1 +1,9 @@
-Hi
+Hi <%= @to_address %>,
+
+<% if @feedback.sender_email.present? %>
+You have received a new feedback from <%= @feedback.sender_email %>.
+<% else %>
+You have received a new feedback from an annonymous user.
+<% end %>
+
+You can view the feedback by visiting this link: https://feeder-fish.herokuapp.com/app/<%= @feedback.project.id %>

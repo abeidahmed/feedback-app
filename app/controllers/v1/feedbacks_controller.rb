@@ -14,7 +14,7 @@ class V1::FeedbacksController < ApplicationController
 
     if @feedback.save
       render :new, status: :created
-      project.team_members.each { |user| user.send_feedback_mail(@feedback.sender_email) }
+      project.team_members.each { |user| user.send_feedback_mail(@feedback) }
     else
       render json: { message: @feedback.errors.full_messages }, status: :bad_request
     end
