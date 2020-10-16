@@ -10,4 +10,32 @@ class V1::PasswordResetsController < ApplicationController
       render json: { message: 'Invalid email address' }, status: :bad_request
     end
   end
+
+  def update
+    user = User.find_by_password_reset_token(params[:id])
+    return user_not_found_message unless user
+    return token_expired_message if user.password_reset_token_expired?
+
+    if password_param.blank?
+      user.errors.add(:password, 'cannot be blank')
+      render json: { message: user.errors.full_messages }, status: :bad_request
+    elsif user.update(password: password_param)
+      user.reset_password_reset_fields
+    else
+      render json: { message: 'Something went wrong' }, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def password_param
+    params.dig(:user, :password)
+  end
+
+  def user_not_found_message
+    render json: { message: 'User does not exist' }, status: :bad_request
+  end
+
+  def token_expired_message
+    render json: { message: 'Password reset token has expired' }, status: :bad_request
+  end
 end
