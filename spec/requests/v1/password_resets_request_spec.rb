@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "V1::PasswordResets", type: :request do
   describe '#create' do
     let(:user) { create(:user) }
-    let(:valid_user) { { user: { email: user.email } }.to_json }
+    let(:valid_user) { { user: { email: user.email.upcase } }.to_json }
     let(:invalid_user) { { user: { email: 'hello@example.com' } }.to_json }
 
     context 'when the password request is made by a user' do

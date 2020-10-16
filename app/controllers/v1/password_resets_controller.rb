@@ -2,7 +2,7 @@ class V1::PasswordResetsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def create
-    user = User.find_by_email(params.dig(:user, :email))
+    user = User.find_by_email(email_param)
 
     if user
       user.initialize_password_reset
@@ -27,6 +27,10 @@ class V1::PasswordResetsController < ApplicationController
   end
 
   private
+  def email_param
+    params.dig(:user, :email).downcase
+  end
+
   def password_param
     params.dig(:user, :password)
   end
