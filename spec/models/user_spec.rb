@@ -49,4 +49,42 @@ RSpec.describe User, type: :model do
       expect(described_class.find_by_credentials('mamakane@example.com', 'helloworld')).to be_nil
     end
   end
+
+  describe '#process_user' do
+    it 'is expected to set password_reset_token column to Secure Random hash' do
+      user = create(:user)
+      user.process_user
+      expect(user.reload.password_reset_token).to_not be_nil
+    end
+
+    it 'is expected to set password_reset_sent_at to current time' do
+      user = create(:user)
+      user.process_user
+      expect(user.reload.password_reset_sent_at).to_not be_nil
+    end
+  end
+
+  describe '#send_password_reset_email' do
+    it 'is expected to send an email address' do
+      user = create(:user)
+      user.send_password_reset_email
+      expect(last_email.subject).to eq('Reset your password')
+    end
+  end
+
+  describe '#password_reset_token_expired?' do
+    context 'when the token has expired' do
+      it 'is expected to return true' do
+        user = create(:user, :password_reset, password_reset_sent_at: 2.hours.ago)
+        expect(user.password_reset_token_expired?).to be_truthy
+      end
+    end
+
+    context 'when the token has not expired' do
+      it 'is expected to return true' do
+        user = create(:user, :password_reset)
+        expect(user.password_reset_token_expired?).to be_falsy
+      end
+    end
+  end
 end
