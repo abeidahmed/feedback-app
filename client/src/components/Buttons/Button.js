@@ -151,7 +151,7 @@ const dangerMinimalCls = css`
 SytledButton.propTypes = {
   size: PropTypes.oneOf(['sm', 'lg']),
   color: PropTypes.oneOf(['primary', 'danger']),
-  appearance: PropTypes.oneOf(['appearance']),
+  appearance: PropTypes.oneOf(['minimal']),
   iconRight: PropTypes.bool,
   iconLeft: PropTypes.bool,
   rounded: PropTypes.number,
