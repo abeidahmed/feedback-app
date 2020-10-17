@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { handleLinkWrapping } from './utils';
@@ -50,6 +51,14 @@ function IconButtonComponent({ icon, ...props }) {
     </StyledIconButton>
   );
 }
+
+StyledIconButton.propTypes = {
+  size: PropTypes.oneOf(['sm']),
+};
+
+IconButtonComponent.propTypes = {
+  icon: PropTypes.string.isRequired,
+};
 
 export const IconButton = (props) =>
   handleLinkWrapping(IconButtonComponent, props);

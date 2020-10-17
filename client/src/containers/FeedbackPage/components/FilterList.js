@@ -5,8 +5,7 @@ import cn from 'classnames';
 import { useGetArchiveTag } from 'api/getTags';
 import { useAddQuery } from 'utils/useAddQuery';
 import { useModalType } from 'store/modal';
-import { IconButton } from 'components/Button';
-import { Icon } from 'components/Icon';
+import { IconButton } from 'components/Buttons';
 
 function FilterList({ tags, projectId }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();
@@ -40,9 +39,7 @@ function FilterList({ tags, projectId }) {
     <React.Fragment>
       <div className="flex items-baseline justify-between">
         <p className="text-sm font-medium text-gray-500 uppercase">Filter</p>
-        <IconButton size="xs" appearance="white" onClick={openAddTagModal}>
-          <Icon icon="plus" className="w-5 h-5" />
-        </IconButton>
+        <IconButton icon="plus" size="sm" onClick={openAddTagModal} />
       </div>
       <nav className="flex flex-col h-full -ml-3 space-y-2 overflow-hidden max-h-72">
         <ul className="mt-4 space-y-2 overflow-y-auto">
