@@ -27,8 +27,6 @@ module.exports = {
       },
       height: {
         ...defaultTheme.height,
-        xs: '34px',
-        sm: '38px',
         120: '30rem',
       },
     },
