@@ -1,14 +1,49 @@
 /** @jsx jsx */
+import { useState } from 'react';
 import { css, jsx } from '@emotion/core';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
 import styled from '@emotion/styled';
-import Logo from 'assets/Logo';
+import { useAddQuery } from 'utils/useAddQuery';
+import { postPasswordReset } from 'api/postPasswordReset';
 import { boxShadow, color, media } from 'global/theme';
+import ResetEmailSent from './ResetEmailSent';
+import Logo from 'assets/Logo';
 import { H1 } from 'components/Typography';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
 
 function InitiatePage() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState([]);
+  const history = useHistory();
+  const {
+    queryString: { email_sent },
+  } = useAddQuery();
+
+  const [mutate, { isLoading }] = useMutation(postPasswordReset, {
+    onSuccess: () => {
+      history.push(
+        encodeURI(`/password_reset?email_sent=true&receiver=${email}`)
+      );
+    },
+    throwOnError: true,
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError([]);
+    try {
+      await mutate({
+        email,
+      });
+    } catch (err) {
+      setError(err.response.data.message.split());
+    }
+  }
+
+  if (email_sent) return <ResetEmailSent />;
+
   return (
     <Main>
       <Wrapper>
@@ -24,15 +59,23 @@ function InitiatePage() {
               To reset your password, enter the <span>email address</span> that
               you used to use to sign in.
             </StyledP>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Input
                 id="password-reset-in-email"
                 label="Email address"
                 type="email"
                 required
+                error={error}
+                errorType="invalid"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <div>
-                <Button color="primary" width="100%">
+                <Button
+                  disabled={isLoading || !email.length}
+                  color="primary"
+                  width="100%"
+                >
                   Get reset link
                 </Button>
               </div>
