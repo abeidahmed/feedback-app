@@ -31,8 +31,9 @@ class V1::PasswordResetsController < ApplicationController
       render json: { message: user.errors.full_messages }, status: :bad_request
     elsif user.update(password: password_param)
       user.reset_password_reset_fields
+      head :ok
     else
-      render json: { message: 'Something went wrong' }, status: :unprocessable_entity
+      render json: { message: user.errors.full_messages }, status: :bad_request
     end
   end
 
