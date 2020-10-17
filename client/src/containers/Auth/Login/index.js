@@ -3,25 +3,31 @@ import { Link } from 'react-router-dom';
 import Logo from 'assets/Logo';
 import { Form, Footer } from './components';
 import { H1 } from 'components/Typography';
+import {
+  FormMainArea,
+  FormWrapper,
+  FormMain,
+  FormHeader,
+} from 'components/FormBuilder';
 
 function Login() {
   return (
-    <main className="flex items-center justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
-      <div className="w-full sm:max-w-md">
-        <div className="px-4">
-          <div className="flex justify-center">
+    <FormMain>
+      <FormWrapper>
+        <FormHeader>
+          <div>
             <Link to="/">
               <Logo className="w-12 h-12" />
             </Link>
           </div>
           <H1 align="center">Sign in to Feeder</H1>
-        </div>
-        <div className="px-10 py-8 mt-8 bg-white shadow sm:rounded-md">
+        </FormHeader>
+        <FormMainArea>
           <Form />
           <Footer />
-        </div>
-      </div>
-    </main>
+        </FormMainArea>
+      </FormWrapper>
+    </FormMain>
   );
 }
 

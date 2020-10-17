@@ -5,6 +5,7 @@ import { loginApi } from 'api/login';
 import { useCurrentUser } from 'store/currentUser';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
+import { Form as LoginForm } from 'components/FormBuilder';
 
 function Form() {
   const [email, setEmail] = useState('');
@@ -38,7 +39,7 @@ function Form() {
   }
 
   return (
-    <form onSubmit={handleLogin} className="space-y-5">
+    <LoginForm onSubmit={handleLogin} className="space-y-5">
       <section className="space-y-3">
         <Input
           label="Email address"
@@ -65,7 +66,7 @@ function Form() {
           Sign in
         </Button>
       </div>
-    </form>
+    </LoginForm>
   );
 }
 

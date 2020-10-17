@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FormText } from 'components/FormBuilder';
 
 function Footer() {
   return (
-    <p className="text-sm text-center text-gray-600">
-      Already a member?{' '}
-      <Link to="/login" className="font-medium text-blue-500 hover:underline">
-        Sign in
-      </Link>
-    </p>
+    <FormText>
+      Already a member? <Link to="/login">Sign in</Link>
+    </FormText>
   );
 }
 

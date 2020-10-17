@@ -1,24 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'components/Button';
+import { FormText } from 'components/FormBuilder';
+import { P } from 'components/Typography';
 
 function Footer() {
   return (
     <>
       <div className="mt-4">
-        <p className="text-sm text-gray-600">
+        <FormText>
           By signing in you agree to our{' '}
-          <Link to="/" className="font-medium underline hover:text-gray-500">
-            terms and conditions
-          </Link>
-          .
-        </p>
+          <Link to="/">terms and conditions</Link>.
+        </FormText>
       </div>
       <div className="py-5">
         <div className="w-full border-t border-gray-200"></div>
       </div>
       <div>
-        <p className="text-gray-700">New to our platform?</p>
+        <P>New to our platform?</P>
         <div className="mt-4">
           <Button to="/signup" width="100%">
             Create an account

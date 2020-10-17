@@ -6,32 +6,33 @@ import { TOKEN } from 'store/currentUser';
 import Logo from 'assets/Logo';
 import { Form, Footer } from './components';
 import { AvatarGroup } from 'components/Avatar';
-import { H1 } from 'components/Typography';
+import { H1, P } from 'components/Typography';
+import { FormMain } from 'components/FormBuilder';
 
 function Signup() {
   if (Cookies.get(TOKEN)) return <Redirect to={{ pathname: '/app' }} />;
 
   return (
-    <main className="flex items-center justify-center min-h-screen px-4">
+    <FormMain>
       <div className="w-full">
         <div className="flex justify-center">
           <Link to="/">
-            <Logo className="w-12 h-12" />
+            <Logo width="48" height="48" />
           </Link>
         </div>
         <section className="w-full">
           <H1 align="center">Join Feeder</H1>
           <Wrapper>
             <AvatarGroup />
-            <p className="mt-3 text-sm text-gray-600">
+            <P marginTop={12} fontSize={14} align="center">
               Join these and 10,465 other users
-            </p>
+            </P>
           </Wrapper>
           <Form />
           <Footer />
         </section>
       </div>
-    </main>
+    </FormMain>
   );
 }
 
