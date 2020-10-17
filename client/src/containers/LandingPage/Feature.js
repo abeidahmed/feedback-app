@@ -1,71 +1,96 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import UserIcon from './UserIcon';
 import LanguageIcon from './LanguageIcon';
 import CameraIcon from './CameraIcon';
 import TeamIcon from './TeamIcon';
+import { media } from 'global/theme';
+import { P, H3 } from 'components/Typography';
 
 function Feature() {
   return (
-    <section className="py-10">
-      <div className="grid gap-y-8 md:grid-cols-2 md:gap-x-4 lg:gap-x-5 md:gap-y-12">
-        <div className="flex space-x-4 md:col-span-1">
+    <Section>
+      <Wrapper>
+        <FeatureSection>
           <div>
-            <UserIcon className="w-14 h-14" />
+            <UserIcon width="56" height="56" />
           </div>
           <div>
-            <h4 className="font-sans font-semibold text-gray-700">
-              User Identification
-            </h4>
-            <p className="mt-2 text-sm text-gray-600 md:text-base">
+            <H3>User Identification</H3>
+            <P marginTop={8}>
               Reply to their customers by attaching their email address.
-            </p>
+            </P>
           </div>
-        </div>
-        <div className="flex space-x-4 md:col-span-1">
+        </FeatureSection>
+        <FeatureSection>
           <div>
-            <LanguageIcon className="w-14 h-14" />
+            <LanguageIcon width="56" height="56" />
           </div>
           <div>
-            <h4 className="font-sans font-semibold text-gray-700">
-              More than 40 languages
-            </h4>
-            <p className="mt-2 text-sm text-gray-600 md:text-base">
+            <H3>More than 40 languages</H3>
+            <P marginTop={8}>
               We speak the same language as your users. The widget automatically
               adapts.
-            </p>
+            </P>
           </div>
-        </div>
-        <div className="flex space-x-4 md:col-span-1">
+        </FeatureSection>
+        <FeatureSection>
           <div>
-            <CameraIcon className="w-14 h-14" />
+            <CameraIcon width="56" height="56" />
           </div>
           <div>
-            <h4 className="font-sans font-semibold text-gray-700">
-              One-click screenshots
-            </h4>
-            <p className="mt-2 text-sm text-gray-600 md:text-base">
+            <H3>One-click screenshots</H3>
+            <P marginTop={8}>
               See what your users see with screenshots. Device information is
               automatically attached.
-            </p>
+            </P>
           </div>
-        </div>
-        <div className="flex space-x-4 md:col-span-1">
+        </FeatureSection>
+        <FeatureSection>
           <div>
-            <TeamIcon className="w-14 h-14" />
+            <TeamIcon width="56" height="56" />
           </div>
           <div>
-            <h4 className="font-sans font-semibold text-gray-700">
-              Team Friendly
-            </h4>
-            <p className="mt-2 text-sm text-gray-600 md:text-base">
+            <H3>Team Friendly</H3>
+            <P marginTop={8}>
               Bring your team on the same page. Give your colleagues access to
               your feedback.
-            </p>
+            </P>
           </div>
-        </div>
-      </div>
-    </section>
+        </FeatureSection>
+      </Wrapper>
+    </Section>
   );
 }
+
+const Section = styled.section`
+  padding: 40px 0;
+`;
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-row-gap: 32px;
+
+  ${media.md`
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 24px;
+    column-gap: 48px;
+    grid-row-gap: 24px;
+    grid-column-gap: 48px;
+  `}
+
+  ${media.lg`
+    row-gap: 28px;
+    grid-row-gap: 28px;
+  `}
+`;
+
+const FeatureSection = styled.div`
+  grid-column: span 1 / span 1;
+  display: flex;
+  > * + * {
+    margin-left: 16px;
+  }
+`;
 
 export default Feature;
