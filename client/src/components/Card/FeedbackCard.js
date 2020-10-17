@@ -1,12 +1,17 @@
+/** @jsx jsx */
 import React from 'react';
+import { jsx } from '@emotion/core';
+import styled from '@emotion/styled';
 import { useRefetchMutation } from 'utils/useRefetchMutation';
 import { useNotification } from 'store/notification';
 import { archiveFeedbackApi } from 'api/patchFeedback';
 import { deleteFeedbackApi } from 'api/deleteFeedback';
 import { simpleEmailValidation } from 'utils/simpleEmailValidation';
 import * as q from 'global/queryKey';
+import { boxShadow, color } from 'global/theme';
 import { Button } from 'components/Button';
 import { Badge } from 'components/Badge';
+import { P } from 'components/Typography';
 
 function FeedbackCard({ feedback, projectId }) {
   const {
@@ -72,42 +77,67 @@ function FeedbackCard({ feedback, projectId }) {
   }
 
   return (
-    <div className="p-4 border border-gray-200 rounded-md shadow-sm">
-      <div className="flex items-center justify-between">
+    <div
+      css={{
+        padding: 16,
+        border: '1px solid',
+        borderColor: color.gray200,
+        borderRadius: 6,
+        boxShadow: boxShadow.sm,
+      }}
+    >
+      <div
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
         <Badge tag={tag} />
-        <span className="text-sm text-gray-400">{createdAt} ago</span>
+        <P as="span" fontSize={14} color={color.gray400}>
+          {createdAt} ago
+        </P>
       </div>
-      <p className="mt-4 leading-7 text-gray-600">{content}</p>
+      <P marginTop={16}>{content}</P>
       <div className="mt-3">
-        <div className="space-y-2">
+        <div css={{ '> * + *': { marginTop: 8 } }}>
           {senderEmail && (
             <div>
-              <span className="text-xs tracking-wide text-gray-400 uppercase">
-                User
-              </span>
-              <p className="text-sm font-medium text-gray-700">{senderEmail}</p>
+              <StyledSpan>User</StyledSpan>
+              <P fontSize={14} fontWeight={500}>
+                {senderEmail}
+              </P>
             </div>
           )}
           {device && (
             <div>
-              <span className="text-xs tracking-wide text-gray-400 uppercase">
-                Device
-              </span>
-              <p className="text-sm font-medium text-gray-700">{device}</p>
+              <StyledSpan>Device</StyledSpan>
+              <P fontSize={14} fontWeight={500}>
+                {device}
+              </P>
             </div>
           )}
           {pageUrl && (
             <div>
-              <span className="text-xs tracking-wide text-gray-400 uppercase">
-                Page
-              </span>
-              <p className="text-sm font-medium text-gray-700">{pageUrl}</p>
+              <StyledSpan>Page</StyledSpan>
+              <P fontSize={14} fontWeight={500}>
+                {pageUrl}
+              </P>
             </div>
           )}
         </div>
-        <div className="flex justify-end mt-3 space-x-2">
+        <div
+          css={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: 12,
+            '> * + * ': {
+              marginLeft: 8,
+            },
+          }}
+        >
           {archived ? (
-            <>
+            <React.Fragment>
               <Button
                 appearance="minimal"
                 size="sm"
@@ -125,9 +155,9 @@ function FeedbackCard({ feedback, projectId }) {
               >
                 Delete
               </Button>
-            </>
+            </React.Fragment>
           ) : (
-            <>
+            <React.Fragment>
               <Button
                 appearance="minimal"
                 size="sm"
@@ -146,12 +176,19 @@ function FeedbackCard({ feedback, projectId }) {
                   Reply with mail
                 </Button>
               )}
-            </>
+            </React.Fragment>
           )}
         </div>
       </div>
     </div>
   );
 }
+
+const StyledSpan = styled.span`
+  text-transform: uppercase;
+  font-size: 12px;
+  color: ${color.gray400};
+  letter-spacing: 0.025em;
+`;
 
 export default FeedbackCard;
