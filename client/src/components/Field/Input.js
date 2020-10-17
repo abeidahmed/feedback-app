@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
-import { color, boxShadow, media } from 'global/theme';
+import { color, boxShadow } from 'global/theme';
 import { ErrorMessage } from './components';
 
 function Input({
@@ -71,8 +71,8 @@ const Label = styled.label`
 const StyledInput = styled.input`
   display: block;
   width: 100%;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
   appearance: none;
   background-color: #fff;
   border: 1px solid ${color.gray300};
@@ -85,11 +85,6 @@ const StyledInput = styled.input`
     css`
       margin-top: 4px;
     `}
-
-  ${media.sm`
-    font-size: 14px;
-    line-height: 20px;
-  `}
 
   &:focus {
     outline: none;
