@@ -1,10 +1,11 @@
 /** @jsx jsx */
 import { useState } from 'react';
 import { css, jsx } from '@emotion/core';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory, useRouteMatch } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useMutation, useQuery } from 'react-query';
 import { useAddQuery } from 'utils/useAddQuery';
+import { useCurrentUser } from 'store/currentUser';
 import { patchPasswordApi } from 'api/patchPasswordReset';
 import { showPasswordResetterApi } from 'api/showPasswordResetter';
 import Logo from 'assets/Logo';
@@ -13,33 +14,48 @@ import { H1 } from 'components/Typography';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
 import { Spinner } from 'components/Loader';
+import PasswordChanged from './PasswordChanged';
 
 function ResetPage() {
   const [password, setPassword] = useState('');
-  const {
-    queryString: { token },
-  } = useAddQuery();
-  const [mutate, { isLoading }] = useMutation(patchPasswordApi, {
-    onSuccess: () => console.log('yo mama'),
-  });
+  const [error, setError] = useState([]);
+  const history = useHistory();
+  const { url } = useRouteMatch();
+  const { logout } = useCurrentUser();
 
-  const { isLoading: fetchingUser, isError } = useQuery(
-    ['passwordReset', { token }],
-    showPasswordResetterApi
-  );
+  const {
+    queryString: { token, reset_state },
+  } = useAddQuery();
+
+  const [mutate, { isLoading }] = useMutation(patchPasswordApi, {
+    onSuccess: () => {
+      logout(); // we do not want old instances of the user.
+      history.push(`${url}?reset_state=success`);
+    },
+    throwOnError: true,
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      mutate({
+      await mutate({
         token,
         password,
       });
     } catch (err) {
-      console.log(err.response.data.message);
+      setError(err.response.data.message);
     }
   }
 
+  const { isLoading: fetchingUser, isError } = useQuery(
+    ['passwordReset', { token }],
+    showPasswordResetterApi,
+    {
+      enabled: token,
+    }
+  );
+
+  if (reset_state) return <PasswordChanged />;
   if (fetchingUser) return <Spinner />;
   if (isError)
     return (
@@ -60,7 +76,7 @@ function ResetPage() {
           </Header>
           <MainArea>
             <StyledP>
-              Set your new password having <span>6 characters</span> or more.
+              Set your new password having <span>5 characters</span> or more.
             </StyledP>
             <Form onSubmit={handleSubmit}>
               <Input
@@ -68,15 +84,13 @@ function ResetPage() {
                 label="Password"
                 type="password"
                 required
+                error={error}
+                errorType="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div>
-                <Button
-                  disabled={isLoading || !password.length}
-                  color="primary"
-                  width="100%"
-                >
+                <Button disabled={isLoading} color="primary" width="100%">
                   Update password
                 </Button>
               </div>
