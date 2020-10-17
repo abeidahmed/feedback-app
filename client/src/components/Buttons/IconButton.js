@@ -16,6 +16,8 @@ const StyledIconButton = styled.button`
   position: relative;
   height: ${(props) => (props.size === 'sm' ? 34 : 38)}px;
   width: ${(props) => (props.size === 'sm' ? 34 : 38)}px;
+  margin-right: ${(props) => props.marginRight || 0}px;
+  margin-left: ${(props) => props.marginLeft || 0}px;
 
   &:focus {
     outline: none;
@@ -27,8 +29,12 @@ const StyledIconButton = styled.button`
   }
 
   ${(props) => !props.color && defaultCls}
+
+  ${(props) =>
+    !props.color && props.appearance === 'minimal' && defaultMinimalCls}
 `;
 
+/** Color classes */
 const defaultCls = css`
   border-color: ${color.gray300};
   background-color: #fff;
@@ -44,6 +50,11 @@ const defaultCls = css`
   }
 `;
 
+/** Minimal classes */
+const defaultMinimalCls = css`
+  border-color: transparent;
+`;
+
 function IconButtonComponent({ icon, ...props }) {
   return (
     <StyledIconButton {...props}>
@@ -54,6 +65,9 @@ function IconButtonComponent({ icon, ...props }) {
 
 StyledIconButton.propTypes = {
   size: PropTypes.oneOf(['sm']),
+  marginRight: PropTypes.number,
+  marginLeft: PropTypes.number,
+  appearance: PropTypes.oneOf(['minimal']),
 };
 
 IconButtonComponent.propTypes = {
