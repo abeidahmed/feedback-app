@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { TOKEN } from 'store/currentUser';
 import Logo from 'assets/Logo';
 import { AvatarGroup, Form, Footer } from './components';
+import { H1 } from 'components/Typography';
 
 function Signup() {
   if (Cookies.get(TOKEN)) return <Redirect to={{ pathname: '/app' }} />;
@@ -16,10 +17,8 @@ function Signup() {
             <Logo className="w-12 h-12" />
           </Link>
         </div>
-        <section className="w-full py-8">
-          <h1 className="text-2xl font-bold text-center sm:text-3xl lg:text-4xl">
-            Join Feeder
-          </h1>
+        <section className="w-full">
+          <H1 align="center">Join Feeder</H1>
           <AvatarGroup />
           <Form />
           <Footer />

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from 'assets/Logo';
 import { Form, Footer } from './components';
+import { H1 } from 'components/Typography';
 
 function Login() {
   return (
@@ -13,9 +14,7 @@ function Login() {
               <Logo className="w-12 h-12" />
             </Link>
           </div>
-          <h1 className="text-3xl font-bold text-center sm:text-3xl lg:text-4xl">
-            Sign in to Feeder
-          </h1>
+          <H1 align="center">Sign in to Feeder</H1>
         </div>
         <div className="px-10 py-8 mt-8 bg-white shadow sm:rounded-md">
           <Form />
