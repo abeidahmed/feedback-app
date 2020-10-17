@@ -11,9 +11,7 @@ function CodeBlock() {
     <Section>
       <HeadWrapper>
         <H2 align="center">Integrating is easy</H2>
-        <P size="display" align="center">
-          The API is friendly and fast.
-        </P>
+        <P align="center">The API is friendly and fast.</P>
         <Pattern large></Pattern>
         <Pattern></Pattern>
         <WidgetWrapper>
