@@ -23,7 +23,7 @@ function CodeBlock() {
       <CodeBlockWrapper>
         <div>
           <H2 color="white">Here is the API</H2>
-          <P color="white">
+          <P color={color.gray400}>
             Make a POST request to this API endpoint and we will handle the
             rest.
           </P>

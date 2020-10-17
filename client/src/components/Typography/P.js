@@ -1,25 +1,12 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { color, media } from 'global/theme';
+import { color } from 'global/theme';
 
-const StyledP = styled.p`
-  font-size: 16px;
-  color: ${(props) =>
-    props.color === 'white' ? color.gray400 : color.gray500};
-  text-align: ${(props) => (props.align === 'center' ? 'center' : 'left')};
-
-  ${(props) =>
-    props.size === 'display' &&
-    css`
-      ${media.md`
-      font-size: 1.125rem;
-    `}
-    `};
+const P = styled.p`
+  font-size: ${(props) => props.fontSize || 16}px;
+  text-align: ${(props) => props.align || 'left'};
+  margin-top: ${(props) => props.marginTop}px;
+  color: ${(props) => props.color || color.gray600};
+  line-height: ${(props) => props.lineHeight || 24}px;
 `;
-
-function P({ children, ...props }) {
-  return <StyledP {...props}>{children}</StyledP>;
-}
 
 export default P;

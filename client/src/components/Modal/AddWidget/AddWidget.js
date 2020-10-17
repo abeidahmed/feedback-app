@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import React from 'react';
 import { useModalType } from 'store/modal';
 import ModalWrapper from '../ModalWrapper';
 import { CodeBlock, postCode } from 'components/CodeBlock';
@@ -16,11 +15,7 @@ function AddWidget() {
     <ModalWrapper size="lg">
       <section>
         <H2 align="center">Get started with Feeder</H2>
-        <P
-          css={css`
-            margin-top: 8px;
-          `}
-        >
+        <P marginTop={8}>
           Build your own form and submit the feedback to our API endpoint. Send
           a POST request to{' '}
           <Highlight underline breakWord>

@@ -22,11 +22,11 @@ function Hero() {
         Get feedback. <br /> Make your customers happy.
       </H1>
       <P
-        size="display"
+        fontSize={18}
+        marginTop={12}
+        lineHeight={28}
         css={css`
-          margin-top: 12px;
           max-width: 28rem;
-          line-height: 28px;
         `}
       >
         Collect issues, ideas and compliments with a simple widget. Receive them

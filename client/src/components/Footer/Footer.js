@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import React from 'react';
 import styled from '@emotion/styled';
 import { color } from 'global/theme';
 import { Icon } from 'components/Icon';
@@ -29,13 +28,7 @@ function Footer() {
             </StyledLink>
           </SocialContainer>
         </FooterInner>
-        <P
-          css={css`
-            margin-top: 12px;
-          `}
-        >
-          &#169; 2020 Feeder, Inc. All rights reserved.
-        </P>
+        <P marginTop={12}>&#169; 2020 Feeder, Inc. All rights reserved.</P>
       </div>
     </StyledFooter>
   );
