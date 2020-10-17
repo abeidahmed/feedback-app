@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useGetArchiveTag } from 'api/getTags';
 import { useAddQuery } from 'utils/useAddQuery';
 import { useModalType } from 'store/modal';
-import { IconButton } from 'components/Buttons';
+import { IconButton } from 'components/Button';
 
 function FilterList({ tags, projectId }) {
   const { addQuery, deleteQuery, queryString } = useAddQuery();

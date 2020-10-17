@@ -6,7 +6,7 @@ import Logo from 'assets/Logo';
 import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import { TagSelector } from 'components/Dropdown';
-import { IconButton } from 'components/Buttons';
+import { IconButton } from 'components/Button';
 import { Container } from 'components/Container';
 
 function Dashboard() {

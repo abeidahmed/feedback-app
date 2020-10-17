@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useModalType } from 'store/modal';
 import { color, media } from 'global/theme';
 import { BoxContainer, BoxTop } from './components';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 
 function DeleteProjectBox({ project }) {
   const { id, name } = project;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { useModalType } from 'store/modal';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { IconButton } from 'components/Buttons';
+import { IconButton } from 'components/Button';
 
 function ModalWrapper({ modalTitle, size = 'sm', children }) {
   const { modalOff } = useModalType();

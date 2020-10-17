@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { loginApi } from 'api/login';
 import { useCurrentUser } from 'store/currentUser';
 import { Input } from 'components/Field';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 
 function Form() {
   const [email, setEmail] = useState('');

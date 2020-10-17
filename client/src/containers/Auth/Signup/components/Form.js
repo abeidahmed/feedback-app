@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useCurrentUser } from 'store/currentUser';
 import { signupApi } from 'api/signup';
 import { Input, Checkbox } from 'components/Field';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 
 function Form() {
   const [email, setEmail] = useState('');

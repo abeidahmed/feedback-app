@@ -6,7 +6,7 @@ import { useModalType } from 'store/modal';
 import * as q from 'global/queryKey';
 import ModalWrapper from '../ModalWrapper';
 import { Input } from 'components/Field';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 
 function AddTag() {
   const [tagName, setTagName] = useState('');

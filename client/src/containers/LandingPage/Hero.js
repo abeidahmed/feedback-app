@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import { useCurrentUser } from 'store/currentUser';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 import { Icon } from 'components/Icon';
 import { H1, P } from 'components/Typography';
 

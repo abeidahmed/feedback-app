@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useModalType } from 'store/modal';
-import { Button, IconButton } from 'components/Buttons';
+import { Button, IconButton } from 'components/Button';
 
 function ActionButtonGroup({ project }) {
   const { id, name } = project;

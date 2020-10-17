@@ -5,7 +5,7 @@ import { archiveFeedbackApi } from 'api/patchFeedback';
 import { deleteFeedbackApi } from 'api/deleteFeedback';
 import { simpleEmailValidation } from 'utils/simpleEmailValidation';
 import * as q from 'global/queryKey';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 import { Badge } from 'components/Badge';
 
 function FeedbackCard({ feedback, projectId }) {

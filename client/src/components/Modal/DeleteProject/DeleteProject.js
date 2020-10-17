@@ -10,7 +10,7 @@ import { deleteProjectApi } from 'api/deleteProject';
 import { color } from 'global/theme';
 import ModalWrapper from '../ModalWrapper';
 import { Input } from 'components/Field';
-import { Button } from 'components/Buttons';
+import { Button } from 'components/Button';
 
 function DeleteProject() {
   const {
