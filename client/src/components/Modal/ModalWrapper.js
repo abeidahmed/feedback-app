@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { useModalType } from 'store/modal';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { IconButton } from 'components/Button';
-import { Icon } from 'components/Icon';
+import { IconButton } from 'components/Buttons';
 
 function ModalWrapper({ modalTitle, size = 'sm', children }) {
   const { modalOff } = useModalType();
@@ -29,9 +28,13 @@ function ModalWrapper({ modalTitle, size = 'sm', children }) {
           <OutsideClickHandler onOutsideClick={modalOff}>
             <header className="flex items-center justify-between px-6 border-b border-gray-300 h-14">
               <h2 className="text-xl font-bold">{modalTitle}</h2>
-              <IconButton size="xs" className="-mr-3" onClick={modalOff}>
-                <Icon icon="x" className="w-5 h-5" />
-              </IconButton>
+              <IconButton
+                icon="x"
+                appearance="minimal"
+                size="sm"
+                marginRight={-12}
+                onClick={modalOff}
+              />
             </header>
             <div className="p-6 bg-white">{children}</div>
           </OutsideClickHandler>
