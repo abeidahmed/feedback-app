@@ -6,7 +6,7 @@ import { useAddQuery } from 'utils/useAddQuery';
 import Logo from 'assets/Logo';
 import { color, media, boxShadow } from 'global/theme';
 import { H1 } from 'components/Typography';
-import { Icon } from 'components/Icon';
+import { EmailSentSvg } from 'assets/svg';
 
 function ResetEmailSent() {
   const {
@@ -25,12 +25,7 @@ function ResetEmailSent() {
           </Header>
           <MainArea>
             <ContentWrapper>
-              <Icon
-                icon="check-solid"
-                stroke="none"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              />
+              <EmailSentSvg />
               <div>
                 <p>
                   Account recovery email sent to <span>{receiver}</span> (valid
@@ -112,10 +107,9 @@ const ContentWrapper = styled.div`
   color: ${color.gray600};
 
   > svg {
-    color: ${color.green400};
     margin: 0 auto;
-    width: 48px;
-    height: 48px;
+    width: 200px;
+    height: auto;
   }
 
   > div {
