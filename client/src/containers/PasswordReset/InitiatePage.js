@@ -25,7 +25,12 @@ function InitiatePage() {
               you used to use to sign in.
             </StyledP>
             <Form>
-              <Input id="password-reset-in-email" label="Email address" />
+              <Input
+                id="password-reset-in-email"
+                label="Email address"
+                type="email"
+                required
+              />
               <div>
                 <Button color="primary" width="100%">
                   Get reset link
