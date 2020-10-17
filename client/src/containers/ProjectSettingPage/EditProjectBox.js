@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRefetchMutation } from 'utils/useRefetchMutation';
 import { patchProjectApi } from 'api/patchProject';
 import * as q from 'global/queryKey';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
 
@@ -49,9 +49,7 @@ function EditProjectBox({ project }) {
               <p className="text-sm text-gray-500">Project ID:</p>
               <p className="text-sm text-gray-700">{id}</p>
             </div>
-            <Button size="sm" disabled={isValueValid || isLoading}>
-              Save
-            </Button>
+            <Button disabled={isValueValid || isLoading}>Save</Button>
           </div>
         </BoxBottom>
       </form>

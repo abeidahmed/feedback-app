@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { useModalType } from 'store/modal';
 import { color, media } from 'global/theme';
 import { BoxContainer, BoxTop } from './components';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 
 function DeleteProjectBox({ project }) {
   const { id, name } = project;
@@ -27,7 +27,7 @@ function DeleteProjectBox({ project }) {
             Once you delete this project, there is no going back. Everything
             related to this project, your team, feedbacks, tags will be deleted.
           </p>
-          <Button appearance="danger" size="sm" onClick={handleDelete}>
+          <Button color="danger" appearance="minimal" onClick={handleDelete}>
             Delete project
           </Button>
         </InnerContainer>

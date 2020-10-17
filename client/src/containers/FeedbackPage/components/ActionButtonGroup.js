@@ -1,6 +1,7 @@
 import React from 'react';
 import { useModalType } from 'store/modal';
-import { IconButton, Button } from 'components/Button';
+import { IconButton } from 'components/Button';
+import { Button } from 'components/Buttons';
 import { Icon } from 'components/Icon';
 
 function ActionButtonGroup({ project }) {
@@ -36,7 +37,7 @@ function ActionButtonGroup({ project }) {
         <IconButton appearance="white" size="sm" to={`/app/${id}/settings`}>
           <Icon icon="cog" className="w-5 h-5" />
         </IconButton>
-        <Button appearance="primary" size="sm" onClick={handleAddWidget}>
+        <Button color="primary" onClick={handleAddWidget}>
           Add Widget
         </Button>
       </div>

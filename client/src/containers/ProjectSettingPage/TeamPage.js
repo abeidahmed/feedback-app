@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
 
@@ -41,13 +41,7 @@ function TeamPage({ project }) {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <Button
-            size="sm"
-            className="whitespace-no-wrap"
-            disabled={!email.length}
-          >
-            Invite member
-          </Button>
+          <Button disabled={!email.length}>Invite member</Button>
         </form>
       </BoxBottom>
     </BoxContainer>

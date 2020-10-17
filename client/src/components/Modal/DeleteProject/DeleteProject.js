@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { useState } from 'react';
+import { css, jsx } from '@emotion/core';
 import { useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useMutation } from 'react-query';
 import { useModalType } from 'store/modal';
 import { useNotification } from 'store/notification';
 import { deleteProjectApi } from 'api/deleteProject';
-import { color, media, boxShadow } from 'global/theme';
+import { color } from 'global/theme';
 import ModalWrapper from '../ModalWrapper';
 import { Input } from 'components/Field';
+import { Button } from 'components/Buttons';
 
 function DeleteProject() {
   const {
@@ -64,43 +67,21 @@ function DeleteProject() {
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
           />
-          <DangerButton disabled={projectName !== name || isLoading}>
+          <Button
+            color="danger"
+            width="100%"
+            disabled={projectName !== name || isLoading}
+            css={css`
+              margin-top: 8px;
+            `}
+          >
             Delete this project
-          </DangerButton>
+          </Button>
         </form>
       </Instruction>
     </ModalWrapper>
   );
 }
-
-const DangerButton = styled.button`
-  background-color: ${color.red600};
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 12px;
-  margin-top: 8px;
-  width: 100%;
-  line-height: 24px;
-  font-size: 16px;
-  font-weight: 500;
-  border: 1px solid transparent;
-
-  &:hover {
-    background-color: ${color.red500};
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: ${boxShadow.outlineRed};
-    border-color: ${color.red700};
-  }
-
-  ${media.sm`
-    font-size: 14px;
-    line-height: 20px;
-  `}
-`;
 
 const Instruction = styled.div`
   p {
