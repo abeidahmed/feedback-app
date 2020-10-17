@@ -2,11 +2,12 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from 'containers/LandingPage';
 import { Signup, Login } from 'containers/Auth';
-import { InitiatePage } from 'containers/PasswordReset';
+import { InitiatePage, ResetPage } from 'containers/PasswordReset';
 
 function Guest() {
   return (
     <Switch>
+      <Route path="/password_reset/update" component={ResetPage} />
       <Route path="/password_reset" component={InitiatePage} />
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
