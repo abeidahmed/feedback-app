@@ -1,19 +1,47 @@
 /** @jsx jsx */
+import { useState } from 'react';
 import { css, jsx } from '@emotion/core';
 import { Link, Redirect } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { useMutation, useQuery } from 'react-query';
 import { useAddQuery } from 'utils/useAddQuery';
+import { patchPasswordApi } from 'api/patchPasswordReset';
+import { showPasswordResetterApi } from 'api/showPasswordResetter';
 import Logo from 'assets/Logo';
 import { boxShadow, color, media } from 'global/theme';
 import { H1 } from 'components/Typography';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
+import { Spinner } from 'components/Loader';
 
 function ResetPage() {
+  const [password, setPassword] = useState('');
   const {
     queryString: { token },
   } = useAddQuery();
-  if (token === 'expired')
+  const [mutate, { isLoading }] = useMutation(patchPasswordApi, {
+    onSuccess: () => console.log('yo mama'),
+  });
+
+  const { isLoading: fetchingUser, isError } = useQuery(
+    ['passwordReset', { token }],
+    showPasswordResetterApi
+  );
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      mutate({
+        token,
+        password,
+      });
+    } catch (err) {
+      console.log(err.response.data.message);
+    }
+  }
+
+  if (fetchingUser) return <Spinner />;
+  if (isError)
     return (
       <Redirect
         to={{ pathname: '/password_reset', search: '?token=invalid' }}
@@ -34,15 +62,21 @@ function ResetPage() {
             <StyledP>
               Set your new password having <span>6 characters</span> or more.
             </StyledP>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <Input
                 id="password-update"
                 label="Password"
                 type="password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <div>
-                <Button color="primary" width="100%">
+                <Button
+                  disabled={isLoading || !password.length}
+                  color="primary"
+                  width="100%"
+                >
                   Update password
                 </Button>
               </div>
