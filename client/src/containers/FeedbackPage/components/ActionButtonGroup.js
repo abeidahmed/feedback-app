@@ -1,8 +1,6 @@
 import React from 'react';
 import { useModalType } from 'store/modal';
-import { IconButton } from 'components/Button';
-import { Button } from 'components/Buttons';
-import { Icon } from 'components/Icon';
+import { Button, IconButton } from 'components/Buttons';
 
 function ActionButtonGroup({ project }) {
   const { id, name } = project;
@@ -20,23 +18,8 @@ function ActionButtonGroup({ project }) {
 
   return (
     <div className="flex justify-end mb-4">
-      <div className="flex items-center space-x-4 sm:hidden">
-        <IconButton appearance="white" size="sm" to={`/app/${id}/settings`}>
-          <Icon icon="cog" className="w-5 h-5" />
-        </IconButton>
-        <IconButton
-          appearance="primary"
-          size="sm"
-          className="sm:hidden"
-          onClick={handleAddWidget}
-        >
-          <Icon icon="plus" className="w-5 h-5 text-white" />
-        </IconButton>
-      </div>
-      <div className="hidden space-x-4 sm:items-center sm:flex">
-        <IconButton appearance="white" size="sm" to={`/app/${id}/settings`}>
-          <Icon icon="cog" className="w-5 h-5" />
-        </IconButton>
+      <div className="flex items-center space-x-4">
+        <IconButton icon="cog" to={`/app/${id}/settings`} />
         <Button color="primary" onClick={handleAddWidget}>
           Add Widget
         </Button>
