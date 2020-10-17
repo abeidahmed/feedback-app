@@ -5,7 +5,7 @@ import { archiveFeedbackApi } from 'api/patchFeedback';
 import { deleteFeedbackApi } from 'api/deleteFeedback';
 import { simpleEmailValidation } from 'utils/simpleEmailValidation';
 import * as q from 'global/queryKey';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 import { Badge } from 'components/Badge';
 
 function FeedbackCard({ feedback, projectId }) {
@@ -105,20 +105,21 @@ function FeedbackCard({ feedback, projectId }) {
             </div>
           )}
         </div>
-        <div className="flex justify-end space-x-2">
+        <div className="flex justify-end mt-3 space-x-2">
           {archived ? (
             <>
               <Button
-                appearance="gray"
-                size="xs"
+                appearance="minimal"
+                size="sm"
                 onClick={() => handleArchive('Unarchived feedback!')}
                 disabled={archiving}
               >
                 Undo Archive
               </Button>
               <Button
-                appearance="danger"
-                size="xs"
+                color="danger"
+                appearance="minimal"
+                size="sm"
                 onClick={handleDelete}
                 disabled={deleting}
               >
@@ -128,8 +129,8 @@ function FeedbackCard({ feedback, projectId }) {
           ) : (
             <>
               <Button
-                appearance="gray"
-                size="xs"
+                appearance="minimal"
+                size="sm"
                 onClick={() => handleArchive('Archived feedback!')}
                 disabled={archiving}
               >
@@ -138,8 +139,9 @@ function FeedbackCard({ feedback, projectId }) {
               {simpleEmailValidation(senderEmail) && (
                 <Button
                   href={`mailto:${senderEmail}`}
-                  appearance="blue"
-                  size="xs"
+                  color="primary"
+                  appearance="minimal"
+                  size="sm"
                 >
                   Reply with mail
                 </Button>
