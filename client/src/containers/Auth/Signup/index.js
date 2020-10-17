@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import styled from '@emotion/styled';
 import { TOKEN } from 'store/currentUser';
-import Logo from 'assets/Logo';
+import { Logo } from 'assets/svg';
 import { Form, Footer } from './components';
 import { AvatarGroup } from 'components/Avatar';
 import { H1, P } from 'components/Typography';

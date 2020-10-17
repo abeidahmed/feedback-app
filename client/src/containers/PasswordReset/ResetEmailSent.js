@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { css, jsx } from '@emotion/core';
 import styled from '@emotion/styled';
 import { useAddQuery } from 'utils/useAddQuery';
-import Logo from 'assets/Logo';
 import { color, media, boxShadow } from 'global/theme';
 import { H1 } from 'components/Typography';
-import { EmailSentSvg } from 'assets/svg';
+import { EmailSentSvg, Logo } from 'assets/svg';
 
 function ResetEmailSent() {
   const {

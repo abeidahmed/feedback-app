@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { useGetProjects } from 'api/allProjects';
-import Logo from 'assets/Logo';
+import { Logo } from 'assets/svg';
 import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import { TagSelector } from 'components/Dropdown';

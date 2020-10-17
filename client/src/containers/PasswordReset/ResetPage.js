@@ -5,7 +5,7 @@ import { useAddQuery } from 'utils/useAddQuery';
 import { useCurrentUser } from 'store/currentUser';
 import { patchPasswordApi } from 'api/patchPasswordReset';
 import { showPasswordResetterApi } from 'api/showPasswordResetter';
-import Logo from 'assets/Logo';
+import { Logo } from 'assets/svg';
 import { H1 } from 'components/Typography';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';

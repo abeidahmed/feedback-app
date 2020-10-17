@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { useAddQuery } from 'utils/useAddQuery';
 import { postPasswordReset } from 'api/postPasswordReset';
 import ResetEmailSent from './ResetEmailSent';
-import Logo from 'assets/Logo';
+import { Logo } from 'assets/svg';
 import { H1 } from 'components/Typography';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';

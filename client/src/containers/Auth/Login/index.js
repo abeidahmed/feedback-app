@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from 'assets/Logo';
+import { Logo } from 'assets/svg';
 import { Form, Footer } from './components';
 import { H1 } from 'components/Typography';
 import {

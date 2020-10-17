@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Logo from 'assets/Logo';
+import { Logo } from 'assets/svg';
 import { color, media, boxShadow } from 'global/theme';
 import { H1 } from 'components/Typography';
 import { Icon } from 'components/Icon';
