@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import PropTypes from 'prop-types';
 import { handleLinkWrapping } from './utils';
 import { boxShadow, color } from 'global/theme';
 
@@ -7,13 +8,13 @@ const SytledButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: ${(props) => (props.size === 'lg' ? '16px' : '14px')};
   color: ${color.gray700};
   white-space: nowrap;
   position: relative;
-  border-radius: 6px;
+  border-radius: ${(props) => props.rounded || 6}px;
   border: 1px solid transparent;
-  line-height: 20px;
+  line-height: ${(props) => (props.size === 'lg' ? '24px' : '20px')};
   box-shadow: ${boxShadow.sm};
   font-weight: 500;
   padding: ${(props) => (props.size === 'sm' ? '6px 12px' : '8px 16px')};
@@ -23,6 +24,24 @@ const SytledButton = styled.button`
   &:focus {
     outline: none;
   }
+
+  ${(props) =>
+    props.iconRight &&
+    css`
+      > svg {
+        margin-left: 4px;
+        margin-right: -4px;
+      }
+    `}
+
+  ${(props) =>
+    props.iconLeft &&
+    css`
+      > svg {
+        margin-right: 4px;
+        margin-left: -4px;
+      }
+    `}
 
   ${(props) => !props.color && defaultCls}
   ${(props) => props.color === 'primary' && primaryCls}
@@ -128,5 +147,14 @@ const dangerMinimalCls = css`
     background-color: ${color.red200};
   }
 `;
+
+SytledButton.propTypes = {
+  size: PropTypes.oneOf(['sm', 'lg']),
+  color: PropTypes.oneOf(['primary', 'danger']),
+  appearance: PropTypes.oneOf(['appearance']),
+  iconRight: PropTypes.bool,
+  iconLeft: PropTypes.bool,
+  rounded: PropTypes.number,
+};
 
 export const Button = (props) => handleLinkWrapping(SytledButton, props);
