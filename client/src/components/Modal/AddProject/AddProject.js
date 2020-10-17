@@ -5,7 +5,7 @@ import ModalWrapper from '../ModalWrapper';
 import { postProjectApi } from 'api/postProject';
 import * as q from 'global/queryKey';
 import { Input } from 'components/Field';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 
 function AddProject() {
   const [name, setName] = useState('');
@@ -44,11 +44,7 @@ function AddProject() {
           onChange={(e) => setName(e.target.value)}
         />
         <div className="flex justify-end">
-          <Button
-            size="sm"
-            appearance="primary"
-            disabled={isLoading || !name.length}
-          >
+          <Button color="primary" disabled={isLoading || !name.length}>
             Add project
           </Button>
         </div>

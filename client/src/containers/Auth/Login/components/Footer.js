@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 
 function Footer() {
   return (
@@ -20,7 +20,7 @@ function Footer() {
       <div>
         <p className="text-gray-700">New to our platform?</p>
         <div className="mt-4">
-          <Button to="/signup" className="w-full">
+          <Button to="/signup" width="100%">
             Create an account
           </Button>
         </div>

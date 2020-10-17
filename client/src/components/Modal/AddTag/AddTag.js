@@ -6,7 +6,7 @@ import { useModalType } from 'store/modal';
 import * as q from 'global/queryKey';
 import ModalWrapper from '../ModalWrapper';
 import { Input } from 'components/Field';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 
 function AddTag() {
   const [tagName, setTagName] = useState('');
@@ -94,7 +94,7 @@ function AddTag() {
         </section>
         <section>
           <div className="flex justify-end">
-            <Button disabled={posting} appearance="primary" size="sm">
+            <Button disabled={posting} color="primary">
               Submit
             </Button>
           </div>

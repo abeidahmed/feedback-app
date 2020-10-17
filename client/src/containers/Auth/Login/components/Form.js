@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { loginApi } from 'api/login';
 import { useCurrentUser } from 'store/currentUser';
 import { Input } from 'components/Field';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 
 function Form() {
   const [email, setEmail] = useState('');
@@ -61,7 +61,7 @@ function Form() {
         {error && <p className="text-sm font-medium text-red-700">{error}</p>}
       </section>
       <div>
-        <Button disabled={isLoading} appearance="primary" className="w-full">
+        <Button disabled={isLoading} color="primary" width="100%">
           Sign in
         </Button>
       </div>

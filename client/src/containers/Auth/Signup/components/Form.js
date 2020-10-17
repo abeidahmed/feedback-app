@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useCurrentUser } from 'store/currentUser';
 import { signupApi } from 'api/signup';
 import { Input, Checkbox } from 'components/Field';
-import { Button } from 'components/Button';
+import { Button } from 'components/Buttons';
 
 function Form() {
   const [email, setEmail] = useState('');
@@ -80,11 +80,7 @@ function Form() {
           </Link>
         </Checkbox>
       </div>
-      <Button
-        className="w-full"
-        appearance="primary"
-        disabled={isLoading || !agreed}
-      >
+      <Button color="primary" width="100%" disabled={isLoading || !agreed}>
         Join Feeder
       </Button>
     </form>
