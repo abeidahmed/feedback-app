@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { useAddQuery } from 'utils/useAddQuery';
 import Logo from 'assets/Logo';
 import { boxShadow, color, media } from 'global/theme';
 import { H1 } from 'components/Typography';
@@ -9,6 +10,16 @@ import { Input } from 'components/Field';
 import { Button } from 'components/Button';
 
 function ResetPage() {
+  const {
+    queryString: { token },
+  } = useAddQuery();
+  if (token === 'expired')
+    return (
+      <Redirect
+        to={{ pathname: '/password_reset', search: '?token=invalid' }}
+      />
+    );
+
   return (
     <Main>
       <Wrapper>
