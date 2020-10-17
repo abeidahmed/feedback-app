@@ -6,6 +6,7 @@ import Logo from 'assets/Logo';
 import { boxShadow, color, media } from 'global/theme';
 import { H1 } from 'components/Typography';
 import { Input } from 'components/Field';
+import { Button } from 'components/Button';
 
 function InitiatePage() {
   return (
@@ -26,7 +27,9 @@ function InitiatePage() {
             <Form>
               <Input id="password-reset-in-email" label="Email address" />
               <div>
-                <Button>Get reset link</Button>
+                <Button color="primary" width="100%">
+                  Get reset link
+                </Button>
               </div>
             </Form>
           </MainArea>
@@ -98,34 +101,6 @@ const Form = styled.form`
   > * + * {
     margin-top: 12px;
   }
-`;
-
-const Button = styled.button`
-  background-color: ${color.blue500};
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 12px;
-  width: 100%;
-  line-height: 24px;
-  font-size: 16px;
-  font-weight: 500;
-  border: 1px solid transparent;
-
-  &:hover {
-    background-color: ${color.blue600};
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: ${boxShadow.outline};
-    border-color: ${color.blue700};
-  }
-
-  ${media.sm`
-    font-size: 14px;
-    line-height: 20px;
-  `}
 `;
 
 const StyledP = styled.p`
