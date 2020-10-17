@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:create]
       resources :sessions, only: [:create, :show]
-      resources :password_resets, only: [:create, :update]
+      resources :password_resets, only: [:create, :show, :update]
       resources :projects, only: [:index, :create, :show, :update, :destroy] do
         resources :tags, only: [:index, :create, :destroy, :update] do
           get :archive, on: :collection

@@ -11,6 +11,16 @@ class V1::PasswordResetsController < ApplicationController
     end
   end
 
+  def show
+    user = User.find_by_password_reset_token(params[:id])
+
+    if !user || user.password_reset_token_expired?
+      head :not_found
+    else
+      head :ok
+    end
+  end
+
   def update
     user = User.find_by_password_reset_token(params[:id])
     return user_not_found_message unless user
