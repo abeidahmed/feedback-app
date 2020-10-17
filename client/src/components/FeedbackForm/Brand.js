@@ -61,14 +61,14 @@ function Brand({ isActive, onClose }) {
       <Header>
         {activeForm === types.feedback ? (
           <IconButton type="button" onClick={handleBack}>
-            <Icon icon="arrow-left" className="w-4 h-4 text-gray-500" />
+            <Icon icon="arrow-left" />
           </IconButton>
         ) : (
           <span></span>
         )}
         {activeForm !== types.success && <H4>{formTitle}</H4>}
         <IconButton type="button" onClick={onClose}>
-          <Icon icon="x" className="w-4 h-4 text-gray-500" />
+          <Icon icon="x" />
         </IconButton>
       </Header>
       <Section>
@@ -330,6 +330,12 @@ const IconButton = styled.button`
   padding: 2px;
   border-radius: 4px;
   border: 1px solid transparent;
+
+  > svg {
+    width: 16px;
+    height: 16px;
+    color: ${color.gray500};
+  }
 
   &:focus {
     outline: none;
