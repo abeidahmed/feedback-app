@@ -16,7 +16,7 @@ const SytledButton = styled.button`
   line-height: 20px;
   box-shadow: ${boxShadow.sm};
   font-weight: 500;
-  padding: 8px 16px;
+  padding: ${(props) => (props.size === 'sm' ? '6px 12px' : '8px 16px')};
   text-align: center;
   width: ${(props) => props.width || 'auto'};
 
