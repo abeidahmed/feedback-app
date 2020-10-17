@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import styled from '@emotion/styled';
 import { TOKEN } from 'store/currentUser';
 import Logo from 'assets/Logo';
-import { AvatarGroup, Form, Footer } from './components';
+import { Form, Footer } from './components';
+import { AvatarGroup } from 'components/Avatar';
 import { H1 } from 'components/Typography';
 
 function Signup() {
@@ -19,7 +21,12 @@ function Signup() {
         </div>
         <section className="w-full">
           <H1 align="center">Join Feeder</H1>
-          <AvatarGroup />
+          <Wrapper>
+            <AvatarGroup />
+            <p className="mt-3 text-sm text-gray-600">
+              Join these and 10,465 other users
+            </p>
+          </Wrapper>
           <Form />
           <Footer />
         </section>
@@ -27,5 +34,10 @@ function Signup() {
     </main>
   );
 }
+
+const Wrapper = styled.div`
+  margin-top: 24px;
+  text-align: center;
+`;
 
 export default Signup;
