@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_16_120956) do
+ActiveRecord::Schema.define(version: 2020_10_18_090527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2020_10_16_120956) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_feedbacks_on_project_id"
     t.index ["tag_id"], name: "index_feedbacks_on_tag_id"
+  end
+
+  create_table "invitees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_invitees_on_project_id"
   end
 
   create_table "projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -77,6 +84,7 @@ ActiveRecord::Schema.define(version: 2020_10_16_120956) do
 
   add_foreign_key "feedbacks", "projects"
   add_foreign_key "feedbacks", "tags"
+  add_foreign_key "invitees", "projects"
   add_foreign_key "projects", "teams"
   add_foreign_key "projects", "users"
   add_foreign_key "tags", "projects"
