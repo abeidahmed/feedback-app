@@ -1,5 +1,7 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { useModalType } from 'store/modal';
+import { color, boxShadow } from 'global/theme';
 import { Icon } from 'components/Icon';
 
 function AddProjectButton({ ...props }) {
@@ -13,19 +15,55 @@ function AddProjectButton({ ...props }) {
   }
 
   return (
-    <button
-      className="block col-span-1 p-4 border border-gray-200 rounded-md shadow focus:border-blue-600 focus:outline-none focus:shadow-outline-blue hover:shadow-md"
-      onClick={handleAddProject}
-      {...props}
-    >
-      <span className="inline-flex items-center justify-center w-10 h-10 border border-blue-500 border-dashed rounded-full border-1">
-        <i>
-          <Icon icon="plus" className="w-6 h-6 mx-auto text-blue-500" />
-        </i>
-      </span>
-      <h2 className="mt-2 text-lg">Add new project</h2>
-    </button>
+    <StyledButton onClick={handleAddProject} {...props}>
+      <IconWrapper>
+        <Icon icon="plus" />
+      </IconWrapper>
+      <StyledH3>Add new project</StyledH3>
+    </StyledButton>
   );
 }
+
+const StyledButton = styled.button`
+  display: block;
+  min-width: 0;
+  grid-column: span 1 / span 1;
+  padding: 16px;
+  border: 1px solid ${color.gray200};
+  border-radius: 6px;
+  box-shadow: ${boxShadow.default};
+
+  &:hover {
+    box-shadow: ${boxShadow.md};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: ${boxShadow.outline};
+    border-color: ${color.blue700};
+  }
+`;
+
+const IconWrapper = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px dashed ${color.blue500};
+  border-radius: 9999px;
+
+  > svg {
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+    color: ${color.blue500};
+  }
+`;
+
+const StyledH3 = styled.h3`
+  margin-top: 8px;
+  font-size: 18px;
+`;
 
 export default AddProjectButton;
