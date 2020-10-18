@@ -27,6 +27,6 @@ class V1::InviteesController < ApplicationController
 
   private
   def user_email
-    params.dig(:user, :email)
+    params.dig(:user, :email).downcase
   end
 end

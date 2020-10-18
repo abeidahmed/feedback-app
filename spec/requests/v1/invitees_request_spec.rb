@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "V1::Invitees", type: :request do
   describe '#create' do
-    context 'when the user has an account' do
+    context 'when the user has an account (email is upcase)' do
       let(:project) { create(:project) }
       let(:user) { create(:user) }
-      let(:valid_user) { { user: { email: user.email } }.to_json }
+      let(:valid_user) { { user: { email: user.email.upcase } }.to_json }
       before do
         post v1_project_invitees_url(project), params: valid_user, headers: auth_header(project.user)
       end
