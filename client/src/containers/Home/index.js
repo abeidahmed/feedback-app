@@ -1,5 +1,7 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { useGetProjects } from 'api/allProjects';
+import { media } from 'global/theme';
 import { Container } from 'components/Container';
 import { ProjectCard } from 'components/Card';
 import { AddProjectButton } from './components';
@@ -12,15 +14,30 @@ function Home() {
   return (
     <main>
       <Container>
-        <section className="grid gap-4 py-8 sm:grid-cols-2 md:grid-cols-3">
+        <Section>
           <AddProjectButton />
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
-        </section>
+        </Section>
       </Container>
     </main>
   );
 }
+
+const Section = styled.section`
+  display: grid;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  padding: 32px 0;
+
+  ${media.sm`
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+  `}
+
+  ${media.md`
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+  `}
+`;
 
 export default Home;

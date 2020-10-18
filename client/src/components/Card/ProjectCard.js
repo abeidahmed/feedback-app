@@ -1,6 +1,10 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 import { pluralize } from 'utils/pluralize';
+import { boxShadow, color, truncate } from 'global/theme';
+import { P } from 'components/Typography';
 
 function ProjectCard({ project }) {
   const { id, name, included: { feedbacks, members } = {} } = project;
@@ -12,29 +16,87 @@ function ProjectCard({ project }) {
   } = members;
 
   return (
-    <Link
-      to={`/app/${id}`}
-      className="block min-w-0 col-span-1 p-4 border border-gray-200 rounded-md shadow focus:outline-none focus:shadow-outline-blue focus:border-blue-600 hover:shadow-md"
-    >
-      <h2 className="text-lg truncate">{name}</h2>
-      <div className="mt-2 space-y-2">
-        <div className="flex items-center">
-          <div className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full"></div>
-          <p className="ml-2 text-sm leading-5 text-gray-500">
-            <span className="font-medium text-gray-700">{feedbacksCount}</span>{' '}
+    <StyledLink to={`/app/${id}`}>
+      <StyledH2 className="text-lg truncate">{name}</StyledH2>
+      <div
+        css={{
+          marginTop: 8,
+          '> * + *': {
+            marginTop: 8,
+          },
+        }}
+      >
+        <FlexBox>
+          <Dot bgColor={color.blue500} />
+          <P marginLeft={8} fontSize={14} lineHeight={20}>
+            <P
+              as="span"
+              fontWeight={500}
+              color={color.gray700}
+              fontSize={14}
+              lineHeight={20}
+            >
+              {feedbacksCount}
+            </P>{' '}
             {pluralize(feedbacksCount, 'Feedback')}
-          </p>
-        </div>
-        <div className="flex items-center">
-          <div className="flex-shrink-0 w-2 h-2 bg-red-500 rounded-full"></div>
-          <p className="ml-2 text-sm leading-5 text-gray-500">
-            <span className="font-medium text-gray-700">{membersCount}</span>{' '}
+          </P>
+        </FlexBox>
+        <FlexBox>
+          <Dot bgColor={color.red500} />
+          <P marginLeft={8} fontSize={14} lineHeight={20}>
+            <P
+              as="span"
+              fontWeight={500}
+              color={color.gray700}
+              fontSize={14}
+              lineHeight={20}
+            >
+              {membersCount}
+            </P>{' '}
             {pluralize(membersCount, 'Member')}
-          </p>
-        </div>
+          </P>
+        </FlexBox>
       </div>
-    </Link>
+    </StyledLink>
   );
 }
+
+const StyledLink = styled(Link)`
+  display: block;
+  min-width: 0;
+  grid-column: span 1 / span 1;
+  padding: 16px;
+  border: 1px solid ${color.gray200};
+  border-radius: 6px;
+  box-shadow: ${boxShadow.default};
+
+  &:hover {
+    box-shadow: ${boxShadow.md};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: ${boxShadow.outline};
+    border-color: ${color.blue700};
+  }
+`;
+
+const StyledH2 = styled.h2`
+  font-size: 18px;
+  ${truncate};
+`;
+
+const Dot = styled.div`
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  background-color: ${(props) => props.bgColor || color.gray500};
+  border-radius: 9999px;
+`;
+
+const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default ProjectCard;
