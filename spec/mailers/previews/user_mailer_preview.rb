@@ -6,4 +6,9 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.password_reset
   end
 
+  def invite_user_to_team
+    user = User.last
+    project = Project.last
+    UserMailer.invite_user_to_team(user, project, new_record: true)
+  end
 end

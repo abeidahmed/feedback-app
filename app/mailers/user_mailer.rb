@@ -4,4 +4,12 @@ class UserMailer < ApplicationMailer
 
     mail to: user.email, subject: 'Reset your password'
   end
+
+  def invite_user_to_team(user, project, **options)
+    @user = user
+    @project = project
+    @options = options
+
+    mail to: user.email, subject: 'You have been invited to be a part of a project'
+  end
 end

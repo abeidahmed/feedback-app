@@ -1,0 +1,11 @@
+<h3>Hi, <%= @user.email %></h3>
+
+<p>You have been invited to be a part of the <%= @project.name %> project. Click on this <a href="https://feeder-fish.herokuapp.com/app/<%= @project.id %>">link</a> and you'll be redirected to the confirmation page.</p>
+<% if @options[:new_record] %>
+  <p>We noticed that you aren't a part of Feeder Fish family, and hence we took the initiative of creating a new account for you. Hope you do not mind.</p>
+  <p>
+    Here is your login details: <br>
+    <span>Email address:</span> <b><%= @user.email %></b><br>
+    <span>Password: <b><%= @user.password_reset_token %></b></span>
+  </p>
+<% end %>
