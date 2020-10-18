@@ -1,6 +1,9 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { color } from 'global/theme';
 import { Container } from 'components/Container';
 import { Icon } from 'components/Icon';
 import { H1, P } from 'components/Typography';
@@ -17,31 +20,76 @@ function PageHeader({
   return (
     <main>
       <Container>
-        <section className="py-8">
-          <header className="flex items-center justify-between">
+        <Section spaceY={32}>
+          <Header>
             {backButton && (
-              <button
-                className="inline-flex items-center -ml-1 text-sm text-gray-500 w-14 hover:text-gray-700 focus:outline-none focus:text-gray-900"
-                onClick={() => history.push(url)}
-              >
-                <Icon icon="chevron-left" className="w-4 h-4" />
-                <span className="pl-1">Back</span>
-              </button>
+              <StyledButton onClick={() => history.push(url)}>
+                <Icon icon="chevron-left" />
+                <span>Back</span>
+              </StyledButton>
             )}
-            <div className="mx-auto">
+            <div
+              css={{
+                margin: '0 auto',
+              }}
+            >
               <H1 align="center">{pageTitle}</H1>
               {pageDescription && <P align="center">{pageDescription}</P>}
             </div>
             {backButton && (
-              <span aria-hidden="true" className="inline-block w-14"></span>
+              <span
+                aria-hidden="true"
+                css={{
+                  display: 'inline-block',
+                  width: 56,
+                }}
+              ></span>
             )}
-          </header>
-          <section className="py-6">{children}</section>
-        </section>
+          </Header>
+          <Section spaceY={24}>{children}</Section>
+        </Section>
       </Container>
     </main>
   );
 }
+
+const Section = styled.section`
+  padding-top: ${(props) => props.spaceY}px;
+  padding-bottom: ${(props) => props.spaceY}px;
+`;
+
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  font-size: 14px;
+  color: ${color.gray500};
+  width: 56px;
+
+  &:hover {
+    color: ${color.gray700};
+  }
+
+  &:focus {
+    outline: none;
+    color: ${color.gray900};
+  }
+
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  > span {
+    padding-left: 4px;
+  }
+`;
 
 PageHeader.propTypes = {
   backButton: PropTypes.bool,
