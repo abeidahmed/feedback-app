@@ -26,17 +26,17 @@ function Notification() {
       <NotificationWrapper color={appearance}>
         <MetaWrapper>
           <CheckIconWrapper>
-            <div>
-              <Icon icon="check" width={16} height={16} />
-            </div>
+            <Icon
+              icon="check-solid"
+              width={20}
+              height={20}
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              stroke="none"
+            />
           </CheckIconWrapper>
           <MainContent>
             <p>{content}</p>
-            <div>
-              <button onClick={hideNotification}>
-                <XIcon icon="x" />
-              </button>
-            </div>
           </MainContent>
         </MetaWrapper>
       </NotificationWrapper>
@@ -67,36 +67,21 @@ const NotificationWrapper = styled.div`
     right: 50px;
   `}
 
-  p {
-    font-size: 14px;
-    line-height: 20px;
-  }
-
   ${(props) =>
     props.color === 'SUCCESS' &&
     css`
       background-color: ${color.green50};
       color: ${color.green700};
-      font-weight: 500;
-
-      button {
-        padding: 2px;
-        border-radius: 6px;
-
-        &:focus {
-          outline: none;
-          background-color: ${color.green100};
-        }
-      }
     `}
 `;
 
 const MainContent = styled.div`
   margin-left: 12px;
-  display: flex;
 
-  > * + * {
-    margin-left: 16px;
+  p {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
   }
 `;
 
@@ -105,27 +90,9 @@ const MetaWrapper = styled.div`
 `;
 
 const CheckIconWrapper = styled.div`
-  border-radius: 9999px;
-
-  > div {
-    background-color: ${color.green400};
-    border-radius: 9999px;
-    flex-shrink: 0;
-    padding: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2px;
-
-    > svg {
-      color: #fff;
-    }
+  > svg {
+    color: ${color.green400};
   }
-`;
-
-const XIcon = styled(Icon)`
-  width: 20px;
-  height: 20px;
 `;
 
 export default Notification;
