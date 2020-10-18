@@ -4,6 +4,7 @@ import { useModalType } from 'store/modal';
 import { color, media } from 'global/theme';
 import { BoxContainer, BoxTop } from './components';
 import { Button } from 'components/Button';
+import { P } from 'components/Typography';
 
 function DeleteProjectBox({ project }) {
   const { id, name } = project;
@@ -23,10 +24,10 @@ function DeleteProjectBox({ project }) {
     <BoxContainer>
       <BoxTop title="Delete Project">
         <InnerContainer>
-          <p>
+          <P fontSize={14}>
             Once you delete this project, there is no going back. Everything
             related to this project, your team, feedbacks, tags will be deleted.
-          </p>
+          </P>
           <Button color="danger" appearance="minimal" onClick={handleDelete}>
             Delete project
           </Button>
@@ -53,12 +54,6 @@ const InnerContainer = styled.div`
         margin-left: 12px;
       }
   `}
-
-  p {
-    color: ${color.gray700};
-    font-size: 14px;
-    line-height: 20px;
-  }
 `;
 
 export default DeleteProjectBox;
