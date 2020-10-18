@@ -1,11 +1,14 @@
 class Project < ApplicationRecord
-  after_create :initialize_tags
+  after_create do
+    initialize_tags
+    initialize_invitee_list
+  end
 
   belongs_to :user
   belongs_to :team
   has_many :tags, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
-  has_one :invitee
+  has_one :invitee, dependent: :destroy
 
   validates_presence_of :name
   validates_length_of :name, maximum: 50
@@ -32,6 +35,10 @@ class Project < ApplicationRecord
         bg_color: color_hash[:accent]
       )
     end
+  end
+
+  def initialize_invitee_list
+    self.create_invitee!
   end
 
   def team_members

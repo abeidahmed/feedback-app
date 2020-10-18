@@ -32,6 +32,10 @@ RSpec.describe "V1::Projects", type: :request do
         expect(Team.count).to eq(1)
       end
 
+      it 'is expected to create a new invitee list' do
+        expect(Invitee.count).to eq(1)
+      end
+
       it 'is expected to assign the user to the team' do
         expect(user.teams.count).to eq(1)
       end
@@ -70,6 +74,10 @@ RSpec.describe "V1::Projects", type: :request do
 
       it 'is expected to not create the tags' do
         expect(Tag.count).to be_zero
+      end
+
+      it 'is expected to not create the invitee list' do
+        expect(Invitee.count).to be_zero
       end
 
       it 'is expected to not create the team' do
