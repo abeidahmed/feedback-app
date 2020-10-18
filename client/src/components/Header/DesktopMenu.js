@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { useCurrentUser } from 'store/currentUser';
-import { color } from 'global/theme';
+import { color, media } from 'global/theme';
 import { BrandFeedbackForm } from 'components/FeedbackForm';
 
 function DesktopMenu() {
@@ -22,13 +21,10 @@ function DesktopMenu() {
   }
 
   return (
-    <nav className="items-center hidden space-x-4 md:flex md:space-x-8">
+    <Nav>
       <FormWrapper>
         <OutsideClickHandler onOutsideClick={closeFeedbackForm}>
-          <StyledButton
-            className="text-gray-600 hover:text-gray-900"
-            onClick={() => setFeedbackActive(!feedbackActive)}
-          >
+          <StyledButton onClick={() => setFeedbackActive(!feedbackActive)}>
             Give your feedback
           </StyledButton>
           <FeedbackWrapper>
@@ -39,15 +35,25 @@ function DesktopMenu() {
           </FeedbackWrapper>
         </OutsideClickHandler>
       </FormWrapper>
-      <StyledButton
-        className="text-gray-600 hover:text-gray-900"
-        onClick={handleLogout}
-      >
-        Logout
-      </StyledButton>
-    </nav>
+      <StyledButton onClick={handleLogout}>Logout</StyledButton>
+    </Nav>
   );
 }
+
+const Nav = styled.nav`
+  display: none;
+  > * + * {
+    margin-left: 16px;
+  }
+
+  ${media.md`
+    display: flex;
+    align-items: center;
+    > * + * {
+      margin-left: 32px;
+    }
+  `}
+`;
 
 const FormWrapper = styled.div`
   position: relative;
@@ -59,16 +65,12 @@ const FeedbackWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const button = css`
+const StyledButton = styled.button`
   color: ${color.gray600};
 
   &:hover {
     color: ${color.gray900};
   }
-`;
-
-const StyledButton = styled.button`
-  ${button}
 `;
 
 export default DesktopMenu;
