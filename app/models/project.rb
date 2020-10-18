@@ -44,4 +44,8 @@ class Project < ApplicationRecord
   def team_members
     self.team.users
   end
+
+  def user_invite_list
+    self.invitee.users
+  end
 end
