@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :projects
   has_many :teamnations
   has_many :teams, through: :teamnations
+  has_many :invitables
+  has_many :invitees, through: :invitables
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 

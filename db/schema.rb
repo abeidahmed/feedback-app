@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_18_091415) do
+ActiveRecord::Schema.define(version: 2020_10_18_092022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2020_10_18_091415) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_feedbacks_on_project_id"
     t.index ["tag_id"], name: "index_feedbacks_on_tag_id"
+  end
+
+  create_table "invitables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "invitee_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invitee_id"], name: "index_invitables_on_invitee_id"
+    t.index ["user_id"], name: "index_invitables_on_user_id"
   end
 
   create_table "invitees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -78,19 +87,18 @@ ActiveRecord::Schema.define(version: 2020_10_18_091415) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.uuid "invitee_id"
     t.index ["email"], name: "index_users_on_email"
-    t.index ["invitee_id"], name: "index_users_on_invitee_id"
     t.index ["password_reset_token"], name: "index_users_on_password_reset_token"
   end
 
   add_foreign_key "feedbacks", "projects"
   add_foreign_key "feedbacks", "tags"
+  add_foreign_key "invitables", "invitees"
+  add_foreign_key "invitables", "users"
   add_foreign_key "invitees", "projects"
   add_foreign_key "projects", "teams"
   add_foreign_key "projects", "users"
   add_foreign_key "tags", "projects"
   add_foreign_key "teamnations", "teams"
   add_foreign_key "teamnations", "users"
-  add_foreign_key "users", "invitees"
 end

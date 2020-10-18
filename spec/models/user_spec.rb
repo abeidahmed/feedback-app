@@ -32,6 +32,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:projects) }
 
     it { should have_many(:teams) }
+
+    it { should have_many(:invitees) }
   end
 
   describe '::find_by_credentials' do
