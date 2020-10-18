@@ -34,7 +34,7 @@ function TeamPage({ project }) {
               type="email"
               label="Invite member"
               showLabel={false}
-              placeholder="colleague@exmaple.com"
+              placeholder="colleague@example.com"
               required
               autoComplete="off"
               value={email}
