@@ -5,6 +5,7 @@ class Project < ApplicationRecord
   belongs_to :team
   has_many :tags, dependent: :destroy
   has_many :feedbacks, dependent: :destroy
+  has_one :invitee
 
   validates_presence_of :name
   validates_length_of :name, maximum: 50

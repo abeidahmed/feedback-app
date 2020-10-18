@@ -15,5 +15,7 @@ RSpec.describe Project, type: :model do
     it { should have_many(:feedbacks) }
 
     it { should belong_to(:team) }
+
+    it { should have_one(:invitee) }
   end
 end
