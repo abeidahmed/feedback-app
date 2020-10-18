@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import styled from '@emotion/styled';
 import { useRefetchMutation } from 'utils/useRefetchMutation';
 import { patchProjectApi } from 'api/patchProject';
+import { media, color } from 'global/theme';
 import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
+import { P } from 'components/Typography';
 
 function EditProjectBox({ project }) {
   const { name, id } = project;
@@ -44,17 +47,38 @@ function EditProjectBox({ project }) {
           />
         </BoxTop>
         <BoxBottom>
-          <div className="flex items-center justify-between w-full space-x-3">
+          <BottomInner>
             <div>
-              <p className="text-sm text-gray-500">Project ID:</p>
-              <p className="text-sm text-gray-700">{id}</p>
+              <P fontSize={14} color={color.gray500}>
+                Project ID:
+              </P>
+              <P fontSize={14} color={color.gray700}>
+                {id}
+              </P>
             </div>
             <Button disabled={isValueValid || isLoading}>Save</Button>
-          </div>
+          </BottomInner>
         </BoxBottom>
       </form>
     </BoxContainer>
   );
 }
+
+const BottomInner = styled.div`
+  width: 100%;
+  > * + * {
+    margin-top: 12px;
+  }
+
+  ${media.sm`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > * + * {
+      margin-left: 12px;
+    }
+  `}
+`;
 
 export default EditProjectBox;
