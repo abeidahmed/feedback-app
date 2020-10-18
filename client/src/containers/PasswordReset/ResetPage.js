@@ -63,11 +63,7 @@ function ResetPage() {
   if (reset_state) return <PasswordChanged />;
   if (fetchingUser) return <Spinner />;
   if (isError)
-    return (
-      <Redirect
-        to={{ pathname: '/password_reset', search: '?token=invalid' }}
-      />
-    );
+    return <Redirect to={{ pathname: '/signup', search: '?token=invalid' }} />;
 
   return (
     <FormMain>
