@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :invitee do
-    project { nil }
+    project
   end
 end

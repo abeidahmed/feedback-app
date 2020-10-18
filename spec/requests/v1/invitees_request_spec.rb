@@ -66,4 +66,37 @@ RSpec.describe "V1::Invitees", type: :request do
       include_examples 'bad_request'
     end
   end
+
+  describe '#accept_invite' do
+    context 'when the user is on the invitee list and wants to be a part of project team' do
+      let(:project) { create(:project) }
+      let(:user) { create(:user) }
+      before do
+        project.invitee.users << user
+        delete accept_invite_v1_project_invitees_url(project), headers: auth_header(user)
+      end
+
+      it 'is expected to delete the user from the invite list' do
+        expect(project.invitee.users.count).to be_zero
+      end
+
+      it 'is expected to add the user to the project' do
+        expect(project.team_members.include?(user)).to be_truthy
+      end
+    end
+
+    context 'when the user is not on the invitee list' do
+      let(:project) { create(:project) }
+      let(:user) { create(:user) }
+      before do
+        delete accept_invite_v1_project_invitees_url(project), headers: auth_header(user)
+      end
+
+      it 'is expected to not add the user to the project' do
+        expect(project.team_members.include?(user)).to be_falsy
+      end
+
+      include_examples 'bad_request'
+    end
+  end
 end

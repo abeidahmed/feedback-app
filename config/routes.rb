@@ -12,7 +12,9 @@ Rails.application.routes.draw do
           get :archive, on: :collection
         end
 
-        resources :invitees, only: [:create]
+        resources :invitees, only: [:create] do
+          delete :accept_invite, on: :collection
+        end
 
         resources :feedbacks, only: [:index, :create, :destroy] do
           patch :archive, on: :member

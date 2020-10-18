@@ -15,6 +15,16 @@ class V1::InviteesController < ApplicationController
     end
   end
 
+  def accept_invite
+    project = Project.find(params[:project_id])
+    invite_list = project.invitee.users
+    return head :bad_request unless invite_list.exists?(current_user.id)
+
+    invite_list.delete(current_user)
+    project.team.add(current_user)
+    head :ok
+  end
+
   private
   def user_email
     params.dig(:user, :email)
