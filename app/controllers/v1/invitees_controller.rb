@@ -1,9 +1,9 @@
 class V1::InviteesController < ApplicationController
   def create
     project = Project.find(params[:project_id])
-    user = User.find_by_email(user_email)
+    user = User.create_with(password: SecureRandom.urlsafe_base64).find_or_initialize_by(email: user_email)
 
-    if user
+    if user.save
       if project.team_members.include?(user)
         render json: { message: "#{user.email} is already on the team" }, status: :bad_request
       else
@@ -11,13 +11,7 @@ class V1::InviteesController < ApplicationController
         head :created
       end
     else
-      new_user = User.new email: user_email, password: 'helloworld'
-      if new_user.save
-        project.invitee.users << new_user
-        head :created
-      else
-        render json: { message: new_user.errors.full_messages }, status: :bad_request
-      end
+      render json: { message: user.errors.full_messages }, status: :bad_request
     end
   end
 
