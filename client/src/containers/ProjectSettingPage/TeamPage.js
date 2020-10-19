@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { useMutation } from 'react-query';
+import { queryCache, useMutation } from 'react-query';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import { postInviteTeamMemberApi } from 'api/inviteTeamMember';
+import { color, maxWidth, media, truncate } from 'global/theme';
+import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
@@ -14,7 +18,10 @@ function TeamPage({ project }) {
   } = project;
 
   const [mutate, { isLoading }] = useMutation(postInviteTeamMemberApi, {
-    onSuccess: () => console.log('invited'),
+    onSuccess: () => {
+      queryCache.refetchQueries(q.SHOW_PROJECT);
+      setEmail('');
+    },
     throwOnError: true,
   });
 
@@ -34,26 +41,18 @@ function TeamPage({ project }) {
   return (
     <BoxContainer>
       <BoxTop title="Your team">
-        <div className="space-y-2">
-          {teamMembers.map(({ id, email }) => (
-            <div
-              key={id}
-              className="flex items-center justify-between min-w-0 space-x-3"
-            >
-              <p className="text-sm text-gray-700 truncate md:text-base">
-                {email}
-              </p>
-              <p className="text-sm text-gray-400 md:text-base">Member</p>
-            </div>
+        <div>
+          {teamMembers.map(({ id, email, invited }) => (
+            <MemberDetail key={id}>
+              <StyledP primary>{email}</StyledP>
+              <StyledP>{invited ? 'Invited' : 'Member'}</StyledP>
+            </MemberDetail>
           ))}
         </div>
       </BoxTop>
       <BoxBottom>
-        <form
-          onSubmit={handleInvite}
-          className="flex items-center justify-between w-full space-x-4"
-        >
-          <div className="w-full max-w-xs">
+        <Form onSubmit={handleInvite}>
+          <InputWrapper>
             <Input
               id="invite-email"
               type="email"
@@ -68,12 +67,59 @@ function TeamPage({ project }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
+          </InputWrapper>
           <Button disabled={isLoading || !email.length}>Invite member</Button>
-        </form>
+        </Form>
       </BoxBottom>
     </BoxContainer>
   );
 }
+
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  > * + * {
+    margin-left: 16px;
+  }
+`;
+
+const InputWrapper = styled.div`
+  width: 100%;
+  max-width: ${maxWidth.xs};
+`;
+
+const StyledP = styled.p`
+  font-size: 14px;
+  color: ${color.gray400};
+
+  ${(props) =>
+    props.primary &&
+    css`
+      color: ${color.gray700};
+      ${truncate};
+    `}
+
+  ${media.md`
+    font-size: 16px;
+  `}
+`;
+
+const MemberDetail = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 8px 0;
+
+  &:not(:first-of-type) {
+    border-top: 1px solid ${color.gray200};
+  }
+
+  > * + * {
+    margin-left: 12px;
+  }
+`;
 
 export default TeamPage;
