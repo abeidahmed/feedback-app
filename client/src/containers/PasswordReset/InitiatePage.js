@@ -43,7 +43,7 @@ function InitiatePage() {
         email,
       });
     } catch (err) {
-      setError(err.response.data.message.split());
+      setError(err.response.data.message);
     }
   }
 
@@ -70,8 +70,11 @@ function InitiatePage() {
                 label="Email address"
                 type="email"
                 required
-                error={error}
-                errorType="invalid"
+                errors={{
+                  error,
+                  errorType: 'error',
+                  showKey: false,
+                }}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />

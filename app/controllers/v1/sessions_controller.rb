@@ -5,7 +5,7 @@ class V1::SessionsController < ApplicationController
     @user = User.find_by_credentials(email, password)
 
     if @user.nil?
-      render json: { message: 'Invalid credentials' }, status: :bad_request
+      render json: { message: { error: ['Invalid credentials'] } }, status: :bad_request
     else
       @token = Token.new(user_id: @user.id).encode
       render :new

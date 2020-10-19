@@ -9,8 +9,7 @@ import { ErrorMessage } from './components';
 function Input({
   label,
   to,
-  error,
-  errorType,
+  errors,
   showLabel = true,
   id,
   appearance,
@@ -36,7 +35,7 @@ function Input({
         appearance={appearance}
         {...props}
       />
-      <ErrorMessage error={error} errorType={errorType} />
+      <ErrorMessage errors={errors} />
     </div>
   );
 }

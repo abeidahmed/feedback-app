@@ -85,8 +85,10 @@ function ResetPage() {
                 label="Password"
                 type="password"
                 required
-                error={error}
-                errorType="password"
+                errors={{
+                  error,
+                  errorType: 'password',
+                }}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

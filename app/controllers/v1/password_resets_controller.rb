@@ -7,7 +7,7 @@ class V1::PasswordResetsController < ApplicationController
     if user
       user.initialize_password_reset
     else
-      render json: { message: 'Invalid email address' }, status: :bad_request
+      render json: { message: { error: ['Invalid email address'] } }, status: :bad_request
     end
   end
 
@@ -28,12 +28,12 @@ class V1::PasswordResetsController < ApplicationController
 
     if password_param.blank?
       user.errors.add(:password, 'cannot be blank')
-      render json: { message: user.errors.full_messages }, status: :bad_request
+      render json: { message: user.errors }, status: :bad_request
     elsif user.update(password: password_param)
       user.reset_password_reset_fields
       head :ok
     else
-      render json: { message: user.errors.full_messages }, status: :bad_request
+      render json: { message: user.errors }, status: :bad_request
     end
   end
 

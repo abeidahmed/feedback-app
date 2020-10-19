@@ -56,8 +56,10 @@ function AddTag() {
             label="Tag name"
             id="add-tag"
             placeholder="Ex: UI Bug"
-            error={error}
-            errorType="name"
+            errors={{
+              error,
+              errorType: 'name',
+            }}
             value={tagName}
             autoComplete="off"
             onChange={(e) => setTagName(e.target.value)}

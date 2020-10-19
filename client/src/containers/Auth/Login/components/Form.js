@@ -10,7 +10,7 @@ import { Form as LoginForm } from 'components/FormBuilder';
 function Form() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState([]);
 
   const { setUser } = useCurrentUser();
   const history = useHistory();
@@ -45,6 +45,7 @@ function Form() {
           label="Email address"
           id="signin-email"
           type="email"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -52,14 +53,19 @@ function Form() {
           label="Password"
           id="signin-password"
           type="password"
+          required
           to={{
             pathname: '/password_reset',
             title: 'Forgot password?',
           }}
+          errors={{
+            error,
+            errorType: 'error',
+            showKey: false,
+          }}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {error && <p className="text-sm font-medium text-red-700">{error}</p>}
       </section>
       <div>
         <Button disabled={isLoading} color="primary" width="100%">

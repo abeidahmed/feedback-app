@@ -10,7 +10,7 @@ class V1::ProjectsController < ApplicationController
     if @project.save
       render :new, status: :created
     else
-      render json: { message: @project.errors.full_messages }, status: :bad_request
+      render json: { message: @project.errors }, status: :bad_request
     end
   end
 
@@ -25,7 +25,7 @@ class V1::ProjectsController < ApplicationController
     if @project.update(project_params)
       render :new
     else
-      render json: { message: @project.errors.full_messages }, status: :bad_request
+      render json: { message: @project.errors }, status: :bad_request
     end
   end
 

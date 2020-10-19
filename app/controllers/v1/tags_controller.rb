@@ -14,7 +14,7 @@ class V1::TagsController < ApplicationController
     if @tag.save
       render :new, status: :created
     else
-      render json: { message: @tag.errors.full_messages }, status: :bad_request
+      render json: { message: @tag.errors }, status: :bad_request
     end
   end
 
@@ -30,7 +30,7 @@ class V1::TagsController < ApplicationController
     if @tag.update(tag_params)
       render :new
     else
-      render json: { message: @tag.errors.full_messages }, status: :bad_request
+      render json: { message: @tag.errors }, status: :bad_request
     end
   end
 

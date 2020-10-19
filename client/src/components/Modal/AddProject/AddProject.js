@@ -17,12 +17,13 @@ function AddProject() {
       modalOff();
       queryCache.refetchQueries(q.GET_PROJECTS);
     },
+    throwOnError: true,
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      mutate({
+      await mutate({
         name,
       });
     } catch (err) {
@@ -37,14 +38,16 @@ function AddProject() {
           id="add-project-name"
           label="Project name"
           placeholder="Note taking app"
-          error={error}
-          errorType="name"
+          errors={{
+            error,
+            errorType: 'name',
+          }}
           autoComplete="off"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <div className="flex justify-end">
-          <Button color="primary" disabled={isLoading || !name.length}>
+          <Button color="primary" disabled={isLoading}>
             Add project
           </Button>
         </div>

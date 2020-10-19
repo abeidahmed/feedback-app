@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { color } from 'global/theme';
-import { findError } from '../utils';
+import { errorHandler } from '../utils';
 
-function ErrorMessage({ error, errorType }) {
-  if (findError(error, errorType)) {
-    return <StyledP>{findError(error, errorType)}</StyledP>;
+function ErrorMessage({ errors }) {
+  if (!errors) return null;
+  const { error, errorType, showKey = true } = errors;
+
+  if (errorHandler({ errors: error, type: errorType, showKey })) {
+    return (
+      <StyledP>
+        {errorHandler({ errors: error, type: errorType, showKey })}
+      </StyledP>
+    );
   }
   return null;
 }

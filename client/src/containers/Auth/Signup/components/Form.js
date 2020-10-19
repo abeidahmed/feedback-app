@@ -51,8 +51,10 @@ function Form() {
           appearance="gray"
           type="email"
           placeholder="Email address"
-          error={error}
-          errorType="email"
+          errors={{
+            error,
+            errorType: 'email',
+          }}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -63,8 +65,10 @@ function Form() {
           appearance="gray"
           type="password"
           placeholder="Password (min 6 char)"
-          error={error}
-          errorType="password"
+          errors={{
+            error,
+            errorType: 'password',
+          }}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />

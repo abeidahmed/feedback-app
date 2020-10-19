@@ -23,7 +23,7 @@ function EditProjectBox({ project }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      mutate({
+      await mutate({
         id,
         name: projectName,
       });
@@ -39,8 +39,10 @@ function EditProjectBox({ project }) {
           <Input
             id="project-settings-name"
             label="Name"
-            error={error}
-            errorType="name"
+            errors={{
+              error,
+              errorType: 'name',
+            }}
             value={projectName}
             autoComplete="off"
             onChange={(e) => setProjectName(e.target.value)}
