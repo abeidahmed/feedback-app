@@ -6,7 +6,11 @@ import { media, color } from 'global/theme';
 import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Input } from 'components/Field';
-import { BoxContainer, BoxTop, BoxBottom } from './components';
+import {
+  PSContainerBox,
+  PSBoxTop,
+  PSBoxBottom,
+} from 'components/ProjectSettingBox';
 import { P } from 'components/Typography';
 
 function EditProjectBox({ project }) {
@@ -33,9 +37,9 @@ function EditProjectBox({ project }) {
   };
 
   return (
-    <BoxContainer>
+    <PSContainerBox>
       <form onSubmit={handleSubmit}>
-        <BoxTop title="Project Settings">
+        <PSBoxTop title="Project Settings">
           <Input
             id="project-settings-name"
             label="Name"
@@ -47,8 +51,8 @@ function EditProjectBox({ project }) {
             autoComplete="off"
             onChange={(e) => setProjectName(e.target.value)}
           />
-        </BoxTop>
-        <BoxBottom>
+        </PSBoxTop>
+        <PSBoxBottom>
           <BottomInner>
             <div>
               <P fontSize={14} color={color.gray500}>
@@ -60,9 +64,9 @@ function EditProjectBox({ project }) {
             </div>
             <Button disabled={isValueValid || isLoading}>Save</Button>
           </BottomInner>
-        </BoxBottom>
+        </PSBoxBottom>
       </form>
-    </BoxContainer>
+    </PSContainerBox>
   );
 }
 

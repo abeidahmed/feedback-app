@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useModalType } from 'store/modal';
 import { media } from 'global/theme';
-import { BoxContainer, BoxTop } from './components';
+import { PSContainerBox, PSBoxTop } from 'components/ProjectSettingBox';
 import { Button } from 'components/Button';
 import { P } from 'components/Typography';
 
@@ -21,8 +21,8 @@ function DeleteProjectBox({ project }) {
   }
 
   return (
-    <BoxContainer>
-      <BoxTop title="Delete Project">
+    <PSContainerBox>
+      <PSBoxTop title="Delete Project">
         <InnerContainer>
           <P fontSize={14}>
             Once you delete this project, there is no going back. Everything
@@ -32,8 +32,8 @@ function DeleteProjectBox({ project }) {
             Delete project
           </Button>
         </InnerContainer>
-      </BoxTop>
-    </BoxContainer>
+      </PSBoxTop>
+    </PSContainerBox>
   );
 }
 

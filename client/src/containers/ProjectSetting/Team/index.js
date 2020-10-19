@@ -7,7 +7,11 @@ import { color, maxWidth, media, truncate } from 'global/theme';
 import * as q from 'global/queryKey';
 import { Button } from 'components/Button';
 import { Input } from 'components/Field';
-import { BoxContainer, BoxTop, BoxBottom } from './components';
+import {
+  PSContainerBox,
+  PSBoxTop,
+  PSBoxBottom,
+} from 'components/ProjectSettingBox';
 
 function TeamPage({ project }) {
   const [email, setEmail] = useState('');
@@ -39,8 +43,8 @@ function TeamPage({ project }) {
   }
 
   return (
-    <BoxContainer>
-      <BoxTop title="Your team">
+    <PSContainerBox>
+      <PSBoxTop title="Your team">
         <div>
           {teamMembers.map(({ id, email, invited }) => (
             <MemberDetail key={id}>
@@ -49,8 +53,8 @@ function TeamPage({ project }) {
             </MemberDetail>
           ))}
         </div>
-      </BoxTop>
-      <BoxBottom>
+      </PSBoxTop>
+      <PSBoxBottom>
         <Form onSubmit={handleInvite}>
           <InputWrapper>
             <Input
@@ -70,8 +74,8 @@ function TeamPage({ project }) {
           </InputWrapper>
           <Button disabled={isLoading || !email.length}>Invite member</Button>
         </Form>
-      </BoxBottom>
-    </BoxContainer>
+      </PSBoxBottom>
+    </PSContainerBox>
   );
 }
 
