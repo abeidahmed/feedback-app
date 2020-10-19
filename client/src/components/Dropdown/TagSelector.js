@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Redirect, Link } from 'react-router-dom';
-import cn from 'classnames';
+import styled from '@emotion/styled';
 import { useModalType } from 'store/modal';
+import { boxShadow, color, maxWidth, media, truncate } from 'global/theme';
 import { Icon } from 'components/Icon';
 import OutsideClickHandler from 'react-outside-click-handler';
 
@@ -13,14 +14,6 @@ function TagSelector({ projects }) {
 
   const [isActive, setIsActive] = useState(false);
   const [title, setTitle] = useState('');
-
-  const dropdownClass = cn([
-    'absolute w-full mt-2 overflow-hidden bg-white rounded-md shadow-md',
-    {
-      hidden: !isActive,
-      block: isActive,
-    },
-  ]);
 
   useEffect(() => {
     setTitle(name);
@@ -39,40 +32,145 @@ function TagSelector({ projects }) {
   if (location.pathname === '/app') return null;
 
   return (
-    <div className="relative flex-1 w-full max-w-sm ml-3 md:ml-4">
+    <DropdownWrapper>
       <OutsideClickHandler onOutsideClick={() => setIsActive(false)}>
-        <button
-          onClick={() => setIsActive(!isActive)}
-          className="flex shadow w-full bg-gray-50 py-1.5 px-3 border border-transparent focus:border-blue-600 hover:bg-gray-100 focus:shadow-outline-blue rounded-md items-center justify-between focus:outline-none"
-        >
-          <span>{title}</span>
-          <Icon icon="selector" className="w-5 h-5 text-gray-600" />
-        </button>
-        <div className={dropdownClass}>
-          <ul className="w-full py-1">
+        <div>
+          <StyledButton onClick={() => setIsActive(!isActive)}>
+            <span>{title}</span>
+            <Icon icon="selector" />
+          </StyledButton>
+        </div>
+        <ListWrapper isActive={isActive}>
+          <ul>
             {projects.map(({ id, name }) => (
-              <Link
+              <StyledLink
                 key={id}
                 to={`/app/${id}`}
-                className="block px-3 py-2 text-gray-700 focus:bg-gray-100 hover:bg-gray-100 focus:outline-none"
                 onClick={() => setIsActive(false)}
               >
                 {name}
-              </Link>
+              </StyledLink>
             ))}
-            <hr className="my-1 border-gray-200" />
-            <button
-              className="inline-flex items-center justify-between w-full px-3 py-2 text-left text-gray-700 focus:outline-none focus:bg-gray-100 hover:bg-gray-100"
-              onClick={handleAddProject}
-            >
-              <span>New Project</span>
-              <Icon icon="plus" className="w-5 h-5 text-gray-400" />
-            </button>
+            <hr />
+            <StyledListButton onClick={handleAddProject}>
+              New Project
+              <Icon icon="plus" />
+            </StyledListButton>
           </ul>
-        </div>
+        </ListWrapper>
       </OutsideClickHandler>
-    </div>
+    </DropdownWrapper>
   );
 }
+
+const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: ${boxShadow.default};
+  background-color: ${color.gray50};
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  > span {
+    ${truncate};
+    width: 0;
+    flex: 1;
+    text-align: left;
+    padding-right: 4px;
+  }
+
+  > svg {
+    width: 20px;
+    height: 20px;
+    color: ${color.gray600};
+    margin-right: -4px;
+  }
+
+  &:hover {
+    background-color: ${color.gray100};
+  }
+
+  &:focus {
+    border-color: ${color.blue600};
+    outline: none;
+    box-shadow: ${boxShadow.outline};
+  }
+`;
+
+const StyledListButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  text-align: left;
+  color: ${color.gray700};
+
+  > svg {
+    height: 20px;
+    width: 20px;
+    color: ${color.gray400};
+  }
+
+  &:hover {
+    background-color: ${color.gray100};
+  }
+
+  &:focus {
+    background-color: ${color.gray100};
+    outline: none;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  display: block;
+  padding: 8px 12px;
+  color: ${color.gray700};
+
+  &:hover {
+    background-color: ${color.gray100};
+  }
+
+  &:focus {
+    background-color: ${color.gray100};
+    outline: none;
+  }
+`;
+
+const DropdownWrapper = styled.div`
+  position: relative;
+  flex: 1;
+  max-width: ${maxWidth.sm};
+  width: 100%;
+  margin-left: 12px;
+
+  ${media.md`
+    margin-left: 16px;
+  `}
+`;
+
+const ListWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  margin-top: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: ${boxShadow.md};
+  display: ${(props) => !props.isActive && 'none'};
+
+  > ul {
+    width: 100%;
+    padding: 4px 0;
+
+    > hr {
+      margin: 4px 0;
+      border-color: ${color.gray200};
+    }
+  }
+`;
 
 export default TagSelector;
