@@ -14,7 +14,8 @@ class Project < ApplicationRecord
   validates_length_of :name, maximum: 50
 
   default_scope -> { order(created_at: :desc) }
-  scope :user_part_of, ->(user) { where(team_id: user.teams.pluck(:id)) }
+  scope :user_part_of_invite_list, ->(user) { where(id: user.invitees.pluck(:project_id)) }
+  scope :user_part_of, ->(user) { where(team_id: user.teams.pluck(:id)).or(user_part_of_invite_list(user)) }
 
   def initialize_team(current_user)
     ActiveRecord::Base.transaction do
