@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect, useRouteMatch } from 'react-router-dom';
+import { PageHeader } from 'components/Header';
 
 function ProjectInvitation({ project }) {
   const { url } = useRouteMatch('/app/:id');
@@ -8,9 +9,9 @@ function ProjectInvitation({ project }) {
   if (!pendingInvite) return <Redirect to={{ pathname: url }} />;
 
   return (
-    <div>
-      <h1>hello inviteeessss for {name}</h1>
-    </div>
+    <PageHeader pageTitle={`Invitation for ${name}`} backButton={false}>
+      <div>hello</div>
+    </PageHeader>
   );
 }
 
