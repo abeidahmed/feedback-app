@@ -1,13 +1,18 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { pluralize } from 'utils/pluralize';
 import { boxShadow, color, truncate } from 'global/theme';
 import { P } from 'components/Typography';
+import { Badge } from 'components/Badge';
 
 function ProjectCard({ project }) {
-  const { id, name, included: { feedbacks, members } = {} } = project;
+  const {
+    id,
+    name,
+    pendingInvite,
+    included: { feedbacks, members } = {},
+  } = project;
   const {
     meta: { feedbacksCount },
   } = feedbacks;
@@ -17,15 +22,15 @@ function ProjectCard({ project }) {
 
   return (
     <StyledLink to={`/app/${id}`}>
-      <StyledH2 className="text-lg truncate">{name}</StyledH2>
-      <div
-        css={{
-          marginTop: 8,
-          '> * + *': {
-            marginTop: 8,
-          },
-        }}
-      >
+      <TitleWrapper>
+        <StyledH2 className="text-lg truncate">{name}</StyledH2>
+        {pendingInvite && (
+          <Badge color="#8e4b10" bgColor="#fdf6b2" size="sm">
+            Invitation
+          </Badge>
+        )}
+      </TitleWrapper>
+      <CardContent>
         <FlexBox>
           <Dot bgColor={color.blue500} />
           <P marginLeft={8} fontSize={14} lineHeight={20}>
@@ -56,7 +61,7 @@ function ProjectCard({ project }) {
             {pluralize(membersCount, 'Member')}
           </P>
         </FlexBox>
-      </div>
+      </CardContent>
     </StyledLink>
   );
 }
@@ -78,6 +83,24 @@ const StyledLink = styled(Link)`
     outline: none;
     box-shadow: ${boxShadow.outline};
     border-color: ${color.blue700};
+  }
+`;
+
+const CardContent = styled.div`
+  margin-top: 8px;
+
+  > * + * {
+    margin-top: 8px;
+  }
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > * + * {
+    margin-left: 6px;
   }
 `;
 
