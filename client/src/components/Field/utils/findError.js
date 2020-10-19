@@ -1,3 +1,5 @@
+import { capitalize } from 'utils/capitalize';
+
 export function errorHandler({ errors, type, showKey }) {
   if (errors) {
     for (let errorType of Object.keys(errors)) {
@@ -10,11 +12,4 @@ export function errorHandler({ errors, type, showKey }) {
       }
     }
   }
-}
-
-function capitalize(string) {
-  if (typeof string !== 'string')
-    throw new Error(`${string} must be of type string`);
-
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
