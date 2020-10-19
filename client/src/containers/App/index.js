@@ -1,7 +1,8 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useShowProject } from 'api/showProject';
+import { ProtectedProject } from 'components/ProtectedRoute';
 import FeedbackContainer from 'containers/Feedback';
 import ProjectSettingContainer from 'containers/ProjectSetting';
 import { Spinner } from 'components/Loader';
@@ -11,18 +12,21 @@ function AppContainer() {
 
   const { project, isLoading, isError } = useShowProject({ id });
 
+  if (isLoading || isError) return <Spinner />;
+
   return (
     <Switch>
-      {isLoading || isError ? (
-        <Spinner />
-      ) : (
-        <Route
-          exact
-          path="/app/:id"
-          render={(props) => <FeedbackContainer project={project} {...props} />}
-        />
-      )}
-      <Route path="/app/:id/settings" component={ProjectSettingContainer} />
+      <ProtectedProject
+        exact
+        path="/app/:id"
+        pendingInvite={project.pendingInvite}
+        children={<FeedbackContainer project={project} />}
+      />
+      <ProtectedProject
+        path="/app/:id/settings"
+        pendingInvite={project.pendingInvite}
+        children={<ProjectSettingContainer project={project} />}
+      />
     </Switch>
   );
 }

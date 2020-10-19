@@ -1,21 +1,11 @@
 import React from 'react';
-import {
-  Switch,
-  Route,
-  NavLink,
-  useRouteMatch,
-  useParams,
-} from 'react-router-dom';
+import { Switch, Route, NavLink, useRouteMatch } from 'react-router-dom';
 import GeneralSetting from './GeneralSetting';
 import Team from './Team';
-import { useShowProject } from 'api/showProject';
 import { PageHeader } from 'components/Header';
-import { Spinner } from 'components/Loader';
 
-function ProjectSettingPage() {
+function ProjectSettingPage({ project }) {
   const { url, path } = useRouteMatch();
-  const { id } = useParams();
-  const { project, isLoading, isError } = useShowProject({ id });
 
   return (
     <PageHeader pageTitle="Settings">
@@ -66,23 +56,19 @@ function ProjectSettingPage() {
           </nav>
         </div>
         <div className="relative md:col-span-2">
-          {isLoading || isError ? (
-            <Spinner />
-          ) : (
-            <Switch>
-              <Route
-                exact
-                path={path}
-                render={(props) => (
-                  <GeneralSetting project={project} {...props} />
-                )}
-              />
-              <Route
-                path={`${path}/team`}
-                render={(props) => <Team project={project} {...props} />}
-              />
-            </Switch>
-          )}
+          <Switch>
+            <Route
+              exact
+              path={path}
+              render={(props) => (
+                <GeneralSetting project={project} {...props} />
+              )}
+            />
+            <Route
+              path={`${path}/team`}
+              render={(props) => <Team project={project} {...props} />}
+            />
+          </Switch>
         </div>
       </section>
     </PageHeader>
