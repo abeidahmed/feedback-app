@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useModalType } from 'store/modal';
-import { color, media } from 'global/theme';
+import { media } from 'global/theme';
 import { BoxContainer, BoxTop } from './components';
 import { Button } from 'components/Button';
 import { P } from 'components/Typography';
