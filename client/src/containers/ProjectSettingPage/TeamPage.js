@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
+import { useMutation } from 'react-query';
+import { postInviteTeamMemberApi } from 'api/inviteTeamMember';
 import { Button } from 'components/Button';
 import { Input } from 'components/Field';
 import { BoxContainer, BoxTop, BoxBottom } from './components';
 
 function TeamPage({ project }) {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState([]);
   const {
+    id,
     included: { teamMembers },
   } = project;
+
+  const [mutate, { isLoading }] = useMutation(postInviteTeamMemberApi, {
+    onSuccess: () => console.log('invited'),
+    throwOnError: true,
+  });
+
+  async function handleInvite(e) {
+    e.preventDefault();
+    setError([]);
+    try {
+      await mutate({
+        projectId: id,
+        email,
+      });
+    } catch (err) {
+      setError(err.response.data.message);
+    }
+  }
 
   return (
     <BoxContainer>
@@ -27,7 +49,10 @@ function TeamPage({ project }) {
         </div>
       </BoxTop>
       <BoxBottom>
-        <form className="flex items-center justify-between w-full space-x-4">
+        <form
+          onSubmit={handleInvite}
+          className="flex items-center justify-between w-full space-x-4"
+        >
           <div className="w-full max-w-xs">
             <Input
               id="invite-email"
@@ -35,13 +60,16 @@ function TeamPage({ project }) {
               label="Invite member"
               showLabel={false}
               placeholder="colleague@example.com"
-              required
               autoComplete="off"
+              errors={{
+                error,
+                errorType: 'email',
+              }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <Button disabled={!email.length}>Invite member</Button>
+          <Button disabled={isLoading || !email.length}>Invite member</Button>
         </form>
       </BoxBottom>
     </BoxContainer>
