@@ -52,16 +52,16 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#process_user' do
+  describe '#set_password_reset_fields' do
     it 'is expected to set password_reset_token column to Secure Random hash' do
       user = create(:user)
-      user.process_user
+      user.set_password_reset_fields
       expect(user.reload.password_reset_token).to_not be_nil
     end
 
     it 'is expected to set password_reset_sent_at to current time' do
       user = create(:user)
-      user.process_user
+      user.set_password_reset_fields
       expect(user.reload.password_reset_sent_at).to_not be_nil
     end
   end

@@ -15,11 +15,11 @@ class User
     end
 
     def initialize_password_reset
-      process_user
+      set_password_reset_fields
       send_password_reset_email
     end
 
-    def process_user
+    def set_password_reset_fields
       generate_token(:password_reset_token)
       self.password_reset_sent_at = Time.zone.now
       save!
