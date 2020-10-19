@@ -1,10 +1,11 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { useShowProject } from 'api/showProject';
 import { ProtectedProject } from 'components/ProtectedRoute';
 import FeedbackContainer from 'containers/Feedback';
 import ProjectSettingContainer from 'containers/ProjectSetting';
+import ProjectInvitation from 'containers/ProjectInvitation';
 import { Spinner } from 'components/Loader';
 
 function AppContainer() {
@@ -27,6 +28,9 @@ function AppContainer() {
         pendingInvite={project.pendingInvite}
         children={<ProjectSettingContainer project={project} />}
       />
+      <Route path="/app/:id/invitations">
+        <ProjectInvitation project={project} />
+      </Route>
     </Switch>
   );
 }
