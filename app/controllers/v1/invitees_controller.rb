@@ -8,6 +8,7 @@ class V1::InviteesController < ApplicationController
         return render json: { message: "#{user.email} is already on the team" }, status: :bad_request
       elsif user.new_record?
         user.save!
+        user.set_password_reset_fields
         UserMailer.invite_user_to_team(user, project, new_record: true).deliver_now
       else
         UserMailer.invite_user_to_team(user, project).deliver_now
