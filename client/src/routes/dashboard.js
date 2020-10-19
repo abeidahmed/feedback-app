@@ -15,8 +15,12 @@ function Dashboard() {
         <ModalRoot />
         <DashboardHeader />
         <Switch>
-          <Route exact path="/app" component={Home} />
-          <Route path="/app/:id" component={AppContainer} />
+          <Route exact path="/app">
+            <Home />
+          </Route>
+          <Route path="/app/:id">
+            <AppContainer />
+          </Route>
         </Switch>
       </div>
     </ModalStore>

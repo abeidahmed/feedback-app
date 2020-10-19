@@ -28,7 +28,9 @@ function App() {
           component={DashboardRoute}
           currentUser={{ token, isError, isLoading }}
         />
-        <Route path="/" component={GuestRoute} />
+        <Route path="/">
+          <GuestRoute />
+        </Route>
       </Switch>
     </Router>
   );

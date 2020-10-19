@@ -7,10 +7,18 @@ import PasswordReset from 'containers/PasswordReset';
 function Guest() {
   return (
     <Switch>
-      <Route path="/password_reset" component={PasswordReset} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/login" component={Login} />
-      <Route exact path="/" component={Home} />
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/password_reset">
+        <PasswordReset />
+      </Route>
+      <Route path="/signup">
+        <Signup />
+      </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
     </Switch>
   );
 }
