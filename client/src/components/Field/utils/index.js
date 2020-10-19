@@ -1,1 +1,1 @@
-export { errorHandler } from './findError';
+export { errorHandler } from './errorHandler';
