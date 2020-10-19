@@ -57,17 +57,12 @@ function ProjectSettingPage({ project }) {
         </div>
         <div className="relative md:col-span-2">
           <Switch>
-            <Route
-              exact
-              path={path}
-              render={(props) => (
-                <GeneralSetting project={project} {...props} />
-              )}
-            />
-            <Route
-              path={`${path}/team`}
-              render={(props) => <Team project={project} {...props} />}
-            />
+            <Route exact path={path}>
+              <GeneralSetting project={project} />
+            </Route>
+            <Route path={`${path}/team`}>
+              <Team project={project} />
+            </Route>
           </Switch>
         </div>
       </section>
