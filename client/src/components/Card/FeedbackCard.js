@@ -93,7 +93,9 @@ function FeedbackCard({ feedback, projectId }) {
           justifyContent: 'space-between',
         }}
       >
-        <Badge tag={tag} />
+        <Badge color={tag.textColor} bgColor={tag.bgColor}>
+          {tag.name}
+        </Badge>
         <P as="span" fontSize={14} color={color.gray400}>
           {createdAt} ago
         </P>

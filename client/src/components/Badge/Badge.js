@@ -1,29 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
-function Badge({ tag, ...props }) {
-  const { name, bgColor, textColor } = tag;
-
-  return (
-    <StyledBadge backgroundColor={bgColor} color={textColor} {...props}>
-      {name}
-    </StyledBadge>
-  );
-}
-
-const StyledBadge = styled.span`
-  display: block;
-  padding: 6px 8px;
-  font-size: 14px;
-  line-height: 12px;
+const Badge = styled.span`
+  display: inline-block;
+  padding: ${(props) => (props.size === 'sm' ? '4px 8px' : '6px 8px')};
+  font-size: ${(props) => (props.size === 'sm' ? 12 : 14)}px;
+  font-weight: ${(props) => props.fontWeight || 500};
+  line-height: ${(props) => props.lineHeight || 12}px;
   border-radius: 9999px;
-  background-color: ${(props) => props.backgroundColor};
+  background-color: ${(props) => props.bgColor};
   color: ${(props) => props.color};
 `;
-
-Badge.propTypes = {
-  tag: PropTypes.object.isRequired,
-};
 
 export default Badge;
