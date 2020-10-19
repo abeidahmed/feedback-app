@@ -8,8 +8,12 @@ function PasswordReset() {
 
   return (
     <Switch>
-      <Route exact path={path} component={InitiatePage} />
-      <Route path={`${path}/update`} component={ResetPage} />
+      <Route exact path={path}>
+        <InitiatePage />
+      </Route>
+      <Route path={`${path}/update`}>
+        <ResetPage />
+      </Route>
     </Switch>
   );
 }
