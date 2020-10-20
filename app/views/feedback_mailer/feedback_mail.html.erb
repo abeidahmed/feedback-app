@@ -1,7 +1,20 @@
-<p>Hi <%= @to_address %>,</p>
+<h1>Hi, <%= @to_address %></h1>
 <% if @feedback.sender_email.present? %>
-  <p>You have received a new feedback from <%= @feedback.sender_email %>.</p>
+  <p>You have received a new feedback from <b><%= @feedback.sender_email %></b>.</p>
 <% else %>
   <p>You have received a new feedback from an annonymous user.</p>
 <% end %>
+<h2>Feedback details:</h2>
+<p>
+  <b>Sender email:</b> <span><%= @feedback.sender_email %></span><br>
+</p>
+<p>
+  <b>Page URL:</b> <span><%= @feedback.page_url ? @feedback.page_url : 'NA' %></span><br>
+</p>
+<p>
+  <b>Feedback:</b> <span><%= @feedback.content %></span><br>
+</p>
+<p>
+  <b>Sent at:</b> <span><%= time_ago_in_words(@feedback.created_at) %> ago</span>
+</p>
 <p>You can view the feedback by clicking on this <a href="https://feeder-fish.herokuapp.com/app/<%= @feedback.project.id %>">link</a>.</p>
