@@ -1,6 +1,9 @@
 import React from 'react';
 import { Redirect, useRouteMatch } from 'react-router-dom';
 import styled from '@emotion/styled';
+import { useMutation, queryCache } from 'react-query';
+import { acceptInvitationApi } from 'api/projectInvitation';
+import * as q from 'global/queryKey';
 import { PageHeader } from 'components/Header';
 import { P } from 'components/Typography';
 import { maxWidth, media } from 'global/theme';
@@ -9,7 +12,15 @@ import { TeamSvg } from 'assets/svg';
 
 function ProjectInvitation({ project }) {
   const { url } = useRouteMatch('/app/:id');
-  const { name, pendingInvite } = project;
+  const { id, name, pendingInvite } = project;
+
+  const [mutate, { isLoading: accepting }] = useMutation(acceptInvitationApi, {
+    onSuccess: () => queryCache.refetchQueries(q.SHOW_PROJECT),
+  });
+
+  async function handleAcceptInvite() {
+    await mutate({ projectId: id });
+  }
 
   if (!pendingInvite) return <Redirect to={{ pathname: url }} />;
 
@@ -26,7 +37,12 @@ function ProjectInvitation({ project }) {
           <ButtonContainer>
             <ButtonGroup>
               <Button size="lg">Decline invitation</Button>
-              <Button color="primary" size="lg">
+              <Button
+                color="primary"
+                size="lg"
+                onClick={handleAcceptInvite}
+                disabled={accepting}
+              >
                 Accept invitation
               </Button>
             </ButtonGroup>
