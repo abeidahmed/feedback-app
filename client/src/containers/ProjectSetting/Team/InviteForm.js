@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { queryCache, useMutation } from 'react-query';
-import { postInviteTeamMemberApi } from 'api/inviteTeamMember';
+import { postInviteTeamMemberApi } from 'api/projectInvitation';
 import * as q from 'global/queryKey';
 import { Input } from 'components/Field';
 import { Button } from 'components/Button';
