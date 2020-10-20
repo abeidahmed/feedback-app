@@ -81,7 +81,7 @@ RSpec.describe "V1::Invitees", type: :request do
       let(:user) { create(:user) }
       before do
         project.invitee.users << user
-        delete accept_invite_v1_project_invitees_url(project), headers: auth_header(user)
+        post accept_invite_v1_project_invitees_url(project), headers: auth_header(user)
       end
 
       it 'is expected to delete the user from the invite list' do
@@ -97,7 +97,7 @@ RSpec.describe "V1::Invitees", type: :request do
       let(:project) { create(:project) }
       let(:user) { create(:user) }
       before do
-        delete accept_invite_v1_project_invitees_url(project), headers: auth_header(user)
+        post accept_invite_v1_project_invitees_url(project), headers: auth_header(user)
       end
 
       it 'is expected to not add the user to the project' do
