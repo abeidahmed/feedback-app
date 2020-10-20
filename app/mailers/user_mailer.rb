@@ -10,6 +10,6 @@ class UserMailer < ApplicationMailer
     @project = project
     @options = options
 
-    mail to: user.email, subject: 'You have been invited to be a part of a project'
+    mail to: user.email, subject: "You have been invited to be a part of #{project.name} project"
   end
 end

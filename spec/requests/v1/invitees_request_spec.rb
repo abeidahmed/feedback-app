@@ -15,7 +15,7 @@ RSpec.describe "V1::Invitees", type: :request do
       end
 
       it 'is expected to email the user' do
-        expect(last_email.subject).to eq('You have been invited to be a part of a project')
+        expect(last_email.subject).to eq("You have been invited to be a part of #{project.name} project")
       end
 
       include_examples 'created'
@@ -50,7 +50,7 @@ RSpec.describe "V1::Invitees", type: :request do
       end
 
       it 'is expected to email the user' do
-        expect(last_email.subject).to eq('You have been invited to be a part of a project')
+        expect(last_email.subject).to eq("You have been invited to be a part of #{project.name} project")
       end
 
       include_examples 'created'
