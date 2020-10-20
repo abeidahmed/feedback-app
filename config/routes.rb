@@ -13,7 +13,10 @@ Rails.application.routes.draw do
         end
 
         resources :invitees, only: [:create] do
-          post :accept_invite, on: :collection
+          collection do
+            post :accept_invite
+            delete :decline_invite
+          end
         end
 
         resources :feedbacks, only: [:index, :create, :destroy] do

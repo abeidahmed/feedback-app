@@ -107,4 +107,23 @@ RSpec.describe "V1::Invitees", type: :request do
       include_examples 'bad_request'
     end
   end
+
+  describe '#decline_invite' do
+    context 'when the user is on the invitee list' do
+      let(:project) { create(:project) }
+      let(:user) { create(:user) }
+      before do
+        project.invitee.users << user
+        delete decline_invite_v1_project_invitees_url(project), headers: auth_header(user)
+      end
+
+      it 'is expected to remove the user from the invitee list' do
+        expect(project.invitee.users.count).to be_zero
+      end
+
+      it 'is expected to not add the user to the project team' do
+        expect(project.team_members.include?(user)).to be_falsy
+      end
+    end
+  end
 end
