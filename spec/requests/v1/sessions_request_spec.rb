@@ -23,11 +23,9 @@ RSpec.describe "V1::Sessions", type: :request do
         post v1_sessions_url, params: invalid_user, headers: default_header
       end
 
-      include_examples 'bad_request'
+      include_examples 'invalid_credentials'
 
-      it 'is expected to return an error message' do
-        expect(json[:message]).to match(/Invalid credentials/)
-      end
+      include_examples 'bad_request'
     end
 
     context 'when the post request is valid' do

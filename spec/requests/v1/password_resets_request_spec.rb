@@ -25,9 +25,7 @@ RSpec.describe "V1::PasswordResets", type: :request do
         post v1_password_resets_url, params: invalid_user, headers: default_header
       end
 
-      it 'is expected to render an error message' do
-        expect(json[:message]).to match(/Invalid email address/)
-      end
+      include_examples 'invalid_email'
 
       include_examples 'bad_request'
     end
