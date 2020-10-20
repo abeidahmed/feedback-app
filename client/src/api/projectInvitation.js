@@ -24,3 +24,12 @@ export async function acceptInvitationApi({ projectId }) {
 
   return data;
 }
+
+export async function declineInvitationApi({ projectId }) {
+  const { data } = await axios.delete(
+    `/v1/projects/${projectId}/invitees/decline_invite`,
+    header()
+  );
+
+  return data;
+}

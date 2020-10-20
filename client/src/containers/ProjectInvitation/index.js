@@ -1,8 +1,11 @@
 import React from 'react';
-import { Redirect, useRouteMatch } from 'react-router-dom';
+import { Redirect, useRouteMatch, useHistory } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useMutation, queryCache } from 'react-query';
-import { acceptInvitationApi } from 'api/projectInvitation';
+import {
+  acceptInvitationApi,
+  declineInvitationApi,
+} from 'api/projectInvitation';
 import * as q from 'global/queryKey';
 import { PageHeader } from 'components/Header';
 import { P } from 'components/Typography';
@@ -12,14 +15,29 @@ import { TeamSvg } from 'assets/svg';
 
 function ProjectInvitation({ project }) {
   const { url } = useRouteMatch('/app/:id');
+  const history = useHistory();
   const { id, name, pendingInvite } = project;
 
-  const [mutate, { isLoading: accepting }] = useMutation(acceptInvitationApi, {
-    onSuccess: () => queryCache.refetchQueries(q.SHOW_PROJECT),
-  });
+  const [acceptInvite, { isLoading: accepting }] = useMutation(
+    acceptInvitationApi,
+    {
+      onSuccess: () => queryCache.refetchQueries(q.SHOW_PROJECT), // history.push does not work here for redirecting
+    }
+  );
 
   async function handleAcceptInvite() {
-    await mutate({ projectId: id });
+    await acceptInvite({ projectId: id });
+  }
+
+  const [declineInvite, { isLoading: declining }] = useMutation(
+    declineInvitationApi,
+    {
+      onSuccess: () => history.push('/app'),
+    }
+  );
+
+  async function handleDeclineInvite() {
+    await declineInvite({ projectId: id });
   }
 
   if (!pendingInvite) return <Redirect to={{ pathname: url }} />;
@@ -36,7 +54,13 @@ function ProjectInvitation({ project }) {
           </P>
           <ButtonContainer>
             <ButtonGroup>
-              <Button size="lg">Decline invitation</Button>
+              <Button
+                size="lg"
+                onClick={handleDeclineInvite}
+                disabled={declining}
+              >
+                Decline invitation
+              </Button>
               <Button
                 color="primary"
                 size="lg"
