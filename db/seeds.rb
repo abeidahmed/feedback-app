@@ -10,6 +10,7 @@ Feedback.destroy_all
 Tag.destroy_all
 Project.destroy_all
 Team.destroy_all
+Invitee.destroy_all
 User.destroy_all
 
 6.times do
