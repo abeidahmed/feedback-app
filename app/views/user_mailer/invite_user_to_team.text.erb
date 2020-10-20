@@ -1,4 +1,12 @@
 Hi, <%= @user.email %>
 ---------------------------------------------------------
 You have been invited to be a part of the <%= @project.name %> project.
-Open this link in your browser https://feeder-fish.herokuapp.com/app/<%= @project.id %> and you'll be redirected to the confirmation page.
+Open this link in your browser https://feeder-fish.herokuapp.com/app/<%= @project.id %>/invitations and you'll be redirected to the confirmation page.
+
+<% if @options[:new_record] %>
+We noticed that you aren't a part of Feeder Fish family, and hence we took the initiative of creating a new account for you. Hope you do not mind.
+
+Login details:
+Email address: <%= @user.email %>
+Please open this link in your browser https://feeder-fish.herokuapp.com/password_reset/update?token=<%= @user.password_reset_token %> to change your account password.
+<% end %>
